@@ -16,6 +16,8 @@ PLAYBOOK = """
   gather_facts: no
   tasks:
 
+    - include_vars: vars/main.yml
+
     - import_tasks: networks/networks.yml
     - import_tasks: networks/subnets.yml
     - import_tasks: networks/security_groups.yml
@@ -25,6 +27,12 @@ PLAYBOOK = """
     - import_tasks: compute/keypairs.yml
     - import_tasks: compute/servers.yml
 """
+
+VARS_PATH = os.path.join(PLAYS, "vars", "main.yml")
+if not os.path.exists(os.path.dirname(VARS_PATH)):
+    os.makedirs(os.path.dirname(VARS_PATH))
+with open(VARS_PATH, "w") as e:
+    e.write("---\n")
 
 NETWORK = {
     'networks.yml': 'create_networks',
@@ -112,7 +120,14 @@ def value(data, name, key):
 def write_yaml(content, path):
     with open(path, "w") as f:
         f.write("---\n")
-        f.write(yaml.safe_dump(content))
+        f.write(yaml.safe_dump(content,
+                               default_flow_style=False, sort_keys=False))
+
+
+def add_vars(content, path):
+    with open(path, "a") as f:
+        f.write(yaml.safe_dump(content,
+                               default_flow_style=False, sort_keys=False))
 
 
 def create_subnets(data, file_):
@@ -126,7 +141,8 @@ def create_subnets(data, file_):
         if subnet['network_id'] in net_ids:
             s['network_name'] = net_ids[subnet['network_id']]
         else:
-            print("subnet %s id=%s doesn't find its network id=%s" % (subnet['name'], subnet['id'], subnet['network_id']))
+            print("subnet %s id=%s doesn't find its network id=%s" %
+                  (subnet['name'], subnet['id'], subnet['network_id']))
             continue
         s['cidr'] = subnet['cidr']
         if value(subnet, 'subnet', 'ip_version'):
@@ -177,7 +193,7 @@ def create_networks(data, file_):
     write_yaml(networks, file_)
 
 
-def create_security_groups(data, file_):
+def create_security_groups(data, file_, force_optimize=True):
     secgrs = []
     secgrs_ids = {i['id']: i['name'] for i in data['secgroups']}
     for secgr in data['secgroups']:
@@ -189,6 +205,7 @@ def create_security_groups(data, file_):
         if value(secgr, 'security_group', 'description'):
             s['description'] = secgr['description']
         if secgr.get('security_group_rules'):
+            pre_optimized = []
             for rule in secgr['security_group_rules']:
                 r = {'security_group': secgr['name']}
                 if s.get('cloud'):
@@ -209,7 +226,15 @@ def create_security_groups(data, file_):
                     r['remote_group'] = secgrs_ids[rule['remote_group_id']]
                 if value(rule, 'security_group_rule', 'remote_ip_prefix'):
                     r['remote_ip_prefix'] = rule['remote_ip_prefix']
-                secgrs.append({'os_security_group_rule': r})
+                if force_optimize:
+                    pre_optimized.append({'os_security_group_rule': r})
+                else:
+                    secgrs.append({'os_security_group_rule': r})
+            if force_optimize:
+                optimized = optimize(
+                    pre_optimized,
+                    var_name=secgr['name'].replace('-', '_') + "_rules")
+                secgrs.append(optimized)
     write_yaml(secgrs, file_)
 
 
@@ -332,7 +357,8 @@ def create_servers(data, file_):
                 s['image'] = ser['image']['id'] if not IMAGES_AS_NAMES else images_dict[
                     ser['image']['id']]
             else:
-                print("Image with ID=%s of server %s is not in images list" % (ser['image']['id'], ser['name']))
+                print("Image with ID=%s of server %s is not in images list" %
+                      (ser['image']['id'], ser['name']))
                 continue
         else:
             # Dancing with boot volumes
@@ -390,8 +416,9 @@ def create_keypairs(data, file_):
     write_yaml(keypairs, file_)
 
 
-def create_images(data, file_, set_id=False):
+def create_images(data, file_, set_id=False, force_optimize=True):
     imgs = []
+    pre_optimized = []
     for img in data['images']:
         im = {'state': 'present'}
         im['name'] = img['name']
@@ -426,7 +453,15 @@ def create_images(data, file_, set_id=False):
             im['volume'] = img['volume']
         if value(img, 'image', 'properties'):
             im['properties'] = img['properties']
-        imgs.append({'os_image': im})
+        if force_optimize:
+            pre_optimized.append({'os_image': im})
+        else:
+            imgs.append({'os_image': im})
+    if force_optimize:
+        optimized = optimize(
+            pre_optimized,
+            var_name="images")
+        imgs.append(optimized)
     write_yaml(imgs, file_)
 
 
@@ -460,8 +495,36 @@ def create_volumes(data, file_):
     write_yaml(vols, file_)
 
 
+def optimize(data, use_vars=True, var_name=None):
+    all_keys = []
+    for d in data:
+        values = d.values()
+        # Extract all possible keys from module
+        all_keys += [j for i in list(values) for j in list(i)]
+    all_keys = list(set(all_keys))
+    # Name of the module
+    main_key = list(data[0].keys())[0]
+    # Fullfil by vaulue|default(omit)
+    templ = {main_key: {k: "{{ %s | default(omit) }}" % k for k in all_keys}}
+    templ.update({'loop': [list(i.values())[0] for i in data]})
+    for k in all_keys:
+        k_values = [i.get(k) for i in templ['loop']]
+        if any([isinstance(y, dict) for y in k_values]):
+            continue
+        allv = list(set(k_values))
+        if len(allv) == 1:
+            templ[main_key][k] = allv[0]
+            for d in templ['loop']:
+                del d[k]
+    if use_vars:
+        var_list = templ.pop('loop')
+        templ['loop'] = "{{ %s }}" % var_name
+        add_vars({var_name: var_list}, VARS_PATH)
+    return templ
+
+
 def main():
-    conn = openstack.connect(cloud='openstack-nodepool')
+    conn = openstack.connect(cloud='rdo-cloud')
     # openstack.enable_logging(debug=True)
     nets = [i for i in conn.network.networks()]
     subnets = [i for i in conn.network.subnets()]
@@ -511,6 +574,7 @@ def main():
     stor_path = os.path.join(PLAYS, "storage")
     if not os.path.exists(stor_path):
         os.makedirs(stor_path)
+
     for stor_file in STORAGE:
         path = os.path.join(stor_path, stor_file)
         func = stor_funcs[STORAGE[stor_file]]
