@@ -10,12 +10,13 @@ from plugins.os_ansible.common import value, optimize, write_yaml
 
 
 class OpenstackAnsible:
-    def __init__(self, debug=False):
+    def __init__(self, cloud_name, debug=False):
         self.debug = debug
         self.data = {}
         self.stor_path = None
         self.net_path = None
         self.comp_path = None
+        self.cloud = cloud_name
 
     def run(self):
         self.get_info()
@@ -29,7 +30,7 @@ class OpenstackAnsible:
         self.write_playbook()
 
     def get_info(self):
-        conn = openstack.connect(cloud='rdo-cloud')
+        conn = openstack.connect(cloud=self.cloud)
         # pylint: disable=maybe-no-member
         if self.debug:
             openstack.enable_logging(debug=True)
@@ -473,7 +474,7 @@ class OpenstackAnsible:
 
 
 def main():
-    playbook = OpenstackAnsible()
+    playbook = OpenstackAnsible("test-cloud")
     playbook.run()
 
 

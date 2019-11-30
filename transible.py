@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import argparse
+import sys
 from plugins.os_ansible.openstack_ansible import OpenstackAnsible
 
 
@@ -13,9 +14,15 @@ def main():
                         default="ansible",
                         choices=["ansible"],
                         help='Deplyment tool')
+    parser.add_argument('--os-cloud', dest="cloud_name",
+                        default="",
+                        help='Openstack cloud name from clouds.yaml')
     args = parser.parse_args()
     if args.from_cloud == "openstack" and args.to == "ansible":
-        OpenstackAnsible().run()
+        if not args.cloud_name:
+            print("Please provide the cloud name for Openstack")
+            sys.exit(1)
+        OpenstackAnsible(args.cloud_name).run()
     else:
         print("Configuration is not supported yet")
 
