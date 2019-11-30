@@ -17,9 +17,9 @@ class OpenstackAnsible:
         self.net_path = None
         self.comp_path = None
         self.cloud = cloud_name
+        self.get_info()
 
     def run(self):
-        self.get_info()
         self.initialize_directories()
         if conf.DUMP_NETWORKS or conf.DUMP_SERVERS:
             self.dump_networks()
@@ -35,19 +35,18 @@ class OpenstackAnsible:
         if self.debug:
             openstack.enable_logging(debug=True)
         if conf.DUMP_NETWORKS or conf.DUMP_SERVERS:
-            self.data['networks'] = [i for i in conn.network.networks()]
-            self.data['subnets'] = [i for i in conn.network.subnets()]
-            self.data['secgroups'] = [
-                i for i in conn.network.security_groups()]
-            self.data['routers'] = [i for i in conn.network.routers()]
-            self.data['ports'] = [i for i in conn.network.ports()]
+            self.data['networks'] = list(conn.network.networks())
+            self.data['subnets'] = list(conn.network.subnets())
+            self.data['secgroups'] = list(conn.network.security_groups())
+            self.data['routers'] = list(conn.network.routers())
+            self.data['ports'] = list(conn.network.ports())
         if conf.DUMP_STORAGE or conf.DUMP_SERVERS:
-            self.data['images'] = [i for i in conn.image.images()]
-            self.data['volumes'] = [i for i in conn.volume.volumes()]
+            self.data['images'] = list(conn.image.images())
+            self.data['volumes'] = list(conn.volume.volumes())
         if conf.DUMP_SERVERS:
-            self.data['servers'] = [i for i in conn.compute.servers()]
-            self.data['keypairs'] = [i for i in conn.compute.keypairs()]
-            self.data['flavors'] = [i for i in conn.compute.flavors()]
+            self.data['servers'] = list(conn.compute.servers())
+            self.data['keypairs'] = list(conn.compute.keypairs())
+            self.data['flavors'] = list(conn.compute.flavors())
 
     def initialize_directories(self):
         if not os.path.exists(conf.PLAYS):
@@ -71,35 +70,35 @@ class OpenstackAnsible:
 
     def dump_networks(self):
         net_funcs = {
-            'create_networks': self.create_networks,
-            'create_subnets': self.create_subnets,
-            'create_security_groups': self.create_security_groups,
-            'create_routers': self.create_routers,
+            const.FILE_NETWORKS: self.create_networks,
+            const.FILE_SUBNETS: self.create_subnets,
+            const.FILE_SECURITY_GROUPS: self.create_security_groups,
+            const.FILE_ROUTERS: self.create_routers,
         }
-        for net_file in const.NETWORK:
+        for net_file, func in net_funcs.items():
             path = os.path.join(self.net_path, net_file)
-            func = net_funcs[const.NETWORK[net_file]]
-            func(self.data, path)
+            dumped_data = func(self.data)
+            write_yaml(dumped_data, path)
 
     def dump_storage(self):
         stor_funcs = {
-            'create_images': self.create_images,
-            'create_volumes': self.create_volumes,
+            const.FILE_IMAGES: self.create_images,
+            const.FILE_VOLUMES: self.create_volumes,
         }
-        for stor_file in const.STORAGE:
+        for stor_file, func in stor_funcs.items():
             path = os.path.join(self.stor_path, stor_file)
-            func = stor_funcs[const.STORAGE[stor_file]]
-            func(self.data, path)
+            dumped_data = func(self.data)
+            write_yaml(dumped_data, path)
 
     def dump_servers(self):
         comp_funcs = {
-            'create_keypairs': self.create_keypairs,
-            'create_servers': self.create_servers,
+            const.FILE_KEYPAIRS: self.create_keypairs,
+            const.FILE_SERVERS: self.create_servers,
         }
-        for comp_file in const.COMPUTE:
+        for comp_file, func in comp_funcs.items():
             path = os.path.join(self.comp_path, comp_file)
-            func = comp_funcs[const.COMPUTE[comp_file]]
-            func(self.data, path)
+            dumped_data = func(self.data)
+            write_yaml(dumped_data, path)
 
     def write_playbook(self):
         playbook = const.PLAYBOOK
@@ -112,7 +111,7 @@ class OpenstackAnsible:
         with open(os.path.join(conf.PLAYS, "playbook.yml"), "w") as f:
             f.write(playbook)
 
-    def create_subnets(self, data, file_):
+    def create_subnets(self, data):
         subnets = []
         net_ids = {i['id']: i['name'] for i in data['networks']}
         for subnet in data['subnets']:
@@ -142,9 +141,9 @@ class OpenstackAnsible:
             if value(subnet, 'subnet', 'host_routes'):
                 s['host_routes'] = subnet['host_routes']
             subnets.append({'os_subnet': s})
-        write_yaml(subnets, file_)
+        return subnets
 
-    def create_networks(self, data, file_):
+    def create_networks(self, data):
         networks = []
         for network in data['networks']:
             n = {'state': 'present'}
@@ -171,9 +170,9 @@ class OpenstackAnsible:
             if value(network, 'network', 'dns_domain'):
                 n['dns_domain'] = network['dns_domain']
             networks.append({'os_network': n})
-        write_yaml(networks, file_)
+        return networks
 
-    def create_security_groups(self, data, file_, force_optimize=True):
+    def create_security_groups(self, data, force_optimize=True):
         secgrs = []
         secgrs_ids = {i['id']: i['name'] for i in data['secgroups']}
         for secgr in data['secgroups']:
@@ -215,9 +214,9 @@ class OpenstackAnsible:
                         pre_optimized,
                         var_name=secgr['name'].replace('-', '_') + "_rules")
                     secgrs.append(optimized)
-        write_yaml(secgrs, file_)
+        return secgrs
 
-    def create_routers(self, data, file_, strict_ip=False):
+    def create_routers(self, data, strict_ip=False):
         routers = []
         subnet_ids = {i['id']: i for i in data['subnets']}
         net_ids = {i['id']: i for i in data['networks']}
@@ -292,9 +291,9 @@ class OpenstackAnsible:
                             'ip': ext_fip
                         }]
             routers.append({'os_router': r})
-        write_yaml(routers, file_)
+        return routers
 
-    def create_servers(self, data, file_):
+    def create_servers(self, data):
 
         def get_boot_volume(volumes):
             # Let's assume it's only one bootable volume
@@ -381,9 +380,9 @@ class OpenstackAnsible:
                             for j in i if j['OS-EXT-IPS:type'] == 'floating']
                     s['floating_ips'] = fips
             servers.append({'os_server': s})
-        write_yaml(servers, file_)
+        return servers
 
-    def create_keypairs(self, data, file_):
+    def create_keypairs(self, data):
         keypairs = []
         for key in data['keypairs']:
             k = {'state': 'present'}
@@ -393,9 +392,9 @@ class OpenstackAnsible:
             if value(key, 'keypair', 'public_key'):
                 k['public_key'] = key['public_key']
             keypairs.append({'os_keypair': k})
-        write_yaml(keypairs, file_)
+        return keypairs
 
-    def create_images(self, data, file_, set_id=False, force_optimize=True):
+    def create_images(self, data, set_id=False, force_optimize=True):
         imgs = []
         pre_optimized = []
         for img in data['images']:
@@ -441,9 +440,9 @@ class OpenstackAnsible:
                 pre_optimized,
                 var_name="images")
             imgs.append(optimized)
-        write_yaml(imgs, file_)
+        return imgs
 
-    def create_volumes(self, data, file_):
+    def create_volumes(self, data):
         vols = []
         for vol in data['volumes']:
             v = {'state': 'present'}
@@ -470,7 +469,7 @@ class OpenstackAnsible:
             if value(vol, 'volume', 'source_volume_id'):
                 v['volume'] = vol['source_volume_id']
             vols.append({'os_volume': v})
-        write_yaml(vols, file_)
+        return vols
 
 
 def main():

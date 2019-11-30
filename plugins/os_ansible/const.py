@@ -69,17 +69,11 @@ COMPUTE_PLAYBOOK = """
     - import_tasks: compute/servers.yml
 """
 
-NETWORK = {
-    'networks.yml': 'create_networks',
-    'subnets.yml': 'create_subnets',
-    'security_groups.yml': 'create_security_groups',
-    'routers.yml': 'create_routers'
-}
-STORAGE = {
-    'images.yml': 'create_images',
-    'volumes.yml': 'create_volumes',
-}
-COMPUTE = {
-    'keypairs.yml': 'create_keypairs',
-    'servers.yml': 'create_servers',
-}
+FILE_NETWORKS = 'networks.yml'
+FILE_SUBNETS = 'subnets.yml'
+FILE_SECURITY_GROUPS = 'security_groups.yml'
+FILE_ROUTERS = 'routers.yml'
+FILE_IMAGES = 'images.yml'
+FILE_VOLUMES = 'volumes.yml'
+FILE_KEYPAIRS = 'keypairs.yml'
+FILE_SERVERS = 'servers.yml'
