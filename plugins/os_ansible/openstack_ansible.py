@@ -111,8 +111,9 @@ class OpenstackAnsible:
         with open(os.path.join(conf.PLAYS, "playbook.yml"), "w") as f:
             f.write(playbook)
 
-    def create_subnets(self, data):
+    def create_subnets(self, data, force_optimize=conf.VARS_OPT_SUBNETS):
         subnets = []
+        pre_optimized = []
         net_ids = {i['id']: i['name'] for i in data['networks']}
         for subnet in data['subnets']:
             s = {'state': 'present'}
@@ -140,11 +141,21 @@ class OpenstackAnsible:
                 s['ipv6_ra_mode'] = subnet['ipv6_ra_mode']
             if value(subnet, 'subnet', 'host_routes'):
                 s['host_routes'] = subnet['host_routes']
-            subnets.append({'os_subnet': s})
+            if force_optimize:
+                pre_optimized.append({'os_subnet': s})
+            else:
+                subnets.append({'os_subnet': s})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="subnets")
+            if optimized:
+                subnets.append(optimized)
         return subnets
 
-    def create_networks(self, data):
+    def create_networks(self, data, force_optimize=conf.VARS_OPT_NETWORKS):
         networks = []
+        pre_optimized = []
         for network in data['networks']:
             n = {'state': 'present'}
             if network.get('location') and network['location'].get('cloud'):
@@ -164,15 +175,26 @@ class OpenstackAnsible:
                 n['provider_physical_network'] = network[
                     'provider_physical_network']
             if value(network, 'network', 'provider_segmentation_id'):
-                n['provider_segmentation_id'] = network['provider_segmentation_id']
+                n['provider_segmentation_id'] = network[
+                    'provider_segmentation_id']
             # if value(network, 'network', 'mtu'):
             #    n['mtu'] = network['mtu']
             if value(network, 'network', 'dns_domain'):
                 n['dns_domain'] = network['dns_domain']
-            networks.append({'os_network': n})
+            if force_optimize:
+                pre_optimized.append({'os_network': n})
+            else:
+                networks.append({'os_network': n})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="networks")
+            if optimized:
+                networks.append(optimized)
         return networks
 
-    def create_security_groups(self, data, force_optimize=True):
+    def create_security_groups(self, data,
+                               force_optimize=conf.VARS_OPT_SECGROUPS):
         secgrs = []
         secgrs_ids = {i['id']: i['name'] for i in data['secgroups']}
         for secgr in data['secgroups']:
@@ -213,11 +235,14 @@ class OpenstackAnsible:
                     optimized = optimize(
                         pre_optimized,
                         var_name=secgr['name'].replace('-', '_') + "_rules")
-                    secgrs.append(optimized)
+                    if optimized:
+                        secgrs.append(optimized)
         return secgrs
 
-    def create_routers(self, data, strict_ip=False):
+    def create_routers(self, data, strict_ip=False,
+                       force_optimize=conf.VARS_OPT_ROUTERS):
         routers = []
+        pre_optimized = []
         subnet_ids = {i['id']: i for i in data['subnets']}
         net_ids = {i['id']: i for i in data['networks']}
         for rout in data['routers']:
@@ -260,13 +285,14 @@ class OpenstackAnsible:
                                     'external_gateway_info']['network_id'])
                 ext_net_name = ext_net['name']
                 r['network'] = ext_net_name
-                if len(rout['external_gateway_info']['external_fixed_ips']) == 1:
+                if len(rout['external_gateway_info']['external_fixed_ips']
+                       ) == 1:
                     ext = rout['external_gateway_info']['external_fixed_ips'][0]
                     if strict_ip:
                         ext_sub_id = ext['subnet_id']
                         ext_subnet = subnet_ids.get(ext_sub_id)
                         if not ext_subnet:
-                            # raise Exception("No subnet with ID=%s" % ext_sub_id)
+                            # raise Exception("No subnet with ID" )
                             ext_sub_name = ext_sub_id
                         else:
                             ext_sub_name = ext_subnet['name']
@@ -290,10 +316,19 @@ class OpenstackAnsible:
                             'subnet': ext_sub_name,
                             'ip': ext_fip
                         }]
-            routers.append({'os_router': r})
+            if force_optimize:
+                pre_optimized.append({'os_router': r})
+            else:
+                routers.append({'os_router': r})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="routers")
+            if optimized:
+                routers.append(optimized)
         return routers
 
-    def create_servers(self, data):
+    def create_servers(self, data, force_optimize=conf.VARS_OPT_SERVERS):
 
         def get_boot_volume(volumes):
             # Let's assume it's only one bootable volume
@@ -308,6 +343,7 @@ class OpenstackAnsible:
                 j['OS-EXT-IPS:type'] for i in list(addresses.values()) for j in i]
 
         servers = []
+        pre_optimized = []
         volumes_dict = {i['id']: i for i in data['volumes']}
         images_dict = {i['id']: i['name'] for i in data['images']}
         flavors_names = {i['id']: i['name'] for i in data['flavors']}
@@ -333,8 +369,10 @@ class OpenstackAnsible:
             # Images and volumes
             if ser['image']['id']:
                 if ser['image']['id'] in images_dict:
-                    s['image'] = ser['image']['id'] if not conf.IMAGES_AS_NAMES else images_dict[
-                        ser['image']['id']]
+                    s['image'] = (
+                        ser['image']['id']
+                        if not conf.IMAGES_AS_NAMES
+                        else images_dict[ser['image']['id']])
                 else:
                     print("Image with ID=%s of server %s is not in images list" %
                           (ser['image']['id'], ser['name']))
@@ -379,11 +417,21 @@ class OpenstackAnsible:
                     fips = [j['addr'] for i in list(ser['addresses'].values())
                             for j in i if j['OS-EXT-IPS:type'] == 'floating']
                     s['floating_ips'] = fips
-            servers.append({'os_server': s})
+            if force_optimize:
+                pre_optimized.append({'os_server': s})
+            else:
+                servers.append({'os_server': s})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="servers")
+            if optimized:
+                servers.append(optimized)
         return servers
 
-    def create_keypairs(self, data):
+    def create_keypairs(self, data, force_optimize=conf.VARS_OPT_KEYPAIRS):
         keypairs = []
+        pre_optimized = []
         for key in data['keypairs']:
             k = {'state': 'present'}
             k['name'] = key['name']
@@ -391,10 +439,20 @@ class OpenstackAnsible:
                 k['cloud'] = key['location']['cloud']
             if value(key, 'keypair', 'public_key'):
                 k['public_key'] = key['public_key']
-            keypairs.append({'os_keypair': k})
+            if force_optimize:
+                pre_optimized.append({'os_keypair': k})
+            else:
+                keypairs.append({'os_keypair': k})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="keypairs")
+            if optimized:
+                keypairs.append(optimized)
         return keypairs
 
-    def create_images(self, data, set_id=False, force_optimize=True):
+    def create_images(self, data, set_id=False,
+                      force_optimize=conf.VARS_OPT_IMAGES):
         imgs = []
         pre_optimized = []
         for img in data['images']:
@@ -439,11 +497,13 @@ class OpenstackAnsible:
             optimized = optimize(
                 pre_optimized,
                 var_name="images")
-            imgs.append(optimized)
+            if optimized:
+                imgs.append(optimized)
         return imgs
 
-    def create_volumes(self, data):
+    def create_volumes(self, data, force_optimize=conf.VARS_OPT_VOLUMES):
         vols = []
+        pre_optimized = []
         for vol in data['volumes']:
             v = {'state': 'present'}
             if not vol['name'] and conf.SKIP_UNNAMED_VOLUMES:
@@ -468,7 +528,16 @@ class OpenstackAnsible:
                 v['snapshot_id'] = vol['snapshot_id']
             if value(vol, 'volume', 'source_volume_id'):
                 v['volume'] = vol['source_volume_id']
-            vols.append({'os_volume': v})
+            if force_optimize:
+                pre_optimized.append({'os_volume': v})
+            else:
+                vols.append({'os_volume': v})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="volumes")
+            if optimized:
+                vols.append(optimized)
         return vols
 
 

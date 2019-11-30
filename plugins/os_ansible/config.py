@@ -39,3 +39,13 @@ NETWORK_AUTO = str2bool(os.environ.get(PREFIX + "NETWORK_AUTO", False))
 FIP_AUTO = str2bool(os.environ.get(PREFIX + "FIP_AUTO", True))
 STRICT_FIPS = not FIP_AUTO
 STRICT_NETWORK_IPS = not NETWORK_AUTO
+
+# Variables optimization configuration
+VARS_OPT_NETWORKS = False
+VARS_OPT_SUBNETS = True
+VARS_OPT_ROUTERS = False
+VARS_OPT_SECGROUPS = True
+VARS_OPT_IMAGES = True
+VARS_OPT_VOLUMES = False
+VARS_OPT_KEYPAIRS = True
+VARS_OPT_SERVERS = False
