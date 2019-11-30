@@ -3,6 +3,12 @@ from plugins.os_ansible.const import DEFAULTS
 from plugins.os_ansible.config import VARS_PATH
 
 
+class ExtraDumper(yaml.Dumper):
+
+    def increase_indent(self, flow=False, indentless=False):
+        return super(ExtraDumper, self).increase_indent(flow, False)
+
+
 def value(data, name, key):
     if key not in data:
         return False
@@ -18,14 +24,18 @@ def value(data, name, key):
 def write_yaml(content, path):
     with open(path, "w") as f:
         f.write("---\n")
-        f.write(yaml.safe_dump(content,
-                               default_flow_style=False, sort_keys=False))
+        f.write(yaml.dump(content,
+                          Dumper=ExtraDumper,
+                          default_flow_style=False,
+                          sort_keys=False))
 
 
 def add_vars(content, path):
     with open(path, "a") as f:
-        f.write(yaml.safe_dump(content,
-                               default_flow_style=False, sort_keys=False))
+        f.write(yaml.dump(content,
+                               Dumper=ExtraDumper,
+                               default_flow_style=False,
+                               sort_keys=False))
 
 
 def optimize(data, use_vars=True, var_name=None):
