@@ -53,6 +53,7 @@ class OpenstackAnsible:
         if conf.DUMP_IDENTITY:
             self.data['users'] = list(conn.identity.users())
             self.data['domains'] = list(conn.identity.domains())
+            self.data['projects'] = list(conn.identity.projects())
 
     def initialize_directories(self):
         if not os.path.exists(conf.PLAYS):
@@ -137,6 +138,7 @@ class OpenstackAnsible:
         users = []
         pre_optimized = []
         domains_by_id = {d['id']: d['name'] for d in data['domains']}
+        projects_by_id = {d['id']: d['name'] for d in data['projects']}
         for user in data['users']:
             u = {'state': 'present'}
             if user.get('location') and user['location'].get('cloud'):
@@ -149,7 +151,7 @@ class OpenstackAnsible:
             if value(user, 'user', 'domain_id'):
                 u['domain'] = domains_by_id[user['domain_id']]
             if value(user, 'user', 'default_project_id'):
-                u['default_project'] = domains_by_id[user['default_project_id']]
+                u['default_project'] = projects_by_id[user['default_project_id']]
             if value(user, 'user', 'email'):
                 u['email'] = user['email']
             if value(user, 'user', 'password'):  # shouldn't be there
