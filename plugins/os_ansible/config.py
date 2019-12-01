@@ -17,7 +17,7 @@ PREFIX = "TRANSIBLE_"
 DUMP_NETWORKS = str2bool(os.environ.get(PREFIX + "DUMP_NETWORKS", True))
 DUMP_STORAGE = str2bool(os.environ.get(PREFIX + "DUMP_STORAGE", True))
 DUMP_SERVERS = str2bool(os.environ.get(PREFIX + "DUMP_SERVERS", True))
-DUMP_IDENTITY = str2bool(os.environ.get(PREFIX + "DUMP_SERVERS", False))
+DUMP_IDENTITY = str2bool(os.environ.get(PREFIX + "DUMP_IDENTITY", False))
 
 # # Paths config
 # Path to playbook

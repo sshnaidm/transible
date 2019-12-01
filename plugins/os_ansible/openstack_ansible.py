@@ -22,9 +22,9 @@ class OpenstackAnsible:
 
     def run(self):
         self.initialize_directories()
-        if conf.DUMP_NETWORKS or conf.DUMP_SERVERS:
+        if conf.DUMP_NETWORKS:
             self.dump_networks()
-        if conf.DUMP_STORAGE or conf.DUMP_SERVERS:
+        if conf.DUMP_STORAGE:
             self.dump_storage()
         if conf.DUMP_SERVERS:
             self.dump_servers()
@@ -35,13 +35,13 @@ class OpenstackAnsible:
         # pylint: disable=maybe-no-member
         if self.debug:
             openstack.enable_logging(debug=True)
-        if conf.DUMP_NETWORKS or conf.DUMP_SERVERS:
+        if conf.DUMP_NETWORKS:
             self.data['networks'] = list(conn.network.networks())
             self.data['subnets'] = list(conn.network.subnets())
             self.data['secgroups'] = list(conn.network.security_groups())
             self.data['routers'] = list(conn.network.routers())
             self.data['ports'] = list(conn.network.ports())
-        if conf.DUMP_STORAGE or conf.DUMP_SERVERS:
+        if conf.DUMP_STORAGE:
             self.data['images'] = list(conn.image.images())
             self.data['volumes'] = list(conn.volume.volumes())
         if conf.DUMP_SERVERS:
@@ -59,11 +59,11 @@ class OpenstackAnsible:
             os.makedirs(os.path.dirname(conf.VARS_PATH))
         with open(conf.VARS_PATH, "w") as e:
             e.write("---\n")
-        if conf.DUMP_NETWORKS or conf.DUMP_SERVERS:
+        if conf.DUMP_NETWORKS:
             self.net_path = os.path.join(conf.PLAYS, "networks")
             if not os.path.exists(self.net_path):
                 os.makedirs(self.net_path)
-        if conf.DUMP_STORAGE or conf.DUMP_SERVERS:
+        if conf.DUMP_STORAGE:
             self.stor_path = os.path.join(conf.PLAYS, "storage")
             if not os.path.exists(self.stor_path):
                 os.makedirs(self.stor_path)
@@ -120,9 +120,9 @@ class OpenstackAnsible:
 
     def write_playbook(self):
         playbook = const.PLAYBOOK
-        if conf.DUMP_NETWORKS or conf.DUMP_SERVERS:
+        if conf.DUMP_NETWORKS:
             playbook += const.NET_PLAYBOOK
-        if conf.DUMP_STORAGE or conf.DUMP_SERVERS:
+        if conf.DUMP_STORAGE:
             playbook += const.STORAGE_PLAYBOOK
         if conf.DUMP_SERVERS:
             playbook += const.COMPUTE_PLAYBOOK
@@ -433,8 +433,12 @@ class OpenstackAnsible:
 
         servers = []
         pre_optimized = []
-        volumes_dict = {i['id']: i for i in data['volumes']}
-        images_dict = {i['id']: i['name'] for i in data['images']}
+        if conf.DUMP_STORAGE:
+            volumes_dict = {i['id']: i for i in data['volumes']}
+            images_dict = {i['id']: i['name'] for i in data['images']}
+        else:
+            volumes_dict = {}
+            images_dict = {}
         flavors_names = {i['id']: i['name'] for i in data['flavors']}
         for ser in data['servers']:
             s = {'state': 'present'}

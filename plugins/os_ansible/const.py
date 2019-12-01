@@ -79,9 +79,7 @@ COMPUTE_PLAYBOOK = """
     - import_tasks: compute/servers.yml
 """
 IDENTITY_PLAYBOOK = """
-    - import_tasks: compute/keypairs.yml
-    - import_tasks: compute/flavors.yml
-    - import_tasks: compute/servers.yml
+    - import_tasks: identity/users.yml
 """
 
 FILE_NETWORKS = 'networks.yml'
