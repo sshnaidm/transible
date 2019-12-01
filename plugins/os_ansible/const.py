@@ -48,6 +48,9 @@ DEFAULTS = {
         'terminate_volume': False,
         'delete_fip': False,
         'reuse_ips': True,
+    },
+    'user': {
+        'is_enabled': True,
     }
 }
 
@@ -75,6 +78,11 @@ COMPUTE_PLAYBOOK = """
     - import_tasks: compute/flavors.yml
     - import_tasks: compute/servers.yml
 """
+IDENTITY_PLAYBOOK = """
+    - import_tasks: compute/keypairs.yml
+    - import_tasks: compute/flavors.yml
+    - import_tasks: compute/servers.yml
+"""
 
 FILE_NETWORKS = 'networks.yml'
 FILE_SUBNETS = 'subnets.yml'
@@ -85,3 +93,4 @@ FILE_VOLUMES = 'volumes.yml'
 FILE_KEYPAIRS = 'keypairs.yml'
 FILE_SERVERS = 'servers.yml'
 FILE_FLAVORS = "flavors.yml"
+FILE_USERS = "users.yml"

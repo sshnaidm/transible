@@ -16,6 +16,7 @@ class OpenstackAnsible:
         self.stor_path = None
         self.net_path = None
         self.comp_path = None
+        self.iden_path = None
         self.cloud = cloud_name
         self.get_info()
 
@@ -47,6 +48,9 @@ class OpenstackAnsible:
             self.data['servers'] = list(conn.compute.servers())
             self.data['keypairs'] = list(conn.compute.keypairs())
             self.data['flavors'] = list(conn.compute.flavors())
+        if conf.DUMP_IDENTITY:
+            self.data['users'] = list(conn.identity.users())
+            self.data['domains'] = list(conn.identity.domains())
 
     def initialize_directories(self):
         if not os.path.exists(conf.PLAYS):
@@ -67,6 +71,10 @@ class OpenstackAnsible:
             self.comp_path = os.path.join(conf.PLAYS, "compute")
             if not os.path.exists(self.comp_path):
                 os.makedirs(self.comp_path)
+        if conf.DUMP_IDENTITY:
+            self.iden_path = os.path.join(conf.PLAYS, "identity")
+            if not os.path.exists(self.iden_path):
+                os.makedirs(self.iden_path)
 
     def dump_networks(self):
         net_funcs = {
@@ -101,6 +109,15 @@ class OpenstackAnsible:
             dumped_data = func(self.data)
             write_yaml(dumped_data, path)
 
+    def dump_identity(self):
+        iden_funcs = {
+            const.FILE_USERS: self.create_users,
+        }
+        for iden_file, func in iden_funcs.items():
+            path = os.path.join(self.iden_path, iden_file)
+            dumped_data = func(self.data)
+            write_yaml(dumped_data, path)
+
     def write_playbook(self):
         playbook = const.PLAYBOOK
         if conf.DUMP_NETWORKS or conf.DUMP_SERVERS:
@@ -109,8 +126,43 @@ class OpenstackAnsible:
             playbook += const.STORAGE_PLAYBOOK
         if conf.DUMP_SERVERS:
             playbook += const.COMPUTE_PLAYBOOK
+        if conf.DUMP_IDENTITY:
+            playbook += const.IDENTITY_PLAYBOOK
         with open(os.path.join(conf.PLAYS, "playbook.yml"), "w") as f:
             f.write(playbook)
+
+    def create_users(self, data, force_optimize=conf.VARS_OPT_FLAVORS):
+        users = []
+        pre_optimized = []
+        domains_by_id = {d['id']: d['name'] for d in data['domains']}
+        for user in data['users']:
+            u = {'state': 'present'}
+            if user.get('location') and user['location'].get('cloud'):
+                u['cloud'] = user['location']['cloud']
+            u['name'] = user['name']
+            if value(user, 'user', 'is_enabled'):
+                u['enabled'] = user['is_enabled']
+            if value(user, 'user', 'description'):
+                u['description'] = user['description']
+            if value(user, 'user', 'domain_id'):
+                u['domain'] = domains_by_id[user['domain_id']]
+            if value(user, 'user', 'default_project_id'):
+                u['default_project'] = domains_by_id[user['default_project_id']]
+            if value(user, 'user', 'email'):
+                u['email'] = user['email']
+            if value(user, 'user', 'password'):  # shouldn't be there
+                u['password'] = user['password']
+            if force_optimize:
+                pre_optimized.append({'os_user': u})
+            else:
+                users.append({'os_user': u})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="users")
+            if optimized:
+                users.append(optimized)
+        return users
 
     def create_flavors(self, data, force_optimize=conf.VARS_OPT_FLAVORS):
         flavors = []
