@@ -94,6 +94,7 @@ class OpenstackAnsible:
         comp_funcs = {
             const.FILE_KEYPAIRS: self.create_keypairs,
             const.FILE_SERVERS: self.create_servers,
+            const.FILE_FLAVORS: self.create_flavors,
         }
         for comp_file, func in comp_funcs.items():
             path = os.path.join(self.comp_path, comp_file)
@@ -110,6 +111,42 @@ class OpenstackAnsible:
             playbook += const.COMPUTE_PLAYBOOK
         with open(os.path.join(conf.PLAYS, "playbook.yml"), "w") as f:
             f.write(playbook)
+
+    def create_flavors(self, data, force_optimize=conf.VARS_OPT_FLAVORS):
+        flavors = []
+        pre_optimized = []
+        for flavor in data['flavors']:
+            fl = {'state': 'present'}
+            if flavor.get('location') and flavor['location'].get('cloud'):
+                fl['cloud'] = flavor['location']['cloud']
+            fl['name'] = flavor['name']
+            if value(flavor, 'flavor', 'disk'):
+                fl['disk'] = flavor['disk']
+            if value(flavor, 'flavor', 'ram'):
+                fl['ram'] = flavor['ram']
+            if value(flavor, 'flavor', 'vcpus'):
+                fl['vcpus'] = flavor['vcpus']
+            if value(flavor, 'flavor', 'swap'):
+                fl['swap'] = flavor['swap']
+            if value(flavor, 'flavor', 'rxtx_factor'):
+                fl['rxtx_factor'] = flavor['rxtx_factor']
+            if value(flavor, 'flavor', 'is_public'):
+                fl['is_public'] = flavor['is_public']
+            if value(flavor, 'flavor', 'ephemeral'):
+                fl['ephemeral'] = flavor['ephemeral']
+            if value(flavor, 'flavor', 'extra_specs'):
+                fl['extra_specs'] = flavor['extra_specs']
+            if force_optimize:
+                pre_optimized.append({'os_nova_flavor': fl})
+            else:
+                flavors.append({'os_nova_flavor': fl})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="flavors")
+            if optimized:
+                flavors.append(optimized)
+        return flavors
 
     def create_subnets(self, data, force_optimize=conf.VARS_OPT_SUBNETS):
         subnets = []

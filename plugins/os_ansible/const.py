@@ -34,6 +34,12 @@ DEFAULTS = {
         'is_protected': False,
     },
     'keypair': {},
+    'flavor': {
+        'swap': 0,
+        'rxtx_factor': 1.0,
+        'is_public': True,
+        'ephemeral': 0,
+    },
     'server': {
         'security_groups': [{'name': 'default'}],
         'config_drive': '',
@@ -66,6 +72,7 @@ STORAGE_PLAYBOOK = """
 """
 COMPUTE_PLAYBOOK = """
     - import_tasks: compute/keypairs.yml
+    - import_tasks: compute/flavors.yml
     - import_tasks: compute/servers.yml
 """
 
@@ -77,3 +84,4 @@ FILE_IMAGES = 'images.yml'
 FILE_VOLUMES = 'volumes.yml'
 FILE_KEYPAIRS = 'keypairs.yml'
 FILE_SERVERS = 'servers.yml'
+FILE_FLAVORS = "flavors.yml"
