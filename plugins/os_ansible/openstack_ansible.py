@@ -28,6 +28,8 @@ class OpenstackAnsible:
             self.dump_storage()
         if conf.DUMP_SERVERS:
             self.dump_servers()
+        if conf.DUMP_IDENTITY:
+            self.dump_identity()
         self.write_playbook()
 
     def get_info(self):
