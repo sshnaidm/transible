@@ -51,7 +51,10 @@ DEFAULTS = {
     },
     'user': {
         'is_enabled': True,
-    }
+    },
+    'domain': {
+        'is_enabled': True,
+    },
 }
 
 PLAYBOOK = """
@@ -92,3 +95,5 @@ FILE_KEYPAIRS = 'keypairs.yml'
 FILE_SERVERS = 'servers.yml'
 FILE_FLAVORS = "flavors.yml"
 FILE_USERS = "users.yml"
+FILE_DOMAINS = "domains.yml"
+FILE_PROJECTS = "projects.yml"

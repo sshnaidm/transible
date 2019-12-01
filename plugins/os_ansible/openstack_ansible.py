@@ -115,6 +115,7 @@ class OpenstackAnsible:
     def dump_identity(self):
         iden_funcs = {
             const.FILE_USERS: self.create_users,
+            const.FILE_DOMAINS: self.create_domains,
         }
         for iden_file, func in iden_funcs.items():
             path = os.path.join(self.iden_path, iden_file)
@@ -133,6 +134,30 @@ class OpenstackAnsible:
             playbook += const.IDENTITY_PLAYBOOK
         with open(os.path.join(conf.PLAYS, "playbook.yml"), "w") as f:
             f.write(playbook)
+
+    def create_domains(self, data, force_optimize=conf.VARS_OPT_FLAVORS):
+        domains = []
+        pre_optimized = []
+        for dom in data['domains']:
+            d = {'state': 'present'}
+            if dom.get('location') and dom['location'].get('cloud'):
+                d['cloud'] = dom['location']['cloud']
+            d['name'] = dom['name']
+            if value(dom, 'domain', 'is_enabled'):
+                d['enabled'] = dom['is_enabled']
+            if value(dom, 'user', 'description'):
+                d['description'] = dom['description']
+            if force_optimize:
+                pre_optimized.append({'os_keystone_domain': d})
+            else:
+                domains.append({'os_keystone_domain': d})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="domains")
+            if optimized:
+                domains.append(optimized)
+        return domains
 
     def create_users(self, data, force_optimize=conf.VARS_OPT_FLAVORS):
         users = []
