@@ -55,6 +55,9 @@ DEFAULTS = {
     'domain': {
         'is_enabled': True,
     },
+    'project': {
+        'is_enabled': True,
+    },
 }
 
 PLAYBOOK = """

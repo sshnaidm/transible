@@ -116,6 +116,7 @@ class OpenstackAnsible:
         iden_funcs = {
             const.FILE_USERS: self.create_users,
             const.FILE_DOMAINS: self.create_domains,
+            const.FILE_PROJECTS: self.create_projects,
         }
         for iden_file, func in iden_funcs.items():
             path = os.path.join(self.iden_path, iden_file)
@@ -135,7 +136,33 @@ class OpenstackAnsible:
         with open(os.path.join(conf.PLAYS, "playbook.yml"), "w") as f:
             f.write(playbook)
 
-    def create_domains(self, data, force_optimize=conf.VARS_OPT_FLAVORS):
+    def create_projects(self, data, force_optimize=conf.VARS_OPT_PROJECTS):
+        projects = []
+        pre_optimized = []
+        for pro in data['projects']:
+            p = {'state': 'present'}
+            if pro.get('location') and pro['location'].get('cloud'):
+                p['cloud'] = pro['location']['cloud']
+            p['name'] = pro['name']
+            if value(pro, 'project', 'is_enabled'):
+                p['enabled'] = pro['is_enabled']
+            if value(pro, 'project', 'description'):
+                p['description'] = pro['description']
+            if value(pro, 'project', 'domain_id'):
+                p['domain_id'] = pro['domain_id']
+            if force_optimize:
+                pre_optimized.append({'os_project': p})
+            else:
+                projects.append({'os_project': p})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                var_name="projects")
+            if optimized:
+                projects.append(optimized)
+        return projects
+
+    def create_domains(self, data, force_optimize=conf.VARS_OPT_DOMAINS):
         domains = []
         pre_optimized = []
         for dom in data['domains']:
@@ -145,7 +172,7 @@ class OpenstackAnsible:
             d['name'] = dom['name']
             if value(dom, 'domain', 'is_enabled'):
                 d['enabled'] = dom['is_enabled']
-            if value(dom, 'user', 'description'):
+            if value(dom, 'domain', 'description'):
                 d['description'] = dom['description']
             if force_optimize:
                 pre_optimized.append({'os_keystone_domain': d})
@@ -159,7 +186,7 @@ class OpenstackAnsible:
                 domains.append(optimized)
         return domains
 
-    def create_users(self, data, force_optimize=conf.VARS_OPT_FLAVORS):
+    def create_users(self, data, force_optimize=conf.VARS_OPT_USERS):
         users = []
         pre_optimized = []
         domains_by_id = {d['id']: d['name'] for d in data['domains']}
