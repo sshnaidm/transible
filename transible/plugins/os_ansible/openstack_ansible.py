@@ -4,56 +4,25 @@
 import os
 import openstack
 
-from plugins.os_ansible import config as conf
-from plugins.os_ansible import const
-from plugins.os_ansible.common import value, optimize, write_yaml
+from transible.plugins.os_ansible import config as conf
+from transible.plugins.os_ansible import const
+from transible.plugins.os_ansible.common import value, optimize, write_yaml, read_yaml
 
 
 class OpenstackAnsible:
-    def __init__(self, cloud_name, debug=False):
-        self.debug = debug
-        self.data = {}
-        self.stor_path = None
-        self.net_path = None
-        self.comp_path = None
-        self.iden_path = None
-        self.cloud = cloud_name
-        self.get_info()
-
-    def run(self):
+    def __init__(self, cloud_name, debug=False, from_file=''):
+        self.path = {}
         self.initialize_directories()
-        if conf.DUMP_NETWORKS:
-            self.dump_networks()
-        if conf.DUMP_STORAGE:
-            self.dump_storage()
-        if conf.DUMP_SERVERS:
-            self.dump_servers()
-        if conf.DUMP_IDENTITY:
-            self.dump_identity()
-        self.write_playbook()
-
-    def get_info(self):
-        conn = openstack.connect(cloud=self.cloud)
-        # pylint: disable=maybe-no-member
-        if self.debug:
-            openstack.enable_logging(debug=True)
-        if conf.DUMP_NETWORKS:
-            self.data['networks'] = list(conn.network.networks())
-            self.data['subnets'] = list(conn.network.subnets())
-            self.data['secgroups'] = list(conn.network.security_groups())
-            self.data['routers'] = list(conn.network.routers())
-            self.data['ports'] = list(conn.network.ports())
-        if conf.DUMP_STORAGE:
-            self.data['images'] = list(conn.image.images())
-            self.data['volumes'] = list(conn.volume.volumes())
-        if conf.DUMP_SERVERS:
-            self.data['servers'] = list(conn.compute.servers())
-            self.data['keypairs'] = list(conn.compute.keypairs())
-            self.data['flavors'] = list(conn.compute.flavors())
-        if conf.DUMP_IDENTITY:
-            self.data['users'] = list(conn.identity.users())
-            self.data['domains'] = list(conn.identity.domains())
-            self.data['projects'] = list(conn.identity.projects())
+        self.data = {}
+        if from_file:
+            self.data = read_yaml(os.path.join(conf.DATA_DIR_TRANSIENT, from_file))
+        else:
+            oi = OpenstackInfo(cloud_name=cloud_name, debug=debug)
+            oi.run()
+            self.data = oi.data
+        self.debug = debug
+        self.data.update({'cloud': cloud_name})
+        self.os_calc = OpenstackCalculation(self.data, debug=self.debug)
 
     def initialize_directories(self):
         if not os.path.exists(conf.PLAYS):
@@ -62,87 +31,131 @@ class OpenstackAnsible:
             os.makedirs(os.path.dirname(conf.VARS_PATH))
         with open(conf.VARS_PATH, "w") as e:
             e.write("---\n")
-        if conf.DUMP_NETWORKS:
-            self.net_path = os.path.join(conf.PLAYS, "networks")
-            if not os.path.exists(self.net_path):
-                os.makedirs(self.net_path)
-        if conf.DUMP_STORAGE:
-            self.stor_path = os.path.join(conf.PLAYS, "storage")
-            if not os.path.exists(self.stor_path):
-                os.makedirs(self.stor_path)
-        if conf.DUMP_SERVERS:
-            self.comp_path = os.path.join(conf.PLAYS, "compute")
-            if not os.path.exists(self.comp_path):
-                os.makedirs(self.comp_path)
-        if conf.DUMP_IDENTITY:
-            self.iden_path = os.path.join(conf.PLAYS, "identity")
-            if not os.path.exists(self.iden_path):
-                os.makedirs(self.iden_path)
-
-    def dump_networks(self):
-        net_funcs = {
-            const.FILE_NETWORKS: self.create_networks,
-            const.FILE_SUBNETS: self.create_subnets,
-            const.FILE_SECURITY_GROUPS: self.create_security_groups,
-            const.FILE_ROUTERS: self.create_routers,
+        dirs_matrix = {
+            'networks': conf.DUMP_NETWORKS,
+            'storage': conf.DUMP_STORAGE,
+            'compute': conf.DUMP_SERVERS,
+            'identity': conf.DUMP_IDENTITY,
         }
-        for net_file, func in net_funcs.items():
-            path = os.path.join(self.net_path, net_file)
-            dumped_data = func(self.data)
-            write_yaml(dumped_data, path)
 
-    def dump_storage(self):
-        stor_funcs = {
-            const.FILE_IMAGES: self.create_images,
-            const.FILE_VOLUMES: self.create_volumes,
-        }
-        for stor_file, func in stor_funcs.items():
-            path = os.path.join(self.stor_path, stor_file)
-            dumped_data = func(self.data)
-            write_yaml(dumped_data, path)
+        for dir_type, dump in dirs_matrix.items():
+            if dump:
+                self.path[dir_type] = os.path.join(conf.PLAYS, dir_type)
+                if not os.path.exists(self.path[dir_type]):
+                    os.makedirs(self.path[dir_type])
+        if conf.DATA_DIR_TRANSIENT:
+            if not os.path.exists(conf.DATA_DIR_TRANSIENT):
+                os.makedirs(conf.DATA_DIR_TRANSIENT)
 
-    def dump_servers(self):
-        comp_funcs = {
-            const.FILE_KEYPAIRS: self.create_keypairs,
-            const.FILE_SERVERS: self.create_servers,
-            const.FILE_FLAVORS: self.create_flavors,
-        }
-        for comp_file, func in comp_funcs.items():
-            path = os.path.join(self.comp_path, comp_file)
-            dumped_data = func(self.data)
-            write_yaml(dumped_data, path)
+    def run(self):
+        for data_type, dump in {
+            'networks': conf.DUMP_NETWORKS,
+            'storage': conf.DUMP_STORAGE,
+            'compute': conf.DUMP_SERVERS,
+            'identity': conf.DUMP_IDENTITY,
+        }.items():
+            if dump:
+                self.retrieve_cloud_data(data_type)
+        self.write_playbook()
 
-    def dump_identity(self):
-        iden_funcs = {
-            const.FILE_USERS: self.create_users,
-            const.FILE_DOMAINS: self.create_domains,
-            const.FILE_PROJECTS: self.create_projects,
+    def retrieve_cloud_data(self, data_type):
+        cloud_funcs = {
+            const.FILE_NETWORKS: ('networks', self.os_calc.create_networks),
+            const.FILE_SUBNETS: ('networks', self.os_calc.create_subnets),
+            const.FILE_SECURITY_GROUPS: ('networks', self.os_calc.create_security_groups),
+            const.FILE_ROUTERS: ('networks', self.os_calc.create_routers),
+            const.FILE_IMAGES: ('storage', self.os_calc.create_images),
+            const.FILE_VOLUMES: ('storage', self.os_calc.create_volumes),
+            const.FILE_FLAVORS: ('compute', self.os_calc.create_flavors),
+            const.FILE_KEYPAIRS: ('compute', self.os_calc.create_keypairs),
+            const.FILE_SERVERS: ('compute', self.os_calc.create_servers),
+            const.FILE_PROJECTS: ('identity', self.os_calc.create_projects),
+            const.FILE_DOMAINS: ('identity', self.os_calc.create_domains),
+            const.FILE_USERS: ('identity', self.os_calc.create_users),
         }
-        for iden_file, func in iden_funcs.items():
-            path = os.path.join(self.iden_path, iden_file)
-            dumped_data = func(self.data)
-            write_yaml(dumped_data, path)
+        for file_name, (path, func) in cloud_funcs.items():
+            if path == data_type:
+                path = os.path.join(self.path[path], file_name)
+                dumped_data = func()
+                write_yaml(dumped_data, path)
 
     def write_playbook(self):
         playbook = const.PLAYBOOK
-        if conf.DUMP_NETWORKS:
-            playbook += const.NET_PLAYBOOK
-        if conf.DUMP_STORAGE:
-            playbook += const.STORAGE_PLAYBOOK
-        if conf.DUMP_SERVERS:
-            playbook += const.COMPUTE_PLAYBOOK
-        if conf.DUMP_IDENTITY:
-            playbook += const.IDENTITY_PLAYBOOK
+        play_matrix = {
+            const.NET_PLAYBOOK: conf.DUMP_NETWORKS,
+            const.STORAGE_PLAYBOOK: conf.DUMP_STORAGE,
+            const.COMPUTE_PLAYBOOK: conf.DUMP_SERVERS,
+            const.IDENTITY_PLAYBOOK: conf.DUMP_IDENTITY,
+        }
+        for play, dump in play_matrix.items():
+            if dump:
+                playbook += play
         with open(os.path.join(conf.PLAYS, "playbook.yml"), "w") as f:
             f.write(playbook)
 
-    def create_projects(self, data, force_optimize=conf.VARS_OPT_PROJECTS):
+
+class OpenstackInfo:
+    def __init__(self, cloud_name, debug=False):
+        self.debug = debug
+        self.data = {}
+        self.cloud = cloud_name
+
+    def run(self):
+        self.get_info()
+
+    def get_info(self):
+        conn = openstack.connect(cloud=self.cloud)
+        # pylint: disable=maybe-no-member
+        if self.debug:
+            openstack.enable_logging(debug=True)
+        info_matrix = {
+            'networks': (conf.DUMP_NETWORKS, conn.network.networks, const.FILE_NETWORKS),
+            'subnets': (conf.DUMP_NETWORKS, conn.network.subnets, const.FILE_SUBNETS),
+            'secgroups': (conf.DUMP_NETWORKS, conn.network.security_groups, const.FILE_SECURITY_GROUPS),
+            'routers': (conf.DUMP_NETWORKS, conn.network.routers, const.FILE_ROUTERS),
+            'ports': (conf.DUMP_NETWORKS, conn.network.ports, const.FILE_PORTS),
+            'images': (conf.DUMP_STORAGE, conn.image.images, const.FILE_IMAGES),
+            'volumes': (conf.DUMP_STORAGE, conn.volume.volumes, const.FILE_VOLUMES),
+            # 'volumes': (conf.DUMP_STORAGE, conn.block_storage.volumes, const.FILE_VOLUMES),
+            # 'floating_ips': (conf.DUMP_NETWORKS, conn.network.floating_ips, const.FILE_FIPS),
+            'keypairs': (conf.DUMP_SERVERS, conn.compute.keypairs, const.FILE_KEYPAIRS),
+            'servers': (conf.DUMP_SERVERS, conn.compute.servers, const.FILE_SERVERS),
+            'flavors': (conf.DUMP_SERVERS, conn.compute.flavors, const.FILE_FLAVORS),
+            'users': (conf.DUMP_IDENTITY, conn.identity.users, const.FILE_FLAVORS),
+            'projects': (conf.DUMP_IDENTITY, conn.identity.projects, const.FILE_PROJECTS),
+            'domains': (conf.DUMP_IDENTITY, conn.identity.domains, const.FILE_DOMAINS),
+        }
+        for data_type, (dump, func, file_name) in info_matrix.items():
+            if dump:
+                self.data[data_type] = list([i.to_dict() for i in func()])
+                # Remove Munch objects from the dict
+                for i in self.data[data_type]:
+                    i.pop('location')
+                self.dump2file(file_name, data_type)
+
+        if conf.DATA_DIR_TRANSIENT:
+            write_yaml(self.data, os.path.join(conf.DATA_DIR_TRANSIENT,
+                                               const.FILE_ALL_DATA))
+
+    def dump2file(self, path, data_type):
+        if conf.DATA_DIR_TRANSIENT:
+            write_yaml(
+                self.data[data_type],
+                os.path.join(conf.DATA_DIR_TRANSIENT, path))
+
+
+class OpenstackCalculation:
+    def __init__(self, data, debug=False):
+        self.debug = debug
+        self.data = data
+
+    def create_projects(self, force_optimize=conf.VARS_OPT_PROJECTS,
+                        vars_file=True):
         projects = []
         pre_optimized = []
-        for pro in data['projects']:
+        for pro in self.data['projects']:
             p = {'state': 'present'}
-            if pro.get('location') and pro['location'].get('cloud'):
-                p['cloud'] = pro['location']['cloud']
+            p['cloud'] = self.data['cloud']
             p['name'] = pro['name']
             if value(pro, 'project', 'is_enabled'):
                 p['enabled'] = pro['is_enabled']
@@ -151,50 +164,52 @@ class OpenstackAnsible:
             if value(pro, 'project', 'domain_id'):
                 p['domain_id'] = pro['domain_id']
             if force_optimize:
-                pre_optimized.append({'os_project': p})
+                pre_optimized.append({'openstack.cloud.project': p})
             else:
-                projects.append({'os_project': p})
+                projects.append({'openstack.cloud.project': p})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="projects")
             if optimized:
                 projects.append(optimized)
         return projects
 
-    def create_domains(self, data, force_optimize=conf.VARS_OPT_DOMAINS):
+    def create_domains(self, force_optimize=conf.VARS_OPT_DOMAINS,
+                       vars_file=True):
         domains = []
         pre_optimized = []
-        for dom in data['domains']:
+        for dom in self.data['domains']:
             d = {'state': 'present'}
-            if dom.get('location') and dom['location'].get('cloud'):
-                d['cloud'] = dom['location']['cloud']
+            d['cloud'] = self.data['cloud']
             d['name'] = dom['name']
             if value(dom, 'domain', 'is_enabled'):
                 d['enabled'] = dom['is_enabled']
             if value(dom, 'domain', 'description'):
                 d['description'] = dom['description']
             if force_optimize:
-                pre_optimized.append({'os_keystone_domain': d})
+                pre_optimized.append({'openstack.cloud.identity_domain': d})
             else:
-                domains.append({'os_keystone_domain': d})
+                domains.append({'openstack.cloud.identity_domain': d})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="domains")
             if optimized:
                 domains.append(optimized)
         return domains
 
-    def create_users(self, data, force_optimize=conf.VARS_OPT_USERS):
+    def create_users(self, force_optimize=conf.VARS_OPT_USERS,
+                     vars_file=True):
         users = []
         pre_optimized = []
-        domains_by_id = {d['id']: d['name'] for d in data['domains']}
-        projects_by_id = {d['id']: d['name'] for d in data['projects']}
-        for user in data['users']:
+        domains_by_id = {d['id']: d['name'] for d in self.data['domains']}
+        projects_by_id = {d['id']: d['name'] for d in self.data['projects']}
+        for user in self.data['users']:
             u = {'state': 'present'}
-            if user.get('location') and user['location'].get('cloud'):
-                u['cloud'] = user['location']['cloud']
+            u['cloud'] = self.data['cloud']
             u['name'] = user['name']
             if value(user, 'user', 'is_enabled'):
                 u['enabled'] = user['is_enabled']
@@ -209,24 +224,25 @@ class OpenstackAnsible:
             if value(user, 'user', 'password'):  # shouldn't be there
                 u['password'] = user['password']
             if force_optimize:
-                pre_optimized.append({'os_user': u})
+                pre_optimized.append({'openstack.cloud.identity_user': u})
             else:
-                users.append({'os_user': u})
+                users.append({'openstack.cloud.identity_user': u})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="users")
             if optimized:
                 users.append(optimized)
         return users
 
-    def create_flavors(self, data, force_optimize=conf.VARS_OPT_FLAVORS):
+    def create_flavors(self, force_optimize=conf.VARS_OPT_FLAVORS,
+                       vars_file=True):
         flavors = []
         pre_optimized = []
-        for flavor in data['flavors']:
+        for flavor in self.data['flavors']:
             fl = {'state': 'present'}
-            if flavor.get('location') and flavor['location'].get('cloud'):
-                fl['cloud'] = flavor['location']['cloud']
+            fl['cloud'] = self.data['cloud']
             fl['name'] = flavor['name']
             if value(flavor, 'flavor', 'disk'):
                 fl['disk'] = flavor['disk']
@@ -245,25 +261,26 @@ class OpenstackAnsible:
             if value(flavor, 'flavor', 'extra_specs'):
                 fl['extra_specs'] = flavor['extra_specs']
             if force_optimize:
-                pre_optimized.append({'os_nova_flavor': fl})
+                pre_optimized.append({'openstack.cloud.compute_flavor': fl})
             else:
-                flavors.append({'os_nova_flavor': fl})
+                flavors.append({'openstack.cloud.compute_flavor': fl})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="flavors")
             if optimized:
                 flavors.append(optimized)
         return flavors
 
-    def create_subnets(self, data, force_optimize=conf.VARS_OPT_SUBNETS):
+    def create_subnets(self, force_optimize=conf.VARS_OPT_SUBNETS,
+                       vars_file=True):
         subnets = []
         pre_optimized = []
-        net_ids = {i['id']: i['name'] for i in data['networks']}
-        for subnet in data['subnets']:
+        net_ids = {i['id']: i['name'] for i in self.data['networks']}
+        for subnet in self.data['subnets']:
             s = {'state': 'present'}
-            if subnet.get('location') and subnet['location'].get('cloud'):
-                s['cloud'] = subnet['location']['cloud']
+            s['cloud'] = self.data['cloud']
             s['name'] = subnet['name']
             if subnet['network_id'] in net_ids:
                 s['network_name'] = net_ids[subnet['network_id']]
@@ -274,7 +291,7 @@ class OpenstackAnsible:
             s['cidr'] = subnet['cidr']
             if value(subnet, 'subnet', 'ip_version'):
                 s['ip_version'] = subnet['ip_version']
-            if value(subnet, 'subnet', 'enable_dhcp'):
+            if value(subnet, 'subnet', 'is_dhcp_enabled'):
                 s['enable_dhcp'] = subnet['is_dhcp_enabled']
             if value(subnet, 'subnet', 'gateway_ip'):
                 s['gateway_ip'] = subnet['gateway_ip']
@@ -287,24 +304,25 @@ class OpenstackAnsible:
             if value(subnet, 'subnet', 'host_routes'):
                 s['host_routes'] = subnet['host_routes']
             if force_optimize:
-                pre_optimized.append({'os_subnet': s})
+                pre_optimized.append({'openstack.cloud.subnet': s})
             else:
-                subnets.append({'os_subnet': s})
+                subnets.append({'openstack.cloud.subnet': s})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="subnets")
             if optimized:
                 subnets.append(optimized)
         return subnets
 
-    def create_networks(self, data, force_optimize=conf.VARS_OPT_NETWORKS):
+    def create_networks(self, force_optimize=conf.VARS_OPT_NETWORKS,
+                        vars_file=True):
         networks = []
         pre_optimized = []
-        for network in data['networks']:
+        for network in self.data['networks']:
             n = {'state': 'present'}
-            if network.get('location') and network['location'].get('cloud'):
-                n['cloud'] = network['location']['cloud']
+            n['cloud'] = self.data['cloud']
             n['name'] = network['name']
             if value(network, 'network', 'is_admin_state_up'):
                 n['admin_state_up'] = network['is_admin_state_up']
@@ -327,33 +345,42 @@ class OpenstackAnsible:
             if value(network, 'network', 'dns_domain'):
                 n['dns_domain'] = network['dns_domain']
             if force_optimize:
-                pre_optimized.append({'os_network': n})
+                pre_optimized.append({'openstack.cloud.network': n})
             else:
-                networks.append({'os_network': n})
+                networks.append({'openstack.cloud.network': n})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="networks")
             if optimized:
                 networks.append(optimized)
         return networks
 
-    def create_security_groups(self, data,
-                               force_optimize=conf.VARS_OPT_SECGROUPS):
+    def create_security_groups(self,
+                               force_optimize=conf.VARS_OPT_SECGROUPS,
+                               vars_file=True):
         secgrs = []
-        secgrs_ids = {i['id']: i['name'] for i in data['secgroups']}
-        for secgr in data['secgroups']:
+        secgrs_ids = {i['id']: i['name'] for i in self.data['secgroups']}
+        for secgr in self.data['secgroups']:
             s = {'state': 'present'}
-            if secgr.get('location') and secgr['location'].get('cloud'):
-                s['cloud'] = secgr['location']['cloud']
+            s['cloud'] = self.data['cloud']
             s['name'] = secgr['name']
-            secgrs.append({'os_security_group': s})
+            project = ''
+            if self.data['projects']:
+                project_ids = {i['id']: i for i in self.data['projects']}
+                if secgr.get('project_id'):
+                    project = project_ids[secgr['project_id']]['name']
+                    s['project'] = project
+            secgrs.append({'openstack.cloud.security_group': s})
             if value(secgr, 'security_group', 'description'):
                 s['description'] = secgr['description']
             if secgr.get('security_group_rules'):
                 pre_optimized = []
                 for rule in secgr['security_group_rules']:
                     r = {'security_group': secgr['name']}
+                    if project:
+                        r['project'] = project
                     if s.get('cloud'):
                         r['cloud'] = s['cloud']
                     if value(rule, 'security_group_rule', 'description'):
@@ -373,32 +400,37 @@ class OpenstackAnsible:
                     if value(rule, 'security_group_rule', 'remote_ip_prefix'):
                         r['remote_ip_prefix'] = rule['remote_ip_prefix']
                     if force_optimize:
-                        pre_optimized.append({'os_security_group_rule': r})
+                        pre_optimized.append({'openstack.cloud.security_group_rule': r})
                     else:
-                        secgrs.append({'os_security_group_rule': r})
+                        secgrs.append({'openstack.cloud.security_group_rule': r})
                 if force_optimize:
+                    var_name = (
+                        secgr['name'].replace('-', '_')
+                        + ("_" + project if project else '')
+                        + "_rules")
                     optimized = optimize(
                         pre_optimized,
-                        var_name=secgr['name'].replace('-', '_') + "_rules")
+                        use_vars=vars_file,
+                        var_name=var_name)
                     if optimized:
                         secgrs.append(optimized)
         return secgrs
 
-    def create_routers(self, data, strict_ip=False,
-                       force_optimize=conf.VARS_OPT_ROUTERS):
+    def create_routers(self, strict_ip=False,
+                       force_optimize=conf.VARS_OPT_ROUTERS, vars_file=True):
         routers = []
         pre_optimized = []
-        subnet_ids = {i['id']: i for i in data['subnets']}
-        net_ids = {i['id']: i for i in data['networks']}
-        for rout in data['routers']:
+        subnet_ids = {i['id']: i for i in self.data['subnets']}
+        net_ids = {i['id']: i for i in self.data['networks']}
+        for rout in self.data['routers']:
             r = {'state': 'present'}
-            if rout.get('location') and rout['location'].get('cloud'):
-                r['cloud'] = rout['location']['cloud']
+            r['cloud'] = self.data['cloud']
             r['name'] = rout['name']
             if value(rout, 'router', 'is_admin_state_up'):
                 r['admin_state_up'] = rout['is_admin_state_up']
             r['interfaces'] = []
-            ports = [i for i in data['ports'] if i['device_id'] == rout['id']]
+            ports = [i for i in self.data['ports']
+                     if i['device_id'] == rout['id']]
             for p in ports:
                 for fip in p['fixed_ips']:
                     subnet = subnet_ids.get(fip['subnet_id'])
@@ -462,18 +494,20 @@ class OpenstackAnsible:
                             'ip': ext_fip
                         }]
             if force_optimize:
-                pre_optimized.append({'os_router': r})
+                pre_optimized.append({'openstack.cloud.router': r})
             else:
-                routers.append({'os_router': r})
+                routers.append({'openstack.cloud.router': r})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="routers")
             if optimized:
                 routers.append(optimized)
         return routers
 
-    def create_servers(self, data, force_optimize=conf.VARS_OPT_SERVERS):
+    def create_servers(self, force_optimize=conf.VARS_OPT_SERVERS,
+                       vars_file=True):
 
         def get_boot_volume(volumes):
             # Let's assume it's only one bootable volume
@@ -490,21 +524,26 @@ class OpenstackAnsible:
         servers = []
         pre_optimized = []
         if conf.DUMP_STORAGE:
-            volumes_dict = {i['id']: i for i in data['volumes']}
-            images_dict = {i['id']: i['name'] for i in data['images']}
+            volumes_dict = {i['id']: i for i in self.data['volumes']}
+            images_dict = {i['id']: i['name'] for i in self.data['images']}
         else:
             volumes_dict = {}
             images_dict = {}
-        flavors_names = {i['id']: i['name'] for i in data['flavors']}
-        for ser in data['servers']:
+        flavors_names = {i['id']: i['name'] for i in self.data['flavors']}
+        for ser in self.data['servers']:
             s = {'state': 'present'}
             s['name'] = ser['name']
-            if ser.get('location') and ser['location'].get('cloud'):
-                s['cloud'] = ser['location']['cloud']
+            s['cloud'] = self.data['cloud']
             if value(ser, 'server', 'security_groups'):
                 s['security_groups'] = list(set(
                     [i['name'] for i in ser['security_groups']]))
-            s['flavor'] = flavors_names[ser['flavor']['id']]
+            if 'original_name' in ser['flavor']:
+                s['flavor'] = ser['flavor']['original_name']
+            elif ser['flavor_id']:
+                s['flavor'] = flavors_names[ser['flavor_id']]
+            else:
+                raise Exception("Flavor for server %s not found! %s" % (
+                    ser['name'], str(ser['flavor'])))
             if value(ser, 'server', 'key_name'):
                 s['key_name'] = ser['key_name']
             if value(ser, 'server', 'scheduler_hints'):
@@ -567,50 +606,51 @@ class OpenstackAnsible:
                             for j in i if j['OS-EXT-IPS:type'] == 'floating']
                     s['floating_ips'] = fips
             if force_optimize:
-                pre_optimized.append({'os_server': s})
+                pre_optimized.append({'openstack.cloud.server': s})
             else:
-                servers.append({'os_server': s})
+                servers.append({'openstack.cloud.server': s})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="servers")
             if optimized:
                 servers.append(optimized)
         return servers
 
-    def create_keypairs(self, data, force_optimize=conf.VARS_OPT_KEYPAIRS):
+    def create_keypairs(self, force_optimize=conf.VARS_OPT_KEYPAIRS,
+                        vars_file=True):
         keypairs = []
         pre_optimized = []
-        for key in data['keypairs']:
+        for key in self.data['keypairs']:
             k = {'state': 'present'}
             k['name'] = key['name']
-            if key.get('location') and key['location'].get('cloud'):
-                k['cloud'] = key['location']['cloud']
+            k['cloud'] = self.data['cloud']
             if value(key, 'keypair', 'public_key'):
                 k['public_key'] = key['public_key']
             if force_optimize:
-                pre_optimized.append({'os_keypair': k})
+                pre_optimized.append({'openstack.cloud.keypair': k})
             else:
-                keypairs.append({'os_keypair': k})
+                keypairs.append({'openstack.cloud.keypair': k})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="keypairs")
             if optimized:
                 keypairs.append(optimized)
         return keypairs
 
-    def create_images(self, data, set_id=False,
-                      force_optimize=conf.VARS_OPT_IMAGES):
+    def create_images(self, set_id=False,
+                      force_optimize=conf.VARS_OPT_IMAGES, vars_file=True):
         imgs = []
         pre_optimized = []
-        for img in data['images']:
+        for img in self.data['images']:
             im = {'state': 'present'}
             im['name'] = img['name']
             if set_id:
                 im['id'] = img['id']
-            if img.get('location') and img['location'].get('cloud'):
-                im['cloud'] = img['location']['cloud']
+            im['cloud'] = self.data['cloud']
             if value(img, 'image', 'checksum'):
                 im['checksum'] = img['checksum']
             if value(img, 'image', 'container_format'):
@@ -639,35 +679,37 @@ class OpenstackAnsible:
             if value(img, 'image', 'properties'):
                 im['properties'] = img['properties']
             if force_optimize:
-                pre_optimized.append({'os_image': im})
+                pre_optimized.append({'openstack.cloud.image': im})
             else:
-                imgs.append({'os_image': im})
+                imgs.append({'openstack.cloud.image': im})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="images")
             if optimized:
                 imgs.append(optimized)
         return imgs
 
-    def create_volumes(self, data, force_optimize=conf.VARS_OPT_VOLUMES):
+    def create_volumes(self, force_optimize=conf.VARS_OPT_VOLUMES,
+                       vars_file=True):
         vols = []
         pre_optimized = []
-        for vol in data['volumes']:
+        for vol in self.data['volumes']:
             v = {'state': 'present'}
             if not vol['name'] and conf.SKIP_UNNAMED_VOLUMES:
                 continue
             if not vol['name']:
                 v['display_name'] = vol['id']
             v['display_name'] = vol['name']
-            if vol.get('location') and vol['location'].get('cloud'):
-                v['cloud'] = vol['location']['cloud']
+            v['cloud'] = self.data['cloud']
             if value(vol, 'volume', 'display_description'):
                 v['display_description'] = vol['description']
             if value(vol, 'volume', 'size'):
                 v['size'] = vol['size']
-            if ('volume_image_metadata' in vol and 'image_name'
-                    in vol['volume_image_metadata']):
+            if ('volume_image_metadata' in vol
+                and vol['volume_image_metadata']
+                    and 'image_name' in vol['volume_image_metadata']):
                 v['image'] = vol['volume_image_metadata']['image_name']
             if value(vol, 'volume', 'metadata'):
                 v['metadata'] = vol['metadata']
@@ -678,12 +720,13 @@ class OpenstackAnsible:
             if value(vol, 'volume', 'source_volume_id'):
                 v['volume'] = vol['source_volume_id']
             if force_optimize:
-                pre_optimized.append({'os_volume': v})
+                pre_optimized.append({'openstack.cloud.volume': v})
             else:
-                vols.append({'os_volume': v})
+                vols.append({'openstack.cloud.volume': v})
         if force_optimize:
             optimized = optimize(
                 pre_optimized,
+                use_vars=vars_file,
                 var_name="volumes")
             if optimized:
                 vols.append(optimized)
