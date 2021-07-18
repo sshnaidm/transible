@@ -1,0 +1,3680 @@
+---
+networks:
+  - availability_zone_hints: []
+    availability_zones:
+      - nova
+    created_at: '2019-07-25T20:30:05Z'
+    description: ''
+    dns_domain: null
+    ipv4_address_scope_id: null
+    ipv6_address_scope_id: null
+    is_admin_state_up: true
+    is_default: false
+    is_port_security_enabled: true
+    is_router_external: true
+    is_shared: true
+    mtu: 1500
+    name: public
+    project_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    provider_network_type: null
+    provider_physical_network: null
+    provider_segmentation_id: null
+    qos_policy_id: null
+    segments: null
+    status: ACTIVE
+    subnet_ids:
+      - 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+      - 9f54b8ad-3274-448a-9847-9f3ddfe484e8
+    updated_at: '2021-06-09T13:01:11Z'
+    is_vlan_transparent: null
+    revision_number: 8
+    id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    tags: []
+  - availability_zone_hints: []
+    availability_zones:
+      - nova
+    created_at: '2020-02-20T14:01:51Z'
+    description: ''
+    dns_domain: null
+    ipv4_address_scope_id: null
+    ipv6_address_scope_id: null
+    is_admin_state_up: true
+    is_default: null
+    is_port_security_enabled: true
+    is_router_external: false
+    is_shared: false
+    mtu: 1450
+    name: private
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    provider_network_type: null
+    provider_physical_network: null
+    provider_segmentation_id: null
+    qos_policy_id: null
+    segments: null
+    status: ACTIVE
+    subnet_ids:
+      - 1a1165c5-4416-4df1-9399-b03efab3a896
+    updated_at: '2020-02-20T14:01:59Z'
+    is_vlan_transparent: null
+    revision_number: 2
+    id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    tags: []
+subnets:
+  - allocation_pools:
+      - start: 192.168.100.2
+        end: 192.168.103.254
+    cidr: 192.168.100.0/22
+    created_at: '2020-02-20T14:01:59Z'
+    description: ''
+    dns_nameservers: []
+    dns_publish_fixed_ip: null
+    gateway_ip: 192.168.100.1
+    host_routes: []
+    ip_version: 4
+    ipv6_address_mode: null
+    ipv6_ra_mode: null
+    is_dhcp_enabled: true
+    name: private_subnet
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    prefix_length: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    segment_id: null
+    service_types: []
+    subnet_pool_id: null
+    updated_at: '2020-02-20T14:01:59Z'
+    use_default_subnet_pool: null
+    revision_number: 0
+    id: 1a1165c5-4416-4df1-9399-b03efab3a896
+    tags: []
+  - allocation_pools:
+      - start: 38.102.83.124
+        end: 38.102.83.251
+      - start: 38.102.83.2
+        end: 38.102.83.120
+    cidr: 38.102.83.0/24
+    created_at: '2019-07-25T20:30:05Z'
+    description: ''
+    dns_nameservers:
+      - 1.1.1.1
+    dns_publish_fixed_ip: null
+    gateway_ip: 38.102.83.1
+    host_routes: []
+    ip_version: 4
+    ipv6_address_mode: null
+    ipv6_ra_mode: null
+    is_dhcp_enabled: true
+    name: public-1
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    prefix_length: null
+    project_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    segment_id: null
+    service_types: []
+    subnet_pool_id: null
+    updated_at: '2021-02-25T16:28:59Z'
+    use_default_subnet_pool: null
+    revision_number: 2
+    id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+    tags: []
+  - allocation_pools:
+      - start: 38.129.56.2
+        end: 38.129.56.252
+    cidr: 38.129.56.0/24
+    created_at: '2021-01-15T13:59:16Z'
+    description: ''
+    dns_nameservers:
+      - 1.1.1.1
+    dns_publish_fixed_ip: null
+    gateway_ip: 38.129.56.1
+    host_routes: []
+    ip_version: 4
+    ipv6_address_mode: null
+    ipv6_ra_mode: null
+    is_dhcp_enabled: true
+    name: public-2
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    prefix_length: null
+    project_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    segment_id: null
+    service_types: []
+    subnet_pool_id: null
+    updated_at: '2021-01-15T13:59:16Z'
+    use_default_subnet_pool: null
+    revision_number: 0
+    id: 9f54b8ad-3274-448a-9847-9f3ddfe484e8
+    tags: []
+secgroups:
+  - created_at: '2020-10-27T03:41:24Z'
+    description: Containers registry
+    name: '5000'
+    stateful: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    security_group_rules:
+      - id: c41ff84c-27e3-435c-a1ba-549cfd08bca4
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 001682e1-a058-499f-9b4e-f33c805a8b8b
+        ethertype: IPv6
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2020-10-27T03:41:24Z'
+        updated_at: '2020-10-27T03:41:24Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: cf9f9a29-2729-47d9-865b-5563823eaae9
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 001682e1-a058-499f-9b4e-f33c805a8b8b
+        ethertype: IPv4
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2020-10-27T03:41:24Z'
+        updated_at: '2020-10-27T03:41:24Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: e965cd00-c12d-4c20-b529-4d3cbba91a91
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 001682e1-a058-499f-9b4e-f33c805a8b8b
+        ethertype: IPv4
+        direction: ingress
+        protocol: tcp
+        port_range_min: 5000
+        port_range_max: 5000
+        remote_ip_prefix: 0.0.0.0/0
+        remote_group_id: null
+        description: ''
+        tags: []
+        created_at: '2020-10-27T03:41:37Z'
+        updated_at: '2020-10-27T03:41:37Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+    updated_at: '2020-10-27T03:41:37Z'
+    revision_number: 2
+    id: 001682e1-a058-499f-9b4e-f33c805a8b8b
+    tags: []
+  - created_at: '2020-02-20T14:02:47Z'
+    description: ''
+    name: sec_group_nameserver
+    stateful: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    security_group_rules:
+      - id: 245e5d90-4e74-4694-af40-e4be59231821
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 3a639065-6347-498e-9306-e87f7867bcbf
+        ethertype: IPv4
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2020-02-20T14:02:47Z'
+        updated_at: '2020-02-20T14:02:47Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: 74d470ed-ab0b-4bff-b066-12ca6de46340
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 3a639065-6347-498e-9306-e87f7867bcbf
+        ethertype: IPv4
+        direction: ingress
+        protocol: tcp
+        port_range_min: 53
+        port_range_max: 53
+        remote_ip_prefix: 38.102.83.0/24
+        remote_group_id: null
+        description: ''
+        tags: []
+        created_at: '2020-02-20T14:15:23Z'
+        updated_at: '2020-02-20T14:15:23Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: d6f28e68-e4de-41a2-bd67-ddf04a3fede5
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 3a639065-6347-498e-9306-e87f7867bcbf
+        ethertype: IPv6
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2020-02-20T14:02:48Z'
+        updated_at: '2020-02-20T14:02:48Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: dc54bf27-0b65-43ed-8710-f1f7e1d2a3b9
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 3a639065-6347-498e-9306-e87f7867bcbf
+        ethertype: IPv4
+        direction: ingress
+        protocol: udp
+        port_range_min: 53
+        port_range_max: 53
+        remote_ip_prefix: 38.102.83.0/24
+        remote_group_id: null
+        description: ''
+        tags: []
+        created_at: '2020-02-20T14:15:29Z'
+        updated_at: '2020-02-20T14:15:29Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+    updated_at: '2020-02-20T14:15:29Z'
+    revision_number: 3
+    id: 3a639065-6347-498e-9306-e87f7867bcbf
+    tags: []
+  - created_at: '2020-02-20T14:02:41Z'
+    description: ''
+    name: sec_group_ssh_access_external
+    stateful: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    security_group_rules:
+      - id: 2c803828-0dac-4d8d-8176-2ec03edcbe60
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 66d52890-2b0e-44c5-bbcb-637407ea896b
+        ethertype: IPv4
+        direction: ingress
+        protocol: tcp
+        port_range_min: 22
+        port_range_max: 22
+        remote_ip_prefix: 0.0.0.0/0
+        remote_group_id: null
+        description: ''
+        tags: []
+        created_at: '2020-02-20T14:03:03Z'
+        updated_at: '2020-02-20T14:03:03Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: beb36028-d2f1-41ea-9c72-2fa44f6c23f7
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 66d52890-2b0e-44c5-bbcb-637407ea896b
+        ethertype: IPv6
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2020-02-20T14:02:41Z'
+        updated_at: '2020-02-20T14:02:41Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: d8664bb7-5d58-40dd-b63c-c6f7d44efcd7
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 66d52890-2b0e-44c5-bbcb-637407ea896b
+        ethertype: IPv4
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2020-02-20T14:02:41Z'
+        updated_at: '2020-02-20T14:02:41Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+    updated_at: '2020-02-20T14:03:03Z'
+    revision_number: 2
+    id: 66d52890-2b0e-44c5-bbcb-637407ea896b
+    tags: []
+  - created_at: '2020-02-20T14:02:34Z'
+    description: ''
+    name: sec_group_http_access_external
+    stateful: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    security_group_rules:
+      - id: 1dfc4ff8-d6d1-45c1-8b2c-bafef475fe5e
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 8047fb63-5e12-4c54-97d4-7781a2f369af
+        ethertype: IPv6
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2020-02-20T14:02:34Z'
+        updated_at: '2020-02-20T14:02:34Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: 63e8adc1-b664-4362-a73e-adb61bb6403a
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 8047fb63-5e12-4c54-97d4-7781a2f369af
+        ethertype: IPv4
+        direction: ingress
+        protocol: tcp
+        port_range_min: 80
+        port_range_max: 80
+        remote_ip_prefix: 0.0.0.0/0
+        remote_group_id: null
+        description: ''
+        tags: []
+        created_at: '2020-02-20T14:02:56Z'
+        updated_at: '2020-02-20T14:02:56Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: 768a7809-377c-4d4c-8fa9-aa0a28914d79
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: 8047fb63-5e12-4c54-97d4-7781a2f369af
+        ethertype: IPv4
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2020-02-20T14:02:34Z'
+        updated_at: '2020-02-20T14:02:34Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+    updated_at: '2020-02-20T14:02:56Z'
+    revision_number: 2
+    id: 8047fb63-5e12-4c54-97d4-7781a2f369af
+    tags: []
+  - created_at: '2021-06-29T12:06:53Z'
+    description: ports for tripleo health
+    name: tripleo-health
+    stateful: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    security_group_rules:
+      - id: 4a1dbf16-ca5d-4fce-9531-e989cd4ce4fd
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: b44a538d-cb54-478a-88bd-002903762fa7
+        ethertype: IPv4
+        direction: ingress
+        protocol: tcp
+        port_range_min: 5000
+        port_range_max: 5050
+        remote_ip_prefix: 0.0.0.0/0
+        remote_group_id: null
+        description: 5000-5050
+        tags: []
+        created_at: '2021-06-29T12:07:41Z'
+        updated_at: '2021-06-29T12:07:41Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: 71a6a631-d8f8-4f6e-86e0-7f18a877efc9
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: b44a538d-cb54-478a-88bd-002903762fa7
+        ethertype: IPv6
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2021-06-29T12:06:53Z'
+        updated_at: '2021-06-29T12:06:53Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: bcdb743e-6f48-4d57-b428-c7d43ac4a3ca
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: b44a538d-cb54-478a-88bd-002903762fa7
+        ethertype: IPv4
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2021-06-29T12:06:53Z'
+        updated_at: '2021-06-29T12:06:53Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+    updated_at: '2021-06-29T12:07:41Z'
+    revision_number: 2
+    id: b44a538d-cb54-478a-88bd-002903762fa7
+    tags: []
+  - created_at: '2019-10-17T18:43:13Z'
+    description: Default security group
+    name: default
+    stateful: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    security_group_rules:
+      - id: 00c7952c-3105-4b5b-8f05-74e465dd5013
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: c1d14408-edbf-4c52-963a-9fda349906cd
+        ethertype: IPv6
+        direction: ingress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: c1d14408-edbf-4c52-963a-9fda349906cd
+        description: null
+        tags: []
+        created_at: '2019-10-17T18:43:13Z'
+        updated_at: '2019-10-17T18:43:13Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: 102d0247-d737-43b8-95e4-1b8261449162
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: c1d14408-edbf-4c52-963a-9fda349906cd
+        ethertype: IPv4
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2019-10-17T18:43:13Z'
+        updated_at: '2019-10-17T18:43:13Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: 799f6767-9421-4e1b-bf54-a36b367ebfa8
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: c1d14408-edbf-4c52-963a-9fda349906cd
+        ethertype: IPv4
+        direction: ingress
+        protocol: icmp
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: 0.0.0.0/0
+        remote_group_id: null
+        description: ''
+        tags: []
+        created_at: '2019-10-17T18:45:15Z'
+        updated_at: '2019-10-17T18:45:15Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: 9a73faf0-6286-4182-87ef-a367453555f3
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: c1d14408-edbf-4c52-963a-9fda349906cd
+        ethertype: IPv6
+        direction: egress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: null
+        description: null
+        tags: []
+        created_at: '2019-10-17T18:43:13Z'
+        updated_at: '2019-10-17T18:43:13Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: b3de3aa1-b024-4a9e-8e82-fa235b9b1663
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: c1d14408-edbf-4c52-963a-9fda349906cd
+        ethertype: IPv4
+        direction: ingress
+        protocol: null
+        port_range_min: null
+        port_range_max: null
+        remote_ip_prefix: null
+        remote_group_id: c1d14408-edbf-4c52-963a-9fda349906cd
+        description: null
+        tags: []
+        created_at: '2019-10-17T18:43:13Z'
+        updated_at: '2019-10-17T18:43:13Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+      - id: dbb93fdf-db4d-45b5-8185-455bf90157ff
+        tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+        security_group_id: c1d14408-edbf-4c52-963a-9fda349906cd
+        ethertype: IPv4
+        direction: ingress
+        protocol: tcp
+        port_range_min: 22
+        port_range_max: 22
+        remote_ip_prefix: 0.0.0.0/0
+        remote_group_id: null
+        description: ''
+        tags: []
+        created_at: '2019-10-17T18:45:07Z'
+        updated_at: '2019-10-17T18:45:07Z'
+        revision_number: 0
+        project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    tenant_id: 13a8c4940aac4c708117ea9eb7c2a018
+    updated_at: '2019-10-17T18:45:15Z'
+    revision_number: 3
+    id: c1d14408-edbf-4c52-963a-9fda349906cd
+    tags: []
+routers:
+  - availability_zone_hints: []
+    availability_zones:
+      - nova
+    created_at: '2020-02-20T14:02:08Z'
+    description: ''
+    external_gateway_info:
+      network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+      external_fixed_ips:
+        - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+          ip_address: 38.102.83.29
+      enable_snat: true
+    flavor_id: null
+    is_admin_state_up: true
+    is_distributed: null
+    is_ha: null
+    name: private_router
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    revision_number: 10
+    routes: []
+    status: ACTIVE
+    updated_at: '2021-02-17T04:41:08Z'
+    id: 1c2bfeff-e510-4e35-bf6a-e28a18a4d08e
+    tags: []
+ports:
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2021-05-18T11:03:45Z'
+    data_plane_status: null
+    description: ''
+    device_id: 93ad60d5-ecf9-48de-aabf-a69095cf1938
+    device_owner: compute:nova
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.103.176
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: true
+    mac_address: fa:16:3e:a1:dc:95
+    name: ''
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids:
+      - 66d52890-2b0e-44c5-bbcb-637407ea896b
+      - 8047fb63-5e12-4c54-97d4-7781a2f369af
+      - c1d14408-edbf-4c52-963a-9fda349906cd
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-05-18T11:10:17Z'
+    revision_number: 6
+    id: 00347c8b-0c77-4865-9e80-de48c98bd08c
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-02-20T14:02:00Z'
+    data_plane_status: null
+    description: ''
+    device_id: dhcpd6d8f63c-bf7a-504c-8455-2197ac33ad35-cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    device_owner: network:dhcp
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.100.2
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:b4:5a:3f
+    name: ''
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-06-30T00:15:05Z'
+    revision_number: 21
+    id: 20a14ec3-35bf-4c95-a990-782518b747eb
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-02-24T11:07:30Z'
+    data_plane_status: null
+    description: ''
+    device_id: a9f2af6b-4fa5-4a0d-aff7-159fa8411a1f
+    device_owner: network:floatingip
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+        ip_address: 38.102.83.48
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:3b:23:ca
+    name: ''
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: N/A
+    trunk_details: null
+    updated_at: '2021-06-09T12:57:27Z'
+    revision_number: 5
+    id: 244d0de3-c850-4439-95d1-d0f34105b358
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-02-20T14:02:19Z'
+    data_plane_status: null
+    description: ''
+    device_id: 1c2bfeff-e510-4e35-bf6a-e28a18a4d08e
+    device_owner: network:ha_router_replicated_interface
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.100.1
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:b8:fe:43
+    name: ''
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-06-30T16:41:36Z'
+    revision_number: 185
+    id: 2c30d5da-61b2-43d1-99c2-54e2d61c17b0
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-08-12T17:06:47Z'
+    data_plane_status: null
+    description: ''
+    device_id: c37da477-57e4-4575-af3b-ae0caf097fb2
+    device_owner: network:floatingip
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+        ip_address: 38.102.83.141
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:a1:4a:38
+    name: ''
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: N/A
+    trunk_details: null
+    updated_at: '2021-06-09T12:59:25Z'
+    revision_number: 5
+    id: 32f5db21-9e8f-4167-a787-2466f0a03a1c
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-02-20T14:04:50Z'
+    data_plane_status: null
+    description: ''
+    device_id: 3a824fc6-92b3-4cf6-ae40-557f23bfdf5b
+    device_owner: network:floatingip
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+        ip_address: 38.102.83.187
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:cd:ce:79
+    name: ''
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: N/A
+    trunk_details: null
+    updated_at: '2021-06-09T13:00:03Z'
+    revision_number: 5
+    id: 36aae32e-aece-43a2-b45a-9230532118c7
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-02-20T14:02:01Z'
+    data_plane_status: null
+    description: ''
+    device_id: dhcp579ece7d-b4bd-5884-8e9e-d54b9cabf030-cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    device_owner: network:dhcp
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.100.3
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:32:f1:49
+    name: ''
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-06-30T16:38:05Z'
+    revision_number: 30
+    id: 74f0bc22-50ec-4fe0-83c1-aea109e9d666
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-02-24T11:22:28Z'
+    data_plane_status: null
+    description: ''
+    device_id: cb234c43-6823-4e03-80f1-d1cd47548d21
+    device_owner: network:floatingip
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+        ip_address: 38.102.83.109
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:68:d3:a3
+    name: ''
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: N/A
+    trunk_details: null
+    updated_at: '2021-06-09T12:58:28Z'
+    revision_number: 5
+    id: 76b7423b-b3ae-4a77-9cc8-059807460283
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-10-27T03:38:23Z'
+    data_plane_status: null
+    description: ''
+    device_id: a9aab2b7-8cbf-4221-b2e3-fc9c99b43132
+    device_owner: compute:nova
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+        ip_address: 38.102.83.78
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: true
+    mac_address: fa:16:3e:ea:7a:1e
+    name: ''
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids:
+      - 001682e1-a058-499f-9b4e-f33c805a8b8b
+      - 66d52890-2b0e-44c5-bbcb-637407ea896b
+      - c1d14408-edbf-4c52-963a-9fda349906cd
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-06-09T13:00:43Z'
+    revision_number: 10
+    id: 9566601b-59e6-4dc9-adba-112f1a99bd75
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-02-20T14:02:02Z'
+    data_plane_status: null
+    description: ''
+    device_id: dhcp70308284-4798-58d0-b250-e0cf2e092ee7-cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    device_owner: network:dhcp
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.100.4
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:65:c5:f6
+    name: ''
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-06-30T16:37:19Z'
+    revision_number: 23
+    id: a6b9288d-a56a-4c66-866c-2b3ef6b06e1f
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2021-04-14T16:46:36Z'
+    data_plane_status: null
+    description: ''
+    device_id: ddb8fb15-31a4-4a09-932b-5c1fa62e31a1
+    device_owner: compute:nova
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.100.80
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: true
+    mac_address: fa:16:3e:40:68:34
+    name: ''
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids:
+      - 66d52890-2b0e-44c5-bbcb-637407ea896b
+      - 8047fb63-5e12-4c54-97d4-7781a2f369af
+      - b44a538d-cb54-478a-88bd-002903762fa7
+      - c1d14408-edbf-4c52-963a-9fda349906cd
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-06-29T12:08:06Z'
+    revision_number: 5
+    id: bf6da5fa-f0e1-4fc5-9381-b5afe311645e
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-09-29T17:16:00Z'
+    data_plane_status: null
+    description: ''
+    device_id: 5102a471-9d44-4ad6-a092-a294c36307c7
+    device_owner: network:floatingip
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+        ip_address: 38.102.83.240
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:e0:2c:9a
+    name: ''
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: N/A
+    trunk_details: null
+    updated_at: '2021-06-09T13:00:25Z'
+    revision_number: 5
+    id: c727b458-b7ba-47b9-92f3-b6ba30a02cd9
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-03-12T14:20:34Z'
+    data_plane_status: null
+    description: ''
+    device_id: f7b2f96a-8c45-4a1b-81d6-90a1d0b2609e
+    device_owner: compute:nova
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.100.241
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: true
+    mac_address: fa:16:3e:a5:f6:8d
+    name: toolbox-port
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids:
+      - 66d52890-2b0e-44c5-bbcb-637407ea896b
+      - 8047fb63-5e12-4c54-97d4-7781a2f369af
+      - c1d14408-edbf-4c52-963a-9fda349906cd
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-02-11T20:16:08Z'
+    revision_number: 13
+    id: d1f5723a-cc4d-472b-997a-049a56ab7adb
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-03-12T14:21:40Z'
+    data_plane_status: null
+    description: ''
+    device_id: d91948fe-206b-4998-9f5a-3635dd7e7dd1
+    device_owner: network:floatingip
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+        ip_address: 38.102.83.131
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:9e:a4:3f
+    name: ''
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: N/A
+    trunk_details: null
+    updated_at: '2021-06-09T12:59:22Z'
+    revision_number: 5
+    id: df3758db-50e9-47ec-89ff-5eb7883c726b
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-03-15T22:07:36Z'
+    data_plane_status: null
+    description: ''
+    device_id: 51d4aeeb-4210-4916-94b8-64981eb9d730
+    device_owner: network:floatingip
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 3169b11b-94b1-4bc9-9727-4fdbbe15e56e
+        ip_address: 38.102.83.165
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: false
+    mac_address: fa:16:3e:e7:41:84
+    name: ''
+    network_id: 7abff1a9-a103-46d0-979a-1f1e599f4f41
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids: []
+    status: N/A
+    trunk_details: null
+    updated_at: '2021-06-09T13:00:35Z'
+    revision_number: 5
+    id: e4b6ff57-aaaa-4555-b942-8f2f74dacf64
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-02-20T14:03:45Z'
+    data_plane_status: null
+    description: ''
+    device_id: a71e2e73-f730-4eaf-be2a-28e01e7fd50a
+    device_owner: compute:nova
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.100.252
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: true
+    mac_address: fa:16:3e:45:6d:81
+    name: dns-port
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids:
+      - 3a639065-6347-498e-9306-e87f7867bcbf
+      - c1d14408-edbf-4c52-963a-9fda349906cd
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-02-11T20:15:28Z'
+    revision_number: 22
+    id: e8d6cdd5-fc75-461b-ae1d-2f869ac0a63f
+    tags: []
+  - allowed_address_pairs: []
+    binding_host_id: null
+    binding_profile: null
+    binding_vif_details: null
+    binding_vif_type: null
+    binding_vnic_type: normal
+    created_at: '2020-03-15T22:06:39Z'
+    data_plane_status: null
+    description: ''
+    device_id: dce3d36b-b97b-4ff2-b201-62585152c3e2
+    device_owner: compute:nova
+    device_profile: null
+    dns_assignment: null
+    dns_domain: null
+    dns_name: null
+    extra_dhcp_opts: []
+    fixed_ips:
+      - subnet_id: 1a1165c5-4416-4df1-9399-b03efab3a896
+        ip_address: 192.168.100.240
+    ip_allocation: null
+    is_admin_state_up: true
+    is_port_security_enabled: true
+    mac_address: fa:16:3e:48:3c:bb
+    name: rrcockpit-port
+    network_id: cfa4673b-30bd-4981-a2f1-19de6d8c267b
+    numa_affinity_policy: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    propagate_uplink_status: null
+    qos_network_policy_id: null
+    qos_policy_id: null
+    resource_request: null
+    security_group_ids:
+      - 66d52890-2b0e-44c5-bbcb-637407ea896b
+      - 8047fb63-5e12-4c54-97d4-7781a2f369af
+      - c1d14408-edbf-4c52-963a-9fda349906cd
+    status: ACTIVE
+    trunk_details: null
+    updated_at: '2021-02-11T20:16:45Z'
+    revision_number: 13
+    id: fc9deebe-7fb5-4285-8a5f-6fdcb7f4aa2e
+    tags: []
+images:
+  - checksum: ac5b1cda9a423ea4b881674fbc0cf402
+    container_format: ari
+    created_at: '2021-06-09T19:36:14Z'
+    disk_format: ari
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: 50a9f10d38202225ad25185823983db9f845b5896306fc0aebe3b2791a3ac64af48975ecc9e0230553385acbbb3efb3bfcaf34787d214c0c75f2c05aa58c00f8
+    min_disk: 0
+    min_ram: 0
+    name: ironic-agent-master-manual.initramfs
+    owner: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    owner_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    properties: null
+    size: 335967761
+    store: null
+    status: active
+    updated_at: '2021-06-09T19:36:20Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/88df8212-ca56-417b-bbbd-8a23fc227ea2/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/88df8212-ca56-417b-bbbd-8a23fc227ea2/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/88df8212-ca56-417b-bbbd-8a23fc227ea2/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: 88df8212-ca56-417b-bbbd-8a23fc227ea2
+    tags: []
+  - checksum: 540c39178fcd8c5b2f4836fe4f857714
+    container_format: aki
+    created_at: '2021-06-09T19:35:33Z'
+    disk_format: aki
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: 0d6674f074f045c25663927882742d124fe596e3480cee677b1e5188f7880c8e855bf08772e362413ac72f90b56217d590472ab5e39ff415f9d83956d8314149
+    min_disk: 0
+    min_ram: 0
+    name: ironic-agent-master-manual.kernel
+    owner: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    owner_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    properties: null
+    size: 10026120
+    store: null
+    status: active
+    updated_at: '2021-06-09T19:35:33Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/fa61fbf0-7dbd-44c8-b6b8-4bdf4a82fd7c/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/fa61fbf0-7dbd-44c8-b6b8-4bdf4a82fd7c/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/fa61fbf0-7dbd-44c8-b6b8-4bdf4a82fd7c/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: fa61fbf0-7dbd-44c8-b6b8-4bdf4a82fd7c
+    tags: []
+  - checksum: 276dd3c3709b508f021c4d8a248672c6
+    container_format: aki
+    created_at: '2021-05-25T14:06:43Z'
+    disk_format: aki
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: d5536bcdc1b0b587cf46a1e656a289d8659dd2e079fcbfdb81c8be09b4bcafea633af2a6a4c0861c4e4c2eeb3ad88d373b2abaccbeb5a2ec50dc9ba78ca9b0a5
+    min_disk: 0
+    min_ram: 0
+    name: ironic-agent.kernel
+    owner: b3cf881b56c047a7b8b7760672b9593a
+    owner_id: b3cf881b56c047a7b8b7760672b9593a
+    properties: null
+    size: 9485448
+    store: null
+    status: active
+    updated_at: '2021-05-25T14:06:44Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/c669fff1-0aa3-4c4d-a89e-6e53bfe6ced5/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/c669fff1-0aa3-4c4d-a89e-6e53bfe6ced5/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/c669fff1-0aa3-4c4d-a89e-6e53bfe6ced5/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: c669fff1-0aa3-4c4d-a89e-6e53bfe6ced5
+    tags: []
+  - checksum: f5d560e15e9aad4454a0afbd540834a3
+    container_format: ari
+    created_at: '2021-05-25T14:06:31Z'
+    disk_format: ari
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: 6d391718be2d895ed4dd54d61913b819e50650738bec2eb04924747dd6903d4da0488b9a7447a54357341543c4ea9ef25b9b6e93d55bd1b20860cd8332777242
+    min_disk: 0
+    min_ram: 0
+    name: ironic-agent.initramfs
+    owner: b3cf881b56c047a7b8b7760672b9593a
+    owner_id: b3cf881b56c047a7b8b7760672b9593a
+    properties: null
+    size: 335099142
+    store: null
+    status: active
+    updated_at: '2021-05-25T14:06:37Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/df6f16a8-9f95-4ef1-8adb-2dc41dced209/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/df6f16a8-9f95-4ef1-8adb-2dc41dced209/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/df6f16a8-9f95-4ef1-8adb-2dc41dced209/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: df6f16a8-9f95-4ef1-8adb-2dc41dced209
+    tags: []
+  - checksum: 55d3f3c6c214cda103ccc392f0592c2a
+    container_format: bare
+    created_at: '2021-03-01T20:49:10Z'
+    disk_format: qcow2
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: eeafba539ec938f990ce682402e2fcf70ca6fc5b80f2d52673c80291bd7245c54ecaee4ea6b7b7f20a5f0b60573aa7bc425703bb9ceab5fb79b24393c0435b6a
+    min_disk: 0
+    min_ram: 0
+    name: centos-8-baremetal
+    owner: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    owner_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    properties:
+      rootfs_uuid: 28d40834-217e-4828-9e16-6ad79edd5a7b
+    size: 896860160
+    store: null
+    status: active
+    updated_at: '2021-03-25T00:40:45Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/7eecd966-89fd-48e4-8d16-fe568268a046/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/7eecd966-89fd-48e4-8d16-fe568268a046/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/7eecd966-89fd-48e4-8d16-fe568268a046/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: 7eecd966-89fd-48e4-8d16-fe568268a046
+    tags: []
+  - checksum: 96117a6e665676269bc8b722d13e263a
+    container_format: aki
+    created_at: '2021-02-27T22:50:44Z'
+    disk_format: aki
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: 626e73ecbf6c9e04c2c87c7fc1a2a34a381ec24e72d7dbb1b9efafdbf358f82d2f617538a1a5d7afb7cb8973698e630a885c940d7b72bae52c8a3272a24c810e
+    min_disk: 0
+    min_ram: 0
+    name: bm-deploy-kernel
+    owner: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    owner_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    properties: null
+    size: 9514120
+    store: null
+    status: active
+    updated_at: '2021-02-27T22:50:44Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/609f4bf4-70dc-4934-8ffc-3a249c7dfb34/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/609f4bf4-70dc-4934-8ffc-3a249c7dfb34/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/609f4bf4-70dc-4934-8ffc-3a249c7dfb34/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: 609f4bf4-70dc-4934-8ffc-3a249c7dfb34
+    tags: []
+  - checksum: ff6f48a028473c72be5c87d9ec46e22a
+    container_format: ari
+    created_at: '2021-02-27T22:50:34Z'
+    disk_format: ari
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: 3a357ad4735bb220c6e8b36322958ae8dfb6c19b0621684f58417b0d3c76301c2b9b4bd3d955566c028fd7bb9aba2c6ccefd86ef9e662c6e81f0bb9a57597050
+    min_disk: 0
+    min_ram: 0
+    name: bm-deploy-ramdisk
+    owner: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    owner_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    properties: null
+    size: 334217238
+    store: null
+    status: active
+    updated_at: '2021-02-27T22:50:39Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/037e7a5a-9339-4972-be77-57257391b6b6/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/037e7a5a-9339-4972-be77-57257391b6b6/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/037e7a5a-9339-4972-be77-57257391b6b6/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: 037e7a5a-9339-4972-be77-57257391b6b6
+    tags: []
+  - checksum: 46e1a0b97982c7b2d1fce450fdf7e48f
+    container_format: bare
+    created_at: '2020-07-10T20:24:07Z'
+    disk_format: raw
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: 202d8c8d5fc7b069154255aa6b83b2d81b3d632f280a845349f96045d78aee1df1ff6daf8183710b30d931b3594e71d07d61a3648f11ab0af267771591d7d607
+    min_disk: 0
+    min_ram: 0
+    name: Debian-10.4.3
+    owner: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    owner_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    properties: null
+    size: 2147483648
+    store: null
+    status: active
+    updated_at: '2020-07-10T20:24:41Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/2e52aed6-9709-4088-b026-80cec19026a4/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/2e52aed6-9709-4088-b026-80cec19026a4/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/2e52aed6-9709-4088-b026-80cec19026a4/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: 2e52aed6-9709-4088-b026-80cec19026a4
+    tags: []
+  - checksum: d89eb49f2c264d29225cecf2b6c83322
+    container_format: bare
+    created_at: '2020-03-11T17:01:37Z'
+    disk_format: qcow2
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: 603dd170927a25bf405cdd60cf6052fef4363ef563e9a7df0d592d370dec3fa79baa77ac37aa39196a2bd27a1b4a5324f5fb12ee7ca7626c8ba90543449760ad
+    min_disk: 8
+    min_ram: 0
+    name: CentOS-8-x86_64-GenericCloud
+    owner: 13a8c4940aac4c708117ea9eb7c2a018
+    owner_id: 13a8c4940aac4c708117ea9eb7c2a018
+    properties: null
+    size: 716176896
+    store: null
+    status: active
+    updated_at: '2020-03-11T17:08:08Z'
+    virtual_size: null
+    visibility: shared
+    file: /v2/images/10b38db1-5638-42fc-bcae-e2ba39b6968f/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/10b38db1-5638-42fc-bcae-e2ba39b6968f/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/10b38db1-5638-42fc-bcae-e2ba39b6968f/snap
+    url: null
+    metadata: null
+    architecture: null
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+    tags: []
+  - checksum: ec8c38b1656ded3e03a6dc0938e201f1
+    container_format: bare
+    created_at: '2019-07-25T20:43:05Z'
+    disk_format: qcow2
+    is_hidden: false
+    is_protected: false
+    hash_algo: sha512
+    hash_value: fab45d500f3e1d6c8f3875fc84d252f09d24231e94fee11671aeaa6911991ad362b111eb272b248f912d37ed68551f1023786087a0b495b4b9fc245e8d421649
+    min_disk: 0
+    min_ram: 0
+    name: CentOS 7.1905 [2019-06-04]
+    owner: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    owner_id: 44dc5507b67e4c7499e2bc71a9aa8ae3
+    properties: null
+    size: 941359104
+    store: null
+    status: active
+    updated_at: '2019-07-25T20:43:22Z'
+    virtual_size: null
+    visibility: public
+    file: /v2/images/804deb43-a185-4139-9605-9099f53e510e/file
+    locations:
+      - url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/804deb43-a185-4139-9605-9099f53e510e/snap
+        metadata: {}
+    direct_url: rbd://d449eca9-e75a-46a7-a01e-4f844da6f49b/images/804deb43-a185-4139-9605-9099f53e510e/snap
+    url: null
+    metadata: null
+    architecture: x86_64
+    hypervisor_type: null
+    instance_type_rxtx_factor: null
+    instance_uuid: null
+    needs_config_drive: null
+    kernel_id: null
+    os_distro: null
+    os_version: null
+    needs_secure_boot: null
+    os_shutdown_timeout: null
+    ramdisk_id: null
+    vm_mode: null
+    hw_cpu_sockets: null
+    hw_cpu_cores: null
+    hw_cpu_threads: null
+    hw_disk_bus: null
+    hw_cpu_policy: null
+    hw_cpu_thread_policy: null
+    hw_rng_model: null
+    hw_machine_type: null
+    hw_scsi_model: null
+    hw_serial_port_count: null
+    hw_video_model: null
+    hw_video_ram: null
+    hw_watchdog_action: null
+    os_command_line: null
+    hw_vif_model: null
+    is_hw_vif_multiqueue_enabled: null
+    is_hw_boot_menu_enabled: null
+    vmware_adaptertype: null
+    vmware_ostype: null
+    has_auto_disk_config: null
+    os_type: null
+    os_admin_user: null
+    hw_qemu_guest_agent: null
+    os_require_quiesce: null
+    schema: /v2/schemas/image
+    id: 804deb43-a185-4139-9605-9099f53e510e
+    tags: []
+volumes:
+  - id: 253aa2c5-5b5a-4a59-a046-1753cd48a726
+    name: ''
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/253aa2c5-5b5a-4a59-a046-1753cd48a726
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/253aa2c5-5b5a-4a59-a046-1753cd48a726
+    availability_zone: nova
+    source_volume_id: null
+    description: ''
+    snapshot_id: null
+    size: 20
+    image_id: null
+    volume_type: rbd
+    is_bootable: true
+    metadata:
+      readonly: 'False'
+    volume_image_metadata:
+      image_id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      image_name: CentOS-8-x86_64-GenericCloud
+      checksum: d89eb49f2c264d29225cecf2b6c83322
+      container_format: bare
+      disk_format: qcow2
+      min_disk: '8'
+      min_ram: '0'
+      size: '716176896'
+    status: available
+    attachments: []
+    created_at: '2021-05-17T09:27:57.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+  - id: dad5d606-076a-4930-a41a-df32fa908776
+    name: ''
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/dad5d606-076a-4930-a41a-df32fa908776
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/dad5d606-076a-4930-a41a-df32fa908776
+    availability_zone: nova
+    source_volume_id: null
+    description: ''
+    snapshot_id: null
+    size: 80
+    image_id: null
+    volume_type: rbd
+    is_bootable: true
+    metadata:
+      readonly: 'False'
+    volume_image_metadata:
+      signature_verified: 'False'
+      image_id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      image_name: CentOS-8-x86_64-GenericCloud
+      checksum: d89eb49f2c264d29225cecf2b6c83322
+      container_format: bare
+      disk_format: qcow2
+      min_disk: '8'
+      min_ram: '0'
+      size: '716176896'
+    status: available
+    attachments: []
+    created_at: '2021-03-29T16:38:13.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+  - id: a5f892e0-62eb-4da5-a6c0-7ab8995095dd
+    name: old-promoter-boot
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/a5f892e0-62eb-4da5-a6c0-7ab8995095dd
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/a5f892e0-62eb-4da5-a6c0-7ab8995095dd
+    availability_zone: nova
+    source_volume_id: null
+    description: ''
+    snapshot_id: null
+    size: 50
+    image_id: null
+    volume_type: rbd
+    is_bootable: true
+    metadata:
+      readonly: 'False'
+    volume_image_metadata:
+      architecture: x86_64
+      image_id: 804deb43-a185-4139-9605-9099f53e510e
+      image_name: CentOS 7.1905 [2019-06-04]
+      checksum: ec8c38b1656ded3e03a6dc0938e201f1
+      container_format: bare
+      disk_format: qcow2
+      min_disk: '0'
+      min_ram: '0'
+      size: '941359104'
+    status: available
+    attachments: []
+    created_at: '2021-02-18T15:16:17.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: cb1e7ba51f88472bb31b823666fd53d3
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+  - id: 7d9820fe-92e0-48d3-8a43-07373502b1ac
+    name: old-promoter-storage
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/7d9820fe-92e0-48d3-8a43-07373502b1ac
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/7d9820fe-92e0-48d3-8a43-07373502b1ac
+    availability_zone: nova
+    source_volume_id: null
+    description: ''
+    snapshot_id: null
+    size: 160
+    image_id: null
+    volume_type: rbd
+    is_bootable: false
+    metadata: {}
+    volume_image_metadata: null
+    status: available
+    attachments: []
+    created_at: '2021-02-17T17:55:13.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: cb1e7ba51f88472bb31b823666fd53d3
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+  - id: 14f1eb9f-9e0a-4341-80eb-c4ce60d9aee3
+    name: ''
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/14f1eb9f-9e0a-4341-80eb-c4ce60d9aee3
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/14f1eb9f-9e0a-4341-80eb-c4ce60d9aee3
+    availability_zone: nova
+    source_volume_id: null
+    description: ''
+    snapshot_id: null
+    size: 100
+    image_id: null
+    volume_type: __DEFAULT__
+    is_bootable: true
+    metadata:
+      readonly: 'False'
+      attached_mode: rw
+    volume_image_metadata:
+      signature_verified: 'False'
+      image_id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      image_name: CentOS-8-x86_64-GenericCloud
+      checksum: d89eb49f2c264d29225cecf2b6c83322
+      container_format: bare
+      disk_format: qcow2
+      min_disk: '8'
+      min_ram: '0'
+      size: '716176896'
+    status: in-use
+    attachments:
+      - id: 14f1eb9f-9e0a-4341-80eb-c4ce60d9aee3
+        attachment_id: 0850eda8-7129-43b7-abdc-6379f12e0b89
+        volume_id: 14f1eb9f-9e0a-4341-80eb-c4ce60d9aee3
+        server_id: a9aab2b7-8cbf-4221-b2e3-fc9c99b43132
+        host_name: null
+        device: /dev/vda
+        attached_at: '2020-10-27T03:39:04.000000'
+    created_at: '2020-10-27T03:38:23.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+  - id: 3c6bf81f-ef53-4abe-a4c7-c256448b9477
+    name: ''
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/3c6bf81f-ef53-4abe-a4c7-c256448b9477
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/3c6bf81f-ef53-4abe-a4c7-c256448b9477
+    availability_zone: nova
+    source_volume_id: null
+    description: ''
+    snapshot_id: null
+    size: 80
+    image_id: null
+    volume_type: __DEFAULT__
+    is_bootable: true
+    metadata:
+      readonly: 'False'
+    volume_image_metadata:
+      signature_verified: 'False'
+      image_id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      image_name: CentOS-8-x86_64-GenericCloud
+      checksum: d89eb49f2c264d29225cecf2b6c83322
+      container_format: bare
+      disk_format: qcow2
+      min_disk: '8'
+      min_ram: '0'
+      size: '716176896'
+    status: available
+    attachments: []
+    created_at: '2020-10-09T18:39:36.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+  - id: 7d82b655-f978-497b-8267-0a963b9b5aa3
+    name: ''
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/7d82b655-f978-497b-8267-0a963b9b5aa3
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/7d82b655-f978-497b-8267-0a963b9b5aa3
+    availability_zone: nova
+    source_volume_id: null
+    description: ''
+    snapshot_id: null
+    size: 80
+    image_id: null
+    volume_type: __DEFAULT__
+    is_bootable: true
+    metadata:
+      readonly: 'False'
+    volume_image_metadata:
+      signature_verified: 'False'
+      container_format: bare
+      min_ram: '0'
+      disk_format: qcow2
+      image_name: CentOS-8-x86_64-GenericCloud
+      image_id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      checksum: d89eb49f2c264d29225cecf2b6c83322
+      min_disk: '8'
+      size: '716176896'
+    status: available
+    attachments: []
+    created_at: '2020-08-12T16:55:34.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+  - id: f8f0d2d4-27fb-4a61-82d5-0cb51d5fac49
+    name: promoter-storage
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/f8f0d2d4-27fb-4a61-82d5-0cb51d5fac49
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/f8f0d2d4-27fb-4a61-82d5-0cb51d5fac49
+    availability_zone: nova
+    source_volume_id: null
+    description: null
+    snapshot_id: null
+    size: 400
+    image_id: null
+    volume_type: __DEFAULT__
+    is_bootable: false
+    metadata: {}
+    volume_image_metadata: null
+    status: in-use
+    attachments:
+      - id: f8f0d2d4-27fb-4a61-82d5-0cb51d5fac49
+        attachment_id: 3c07bd09-fede-48a0-9c90-499f408f3530
+        volume_id: f8f0d2d4-27fb-4a61-82d5-0cb51d5fac49
+        server_id: 93ad60d5-ecf9-48de-aabf-a69095cf1938
+        host_name: kvm4.rdo.mtl2.vexxhost.net
+        device: /dev/vdb
+        attached_at: '2021-05-18T11:06:26.000000'
+    created_at: '2020-03-03T15:31:52.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+  - id: 02cd7091-419b-4cbd-9a3d-d9af0d7a3951
+    name: ''
+    links:
+      - rel: self
+        href: https://volume.rdo.mtl2.vexxhost.net/v3/13a8c4940aac4c708117ea9eb7c2a018/volumes/02cd7091-419b-4cbd-9a3d-d9af0d7a3951
+      - rel: bookmark
+        href: https://volume.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/volumes/02cd7091-419b-4cbd-9a3d-d9af0d7a3951
+    availability_zone: nova
+    source_volume_id: null
+    description: ''
+    snapshot_id: null
+    size: 20
+    image_id: null
+    volume_type: __DEFAULT__
+    is_bootable: true
+    metadata:
+      readonly: 'False'
+    volume_image_metadata:
+      signature_verified: 'False'
+      container_format: bare
+      min_ram: '0'
+      disk_format: qcow2
+      image_name: CentOS 7.1905 [2019-06-04]
+      image_id: 804deb43-a185-4139-9605-9099f53e510e
+      architecture: x86_64
+      checksum: ec8c38b1656ded3e03a6dc0938e201f1
+      min_disk: '0'
+      size: '941359104'
+    status: available
+    attachments: []
+    created_at: '2020-02-24T11:06:54.000000'
+    host: null
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    migration_status: null
+    migration_id: null
+    replication_status: null
+    extended_replication_status: null
+    consistency_group_id: null
+    replication_driver_data: null
+    is_encrypted: false
+keypairs:
+  - created_at: null
+    is_deleted: null
+    fingerprint: 87:55:65:ea:91:f9:57:11:a0:08:1a:0b:d1:5d:6f:3d
+    id: ci-team-keypair
+    name: ci-team-keypair
+    private_key: null
+    public_key: 'ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAEKGOeis2AYzU6TuTS0phK/qiJIcd7nl5J1GP7yq6lB3tif7Y27r6UnZ+ocO68lkAwziMIF35W2GYhhR1kZJJVozQC9w3UvM+VrmXPhBrZFPIRPEZhhSvJuK+x3tw+Mi5+cKvaMxCdW8pmurnvrtK7rvohjjl0c+3wDCkh+EkyfoSAKAw==
+      akahat@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA4Z/c9osaGGtU6X8fgELwfj/yayRurfcKA0HMFfdpPxev2dbwljysMuzoVp4OZmW1gvGtyYPSNRvnzgsaabPNKNo2ym5NToCP6UM+KSe93aln4BcM/24mXChYAbXJQ5Bqq/pIzsGs/pKetQN+vwvMxLOwTvpcsCJBXaa981RKML6xj9l/UZ7IIq1HSEKMvPLxZMWdu0Ut8DkCd5F4nOw9Wgml2uYpDCj5LLCrQQ9ChdOMz8hz6SighhNlRpPkvPaet3OXxr/ytFMu7j7vv06CaEnuMMiY2aTWN1Imin9eHAylIqFHta/3gFfQSWt9jXM7owkBLKL7ATzhaAn+fjNupw==
+      arxcruz@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiJ2p/mxivnTas4Dw5d8mBs+KJMP/qk3HAQ7DPx0kcVUXPL1lgD7TowtdpOn5tyjsGg73/b+SzmrUyRdwsUHmTXL7H8pgdar+fYwCbNmmzhToCnB2GpMqQ1W1F6icJt1d0QXeUvJMGQz/X9p9X9I5LciFEzfA04sFTn+nUXyhdB3Tt/wHFEI4xXjIvbK7wx4QMGRDDJJGT3KbmhKOSWljILgPB54i10wg3xJLfW8fwiF2J160j6wsHztuJLT/v8ZhanEq/euNQ6vEApAvbVHpEg5aPO3x9/7ZFZ5K4TN0YGJ22ffkYvaaauNc5sdvTyV5j9jg5xJtdyVcxyBxc66Of
+      gcerami@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5l3S5KAHjfKFelxXWRNu9aw8GHKzZH3mwiGix1n4DaE3NvO7qh0LkM84RecM4blwPljPq48Zno4EPLVVeFAdbdUSP0i5w6Isw63XzNlOwPf1CGQdfbour+yJH+Q99rUf0utFIZEyeqAPyE9is4NQompmhurwx1hHUmYEebgnAlyN1gumCLZ/oPc6G4c99wD0wjUTXAUSXIuzacB4uho9pudKEPVvMio93x6ov+HYwEU1TqhNEcE9WkL3s4qCl9U+lW9n2ubpjvqs4rTivTdVULoWxILrX/ShOagh6V2wQ+phA1P8rsZDw13DqRbRtuY3VqMa6gSu9hXeMFuHju6u9
+      mkopec@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDS4Fn6k4deCnIlOtLWqZJyksbepjQt04j8Ed8CGx9EKkj0fKiAxiI4TadXQYPuNHMixZy4Nevjb6aDhL5Z906TfvNHKUrjrG7G26a0k8vdc61NEQ7FmcGMWRLwwc6ReDO7lFpzYKBMk4YqfWgBuGU/K6WLKiVW2cVvwIuGIaYrE1OiiX0iVUUk7KApXlDJMXn7qjSYynfO4mF629NIp8FJal38+Kv+HA+0QkE5Y2xXnzD4Lar5+keymiCHRntPppXHeLIRzbt0gxC7v3L72hpQ3BTBEzwHpeS8KY+SX1y5lRMN45thCHfJqGmARJREDjBvWG8JXOPmVIKQtZmVcD5b
+      mandreou@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCz37KwYJHVZbOuiSeMndSTH/eSblBWtA8veBkxEtddJ65pdpAQMTNCNh8ZMjDKUS5Y8MZp/8sj9A4wOcFqcGPgilH6yWzm6I1/XU6TDGtRUJRttfqn1W1R5zfHUhF4/ptOuEioU2BhOycbB07HcrCJUEhcV3i3J9IjYXYo7scAgHsX1o0AHcDPP5+2/a3iYjL3EQMCR1uBNfKKnZGb2Uh+O7CXuBbZUbizDOlLIp7BCi6PKukAcXATCG3Bnqx9xynyUn/XZeYJ93wEqLqWl0FD8JlYQMcNcpblc3Mv4Ke8XIp4aPkL54F/yq7omCz3fi53qP8/KYATnQbTJ/tjY9pt
+      rfolco@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9MiLfy30deHA7xPOAlew5qUq3UP2gmRMYJi8PtkjFB20/DKeWwWNnkZPqP9AayruRoo51SIiVg870gbZE2jYl+Ncx/FYDe56JeC3ySZsXoAVkC9bP7gkOGqOmJjirvAgPMI7bogVz8i+66Q4Ar7OKTp3762G4IuWPPEg4ce4Y7lx9qWocZapHYq4cYKMxrOZ7SEbFSATBbe2bPZAPKTw8do/Eny+Hq/LkHFhIeyra6cqTFQYShr+zPln0Cr+ro/pDX3bB+1ubFgTpjpkkkQsLhDfR6cCdCWM2lgnS3BTtYj5Ct9/JRPR5YOphqZz+uB+OEu2IL68hmU9vNTth1KeX
+      rlandy@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCfoZsNvyBlZJYuLSz+qw4xunkjETo6NElkYw5dCEFl6W5JDVZRjN3ClVHKDzEa2+S9jGzdRC3nlWA5vVRIvH/tX5tT+rLxkr6rgEiSajvwq5fpmla53cFX9W/y6qhL8tz//1Q3BskJS/NUPy8oUdRk7bcSrLyLJaDJxmf1HEE7k3TJ7+9sCEqBWnpQpFWUrTdaPQZISSy172P+beWVCuZQ69mowJ1/6h7czcd+HoZwe3v6qpkjbCmx9FTCYWuua2n7BcMzB5Hh5y4ovNab9zBKoUviOdBpC3ut159WVgQmpnOHPem0whNTxhADEcEcl6HfMi/MqZi6gmjx2ZkaiJpnHL0y1M/4qaEQemsgvEeFZDdJDdG1x42rw5e5vzh4OHAhGEKfA8NCcIWyd9wgusJoatyS/KKybmZ0Q0YOOB5AhDknaClRueBHkvg3vLB6sE47RlFgXTwZrS9N1pl89/4xX6dcnugTPxLm+BqqeUaDKeV81PEao4RVOxuvnTPVKjJhaWuvfmp65ZFQlQYiGWQ7latPEMaYLYwlvgTKBayPwZJJkEGRMjlY/6qWGQWkKzjhgRlgLwHcwLj3GPbxX4vmIsgqBI06NngETWztR71hU/CUz+ZGKQsZjhxqXZkueeW2iLFtGPggGawKgEbhx0eRHBnxrKzPuYDD8BF3q8o71w==
+      ssbarnea@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDhi/BqsZibuAPiUjJe7b3Dqe5nyI7BckOwfGwJYg436+bFQMoR/7RKmtPe+ISVQ04lwIriIPwKGaSHj5mbEe4LsCLZ5jAUHxvWfgHitqS5ln295zU7vp1z28o7e6LQNplgExyqQlxUPdOU48tmlz93F6szSYkNYvZnhzMn9syrajC74qPuKsmHTeYFLEcxesb7/u+BtxCk8WdjYTb//sk038NEtIsNhrGtAOV3WcDpXnA5mNMpUfeoQ4yiN9LqtreXr7Zeo587LV3T2QL+huAE0J7EuCzHAKk6TIzJqjLidg0SYwZZwfbxgviU66QLkeyzh9oiovwskelvOQCBFq3
+      sshnaidm@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCs/fvCoMm/bOLehNLGEhWnMZfJndO4rK2Q8OOrYOAGKpMT5xiWZsPgxGai4vieZ2HmdyXBB2DX5g1FjwGJUWuxPRYT5vAQlseOfyTLqhkHaSmuWcpH6HuP+KvxWO9epyXP8pl7uZLsbVEr5207ER4bYLIg2bk2LRQqxnysG3t4VqbAV0V+YKrkkwwErsHDbLJyz2sqtJielpKZOCF+vFnzrUR3dmORZ4bchBnmf67CFAJqPd1zSU9Hn0fWZ5nVxJMk1o/bxqwIZ6E7a9Yw5bJl3ziGP5WfcSfati4LKGWI503SNwSWLOuL03j2LaLO3GgLSVFUo9eGT6KhN3dogWeaWXDDFvx+O0RfdZFL0+mRFl2Rz83QsJGFBm1JW2H1/W0vUxtXmZhUXFagSt75zh2AQPoatsYgUOCpC4qFSVRXFyZR0a1Q5JnqmtFrYDuIoMovdfelgKEnJ5xBNhmGLpJlRmSIiv4tRNYUvaU4fKnt/yLTtZNT+D7zM4KMUzNy8pqEbUugAGGxMlCs1YfzwOL4+OHxrDX5A5TlvTnjNBHmBWXDQJncXTewjTf1+6oLkGKHMSd8UsGjYTLWX1JepFcHUj5+SF5arVKz/gThvQlelpPzXZgK9MNUSKfU9GHQ79T14Kng9Cfx/BcUYsZmFmCgzj2M1neFD7M3kOFQ8PV2ow==
+      whayutin@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDd2gpOXfUi0v9Vn2bpzNnYeNRtsNDOKYl/25Oq8Jon45E1FR0K54pPacN0r9IhBDpraeJ7OjtBW4+f3YqK5WeOPb2ifOsz/bhAJ/IDxrXdz0O4jQrIkabl2te44KcqxV6Q6yV2n2VQuL/eZdlI/oP+QXwak/guPBz2j6u3t6dMARa2wYaWdRUKyieYgGv1Wa9mSL+hk+Yn9cEimcVGH2k+J6+EeYgPAqJEgYwVOeLiDhb7voO275sHAzHiEAfgjEq2qE62ltpi2gg89EVxl/mc+Ae7pEC59p6llV5A3WJu0MVJbI/PhgSmJVhKa82qQuRLdLV+01Od+SGbHbTjdkzH0PAaxedEF8AQxQdStXVdvqZylYVJ0Xtg8ryUdGBY8Fe6HMWqwBKvkQVlJBYiAgG7ZKwj95G/iINcttQ8q1xXf07tA3f4I+3XKXDEHlUkw7c0PA0Bf1mmBxaT9eDoQMu3Ko0Uh1RqSfDPMvY5lcq1Y6QeRTwm51gkLrYW4XCSKuLC2xGc9t1kDU9roa5ogZHKBtkhidRIHvg+oWv4fuQlAzTAAGjuWOi3SNHd9zePKSUjZqf+z52qTB4RhLOKe5KbNPHq+c5gLlcsveFwCIoFx4zD4sJVNu2GJGU59lZ2MirYWtgW9ta+cdDqm/Glpx077XfasO+VtfVZC7F0s51t+w==
+      chkumar@redhat.com
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDm9Iz7cAH5phA7QEFfaq2+q2wcRYg3CYFvCDgFJV26aQJ8dXPBWUMIb/kDBnx/b1Mem47yZanTwEsOA6HWxBi8hPAJszGeBz9xMB0+zL/b67631+IpBPruq2wlWYHD1pDhyiIwS98PDSKPEGkDiPG+aZlLaEaK2/DxRgzTdhLAnfuoLHW3jETTw0oT35VPJuOlHwlFb/cSQvZILuo0E7H2BdxC+kyDwPyHjSHNR+YwAOoQzNUX4VKAJRZ0tUpwkUTxppAgdsKZoeZgCnnanSk8UFMEtRR5AsktrBm44yH5zHEyDKnhCgPT7S5gPNbRBOEdVw+KgWrsQBcYXt3E2Y0zMUJHz+fcBn3UhdyVLbp6VvojrOZnYjt5waXb0enVSQuO9eyPMAwR6rm3M9/OpjCOSfR6s1hCykbVLC3hPPaBV/fCDNSighDR5hAoDbn3LtlKK1qeKsrWGD6OMyWqjCO/H1L2UbyDpQMNjBT0nle8N7lu+Uk1U08sfUXtIT7jni0=
+      bhagyashris@localhost.localdomain
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD9hHZMu0S/A/BhYMyc3X/qixn/1aoPUWIbWOF01JLkCeB5Vz7EFdW8ohqr5fqe11mXRhNKpeP7NQcTZ8JjdgE5XfA8+elhjmIlJJGEuUe278KmVLie4R7H+Mdu1FcVQ7RpJRginyqLOa5U9/T0oh+oNuHjEqMVAAfrpMGo2e0SBrFs92+sowK+u1SCoF1QI34mg4aHfFY15dDFoSu6z4CUtfSI/bH+pJKPw/xB7I/Ev1RMu5bouhsqtaXCldoBagQKI1d8ZslPZ043IC+0XBG75ZA7bfWs9pW0ReYG9a3J63DEPMSsp3Tnlu36xVYY+/GtpZROgqZxyU3UnfrmFEwL
+      sandyada@redhat.com'
+    type: ssh
+    user_id: null
+  - created_at: null
+    is_deleted: null
+    fingerprint: 7f:c1:5c:a6:7f:71:8d:f6:40:fc:83:97:45:e0:b7:37
+    id: ssbarnea
+    name: ssbarnea
+    private_key: null
+    public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCfoZsNvyBlZJYuLSz+qw4xunkjETo6NElkYw5dCEFl6W5JDVZRjN3ClVHKDzEa2+S9jGzdRC3nlWA5vVRIvH/tX5tT+rLxkr6rgEiSajvwq5fpmla53cFX9W/y6qhL8tz//1Q3BskJS/NUPy8oUdRk7bcSrLyLJaDJxmf1HEE7k3TJ7+9sCEqBWnpQpFWUrTdaPQZISSy172P+beWVCuZQ69mowJ1/6h7czcd+HoZwe3v6qpkjbCmx9FTCYWuua2n7BcMzB5Hh5y4ovNab9zBKoUviOdBpC3ut159WVgQmpnOHPem0whNTxhADEcEcl6HfMi/MqZi6gmjx2ZkaiJpnHL0y1M/4qaEQemsgvEeFZDdJDdG1x42rw5e5vzh4OHAhGEKfA8NCcIWyd9wgusJoatyS/KKybmZ0Q0YOOB5AhDknaClRueBHkvg3vLB6sE47RlFgXTwZrS9N1pl89/4xX6dcnugTPxLm+BqqeUaDKeV81PEao4RVOxuvnTPVKjJhaWuvfmp65ZFQlQYiGWQ7latPEMaYLYwlvgTKBayPwZJJkEGRMjlY/6qWGQWkKzjhgRlgLwHcwLj3GPbxX4vmIsgqBI06NngETWztR71hU/CUz+ZGKQsZjhxqXZkueeW2iLFtGPggGawKgEbhx0eRHBnxrKzPuYDD8BF3q8o71w==
+      github-ssbarnea-20150723
+    type: ssh
+    user_id: null
+  - created_at: null
+    is_deleted: null
+    fingerprint: fb:cf:80:8c:0c:05:82:b8:38:36:11:0e:0a:73:14:da
+    id: weshayutin_pub
+    name: weshayutin_pub
+    private_key: null
+    public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCs/fvCoMm/bOLehNLGEhWnMZfJndO4rK2Q8OOrYOAGKpMT5xiWZsPgxGai4vieZ2HmdyXBB2DX5g1FjwGJUWuxPRYT5vAQlseOfyTLqhkHaSmuWcpH6HuP+KvxWO9epyXP8pl7uZLsbVEr5207ER4bYLIg2bk2LRQqxnysG3t4VqbAV0V+YKrkkwwErsHDbLJyz2sqtJielpKZOCF+vFnzrUR3dmORZ4bchBnmf67CFAJqPd1zSU9Hn0fWZ5nVxJMk1o/bxqwIZ6E7a9Yw5bJl3ziGP5WfcSfati4LKGWI503SNwSWLOuL03j2LaLO3GgLSVFUo9eGT6KhN3dogWeaWXDDFvx+O0RfdZFL0+mRFl2Rz83QsJGFBm1JW2H1/W0vUxtXmZhUXFagSt75zh2AQPoatsYgUOCpC4qFSVRXFyZR0a1Q5JnqmtFrYDuIoMovdfelgKEnJ5xBNhmGLpJlRmSIiv4tRNYUvaU4fKnt/yLTtZNT+D7zM4KMUzNy8pqEbUugAGGxMlCs1YfzwOL4+OHxrDX5A5TlvTnjNBHmBWXDQJncXTewjTf1+6oLkGKHMSd8UsGjYTLWX1JepFcHUj5+SF5arVKz/gThvQlelpPzXZgK9MNUSKfU9GHQ79T14Kng9Cfx/BcUYsZmFmCgzj2M1neFD7M3kOFQ8PV2ow==
+      whayutin@thinkdoe
+    type: ssh
+    user_id: null
+servers:
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/servers/93ad60d5-ecf9-48de-aabf-a69095cf1938
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/servers/93ad60d5-ecf9-48de-aabf-a69095cf1938
+    access_ipv4: ''
+    access_ipv6: ''
+    addresses:
+      private:
+        - version: 4
+          addr: 192.168.103.176
+          OS-EXT-IPS:type: fixed
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:a1:dc:95
+        - version: 4
+          addr: 38.102.83.109
+          OS-EXT-IPS:type: floating
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:a1:dc:95
+    admin_password: null
+    attached_volumes:
+      - id: f8f0d2d4-27fb-4a61-82d5-0cb51d5fac49
+        delete_on_termination: false
+    availability_zone: nova
+    block_device_mapping: null
+    config_drive: ''
+    compute_host: null
+    created_at: '2021-05-18T11:03:42Z'
+    description: TripleO CI promotion server
+    disk_config: AUTO
+    flavor_id: null
+    flavor:
+      vcpus: 8
+      ram: 16384
+      disk: 400
+      ephemeral: 0
+      swap: 0
+      original_name: 8vcpu_16GB
+      extra_specs: {}
+    has_config_drive: ''
+    host_id: 13ccb691f94d7675bbd593bcb5f7498d4828668a75c5a6bcc822b402
+    host_status: null
+    hostname: null
+    hypervisor_hostname: null
+    image_id: null
+    image:
+      checksum: null
+      container_format: null
+      created_at: null
+      disk_format: null
+      is_hidden: null
+      is_protected: null
+      hash_algo: null
+      hash_value: null
+      min_disk: null
+      min_ram: null
+      name: null
+      owner: null
+      owner_id: null
+      properties:
+        links:
+          - rel: bookmark
+            href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/images/10b38db1-5638-42fc-bcae-e2ba39b6968f
+      size: null
+      store: null
+      status: null
+      updated_at: null
+      virtual_size: null
+      visibility: null
+      file: null
+      locations: null
+      direct_url: null
+      url: null
+      metadata: null
+      architecture: null
+      hypervisor_type: null
+      instance_type_rxtx_factor: null
+      instance_uuid: null
+      needs_config_drive: null
+      kernel_id: null
+      os_distro: null
+      os_version: null
+      needs_secure_boot: null
+      os_shutdown_timeout: null
+      ramdisk_id: null
+      vm_mode: null
+      hw_cpu_sockets: null
+      hw_cpu_cores: null
+      hw_cpu_threads: null
+      hw_disk_bus: null
+      hw_cpu_policy: null
+      hw_cpu_thread_policy: null
+      hw_rng_model: null
+      hw_machine_type: null
+      hw_scsi_model: null
+      hw_serial_port_count: null
+      hw_video_model: null
+      hw_video_ram: null
+      hw_watchdog_action: null
+      os_command_line: null
+      hw_vif_model: null
+      is_hw_vif_multiqueue_enabled: null
+      is_hw_boot_menu_enabled: null
+      vmware_adaptertype: null
+      vmware_ostype: null
+      has_auto_disk_config: null
+      os_type: null
+      os_admin_user: null
+      hw_qemu_guest_agent: null
+      os_require_quiesce: null
+      schema: null
+      id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      location: null
+      tags: &id001 []
+    instance_name: null
+    is_locked: false
+    kernel_id: null
+    key_name: ci-team-keypair
+    launch_index: null
+    launched_at: '2021-05-18T11:03:55.000000'
+    metadata: {}
+    networks: null
+    personality: null
+    power_state: 1
+    progress: 0
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    ramdisk_id: null
+    reservation_id: null
+    root_device_name: null
+    scheduler_hints: null
+    security_groups:
+      - name: sec_group_ssh_access_external
+      - name: sec_group_http_access_external
+      - name: default
+    server_groups: null
+    status: ACTIVE
+    task_state: null
+    terminated_at: null
+    trusted_image_certificates: null
+    updated_at: '2021-05-18T11:10:14Z'
+    user_data: null
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    vm_state: active
+    id: 93ad60d5-ecf9-48de-aabf-a69095cf1938
+    name: promoter-server
+    tags: []
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/servers/ddb8fb15-31a4-4a09-932b-5c1fa62e31a1
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/servers/ddb8fb15-31a4-4a09-932b-5c1fa62e31a1
+    access_ipv4: ''
+    access_ipv6: ''
+    addresses:
+      private:
+        - version: 4
+          addr: 192.168.100.80
+          OS-EXT-IPS:type: fixed
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:40:68:34
+        - version: 4
+          addr: 38.102.83.141
+          OS-EXT-IPS:type: floating
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:40:68:34
+    admin_password: null
+    attached_volumes: []
+    availability_zone: nova
+    block_device_mapping: null
+    config_drive: ''
+    compute_host: null
+    created_at: '2021-04-14T16:46:33Z'
+    description: null
+    disk_config: AUTO
+    flavor_id: null
+    flavor:
+      vcpus: 4
+      ram: 8192
+      disk: 80
+      ephemeral: 0
+      swap: 0
+      original_name: 4vcpus_8gb
+      extra_specs: {}
+    has_config_drive: ''
+    host_id: 13ccb691f94d7675bbd593bcb5f7498d4828668a75c5a6bcc822b402
+    host_status: null
+    hostname: null
+    hypervisor_hostname: null
+    image_id: null
+    image:
+      checksum: null
+      container_format: null
+      created_at: null
+      disk_format: null
+      is_hidden: null
+      is_protected: null
+      hash_algo: null
+      hash_value: null
+      min_disk: null
+      min_ram: null
+      name: null
+      owner: null
+      owner_id: null
+      properties:
+        links:
+          - rel: bookmark
+            href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/images/10b38db1-5638-42fc-bcae-e2ba39b6968f
+      size: null
+      store: null
+      status: null
+      updated_at: null
+      virtual_size: null
+      visibility: null
+      file: null
+      locations: null
+      direct_url: null
+      url: null
+      metadata: null
+      architecture: null
+      hypervisor_type: null
+      instance_type_rxtx_factor: null
+      instance_uuid: null
+      needs_config_drive: null
+      kernel_id: null
+      os_distro: null
+      os_version: null
+      needs_secure_boot: null
+      os_shutdown_timeout: null
+      ramdisk_id: null
+      vm_mode: null
+      hw_cpu_sockets: null
+      hw_cpu_cores: null
+      hw_cpu_threads: null
+      hw_disk_bus: null
+      hw_cpu_policy: null
+      hw_cpu_thread_policy: null
+      hw_rng_model: null
+      hw_machine_type: null
+      hw_scsi_model: null
+      hw_serial_port_count: null
+      hw_video_model: null
+      hw_video_ram: null
+      hw_watchdog_action: null
+      os_command_line: null
+      hw_vif_model: null
+      is_hw_vif_multiqueue_enabled: null
+      is_hw_boot_menu_enabled: null
+      vmware_adaptertype: null
+      vmware_ostype: null
+      has_auto_disk_config: null
+      os_type: null
+      os_admin_user: null
+      hw_qemu_guest_agent: null
+      os_require_quiesce: null
+      schema: null
+      id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      location: null
+      tags: *id001
+    instance_name: null
+    is_locked: false
+    kernel_id: null
+    key_name: ci-team-keypair
+    launch_index: null
+    launched_at: '2021-04-14T16:46:57.000000'
+    metadata: {}
+    networks: null
+    personality: null
+    power_state: 1
+    progress: 0
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    ramdisk_id: null
+    reservation_id: null
+    root_device_name: null
+    scheduler_hints: null
+    security_groups:
+      - name: sec_group_ssh_access_external
+      - name: sec_group_http_access_external
+      - name: tripleo-health
+      - name: default
+    server_groups: null
+    status: ACTIVE
+    task_state: null
+    terminated_at: null
+    trusted_image_certificates: null
+    updated_at: '2021-06-29T12:08:06Z'
+    user_data: null
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    vm_state: active
+    id: ddb8fb15-31a4-4a09-932b-5c1fa62e31a1
+    name: tripleo-health-temp
+    tags: []
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/servers/a9aab2b7-8cbf-4221-b2e3-fc9c99b43132
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/servers/a9aab2b7-8cbf-4221-b2e3-fc9c99b43132
+    access_ipv4: ''
+    access_ipv6: ''
+    addresses:
+      public:
+        - version: 4
+          addr: 38.102.83.78
+          OS-EXT-IPS:type: fixed
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:ea:7a:1e
+    admin_password: null
+    attached_volumes:
+      - id: 14f1eb9f-9e0a-4341-80eb-c4ce60d9aee3
+        delete_on_termination: true
+    availability_zone: nova
+    block_device_mapping: null
+    config_drive: ''
+    compute_host: null
+    created_at: '2020-10-27T03:38:21Z'
+    description: null
+    disk_config: AUTO
+    flavor_id: null
+    flavor:
+      vcpus: 1
+      ram: 2048
+      disk: 20
+      ephemeral: 0
+      swap: 0
+      original_name: 1vcpu_2gb
+      extra_specs: {}
+    has_config_drive: ''
+    host_id: 5f67fb5e6ae7bcce53f2be2a95be584f95615f27ab026aa0f345783c
+    host_status: null
+    hostname: null
+    hypervisor_hostname: null
+    image_id: null
+    image:
+      checksum: null
+      container_format: null
+      created_at: null
+      disk_format: null
+      is_hidden: null
+      is_protected: null
+      hash_algo: null
+      hash_value: null
+      min_disk: null
+      min_ram: null
+      name: null
+      owner: null
+      owner_id: null
+      properties: null
+      size: null
+      store: null
+      status: null
+      updated_at: null
+      virtual_size: null
+      visibility: null
+      file: null
+      locations: null
+      direct_url: null
+      url: null
+      metadata: null
+      architecture: null
+      hypervisor_type: null
+      instance_type_rxtx_factor: null
+      instance_uuid: null
+      needs_config_drive: null
+      kernel_id: null
+      os_distro: null
+      os_version: null
+      needs_secure_boot: null
+      os_shutdown_timeout: null
+      ramdisk_id: null
+      vm_mode: null
+      hw_cpu_sockets: null
+      hw_cpu_cores: null
+      hw_cpu_threads: null
+      hw_disk_bus: null
+      hw_cpu_policy: null
+      hw_cpu_thread_policy: null
+      hw_rng_model: null
+      hw_machine_type: null
+      hw_scsi_model: null
+      hw_serial_port_count: null
+      hw_video_model: null
+      hw_video_ram: null
+      hw_watchdog_action: null
+      os_command_line: null
+      hw_vif_model: null
+      is_hw_vif_multiqueue_enabled: null
+      is_hw_boot_menu_enabled: null
+      vmware_adaptertype: null
+      vmware_ostype: null
+      has_auto_disk_config: null
+      os_type: null
+      os_admin_user: null
+      hw_qemu_guest_agent: null
+      os_require_quiesce: null
+      schema: null
+      id: null
+      location: null
+      tags: *id001
+    instance_name: null
+    is_locked: false
+    kernel_id: null
+    key_name: ci-team-keypair
+    launch_index: null
+    launched_at: '2020-10-27T03:39:10.000000'
+    metadata: {}
+    networks: null
+    personality: null
+    power_state: 1
+    progress: 0
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    ramdisk_id: null
+    reservation_id: null
+    root_device_name: null
+    scheduler_hints: null
+    security_groups:
+      - name: '5000'
+      - name: sec_group_ssh_access_external
+      - name: default
+    server_groups: null
+    status: ACTIVE
+    task_state: null
+    terminated_at: null
+    trusted_image_certificates: null
+    updated_at: '2021-02-11T20:20:39Z'
+    user_data: null
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    vm_state: active
+    id: a9aab2b7-8cbf-4221-b2e3-fc9c99b43132
+    name: container-mirror
+    tags: []
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/servers/a71e2e73-f730-4eaf-be2a-28e01e7fd50a
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/servers/a71e2e73-f730-4eaf-be2a-28e01e7fd50a
+    access_ipv4: ''
+    access_ipv6: ''
+    addresses:
+      private:
+        - version: 4
+          addr: 192.168.100.252
+          OS-EXT-IPS:type: fixed
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:45:6d:81
+        - version: 4
+          addr: 38.102.83.187
+          OS-EXT-IPS:type: floating
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:45:6d:81
+    admin_password: null
+    attached_volumes: []
+    availability_zone: nova
+    block_device_mapping: null
+    config_drive: ''
+    compute_host: null
+    created_at: '2020-03-16T13:44:25Z'
+    description: dns
+    disk_config: MANUAL
+    flavor_id: null
+    flavor:
+      vcpus: 2
+      ram: 4096
+      disk: 40
+      ephemeral: 0
+      swap: 0
+      original_name: ci.m1.medium
+      extra_specs: {}
+    has_config_drive: ''
+    host_id: 30759dd28ccb151683ac7baff130361e29a714fb2567e794ccf86b8a
+    host_status: null
+    hostname: null
+    hypervisor_hostname: null
+    image_id: null
+    image:
+      checksum: null
+      container_format: null
+      created_at: null
+      disk_format: null
+      is_hidden: null
+      is_protected: null
+      hash_algo: null
+      hash_value: null
+      min_disk: null
+      min_ram: null
+      name: null
+      owner: null
+      owner_id: null
+      properties:
+        links:
+          - rel: bookmark
+            href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/images/10b38db1-5638-42fc-bcae-e2ba39b6968f
+      size: null
+      store: null
+      status: null
+      updated_at: null
+      virtual_size: null
+      visibility: null
+      file: null
+      locations: null
+      direct_url: null
+      url: null
+      metadata: null
+      architecture: null
+      hypervisor_type: null
+      instance_type_rxtx_factor: null
+      instance_uuid: null
+      needs_config_drive: null
+      kernel_id: null
+      os_distro: null
+      os_version: null
+      needs_secure_boot: null
+      os_shutdown_timeout: null
+      ramdisk_id: null
+      vm_mode: null
+      hw_cpu_sockets: null
+      hw_cpu_cores: null
+      hw_cpu_threads: null
+      hw_disk_bus: null
+      hw_cpu_policy: null
+      hw_cpu_thread_policy: null
+      hw_rng_model: null
+      hw_machine_type: null
+      hw_scsi_model: null
+      hw_serial_port_count: null
+      hw_video_model: null
+      hw_video_ram: null
+      hw_watchdog_action: null
+      os_command_line: null
+      hw_vif_model: null
+      is_hw_vif_multiqueue_enabled: null
+      is_hw_boot_menu_enabled: null
+      vmware_adaptertype: null
+      vmware_ostype: null
+      has_auto_disk_config: null
+      os_type: null
+      os_admin_user: null
+      hw_qemu_guest_agent: null
+      os_require_quiesce: null
+      schema: null
+      id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      location: null
+      tags: *id001
+    instance_name: null
+    is_locked: false
+    kernel_id: null
+    key_name: ci-team-keypair
+    launch_index: null
+    launched_at: '2020-03-16T13:44:36.000000'
+    metadata: {}
+    networks: null
+    personality: null
+    power_state: 1
+    progress: 0
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    ramdisk_id: null
+    reservation_id: null
+    root_device_name: null
+    scheduler_hints: null
+    security_groups:
+      - name: sec_group_nameserver
+      - name: default
+    server_groups: null
+    status: ACTIVE
+    task_state: null
+    terminated_at: null
+    trusted_image_certificates: null
+    updated_at: '2021-03-23T17:10:19Z'
+    user_data: null
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    vm_state: active
+    id: a71e2e73-f730-4eaf-be2a-28e01e7fd50a
+    name: dns
+    tags: []
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/servers/dce3d36b-b97b-4ff2-b201-62585152c3e2
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/servers/dce3d36b-b97b-4ff2-b201-62585152c3e2
+    access_ipv4: ''
+    access_ipv6: ''
+    addresses:
+      private:
+        - version: 4
+          addr: 192.168.100.240
+          OS-EXT-IPS:type: fixed
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:48:3c:bb
+        - version: 4
+          addr: 38.102.83.165
+          OS-EXT-IPS:type: floating
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:48:3c:bb
+    admin_password: null
+    attached_volumes: []
+    availability_zone: nova
+    block_device_mapping: null
+    config_drive: ''
+    compute_host: null
+    created_at: '2020-03-15T22:07:01Z'
+    description: rrcockpit
+    disk_config: MANUAL
+    flavor_id: null
+    flavor:
+      vcpus: 8
+      ram: 65536
+      disk: 120
+      ephemeral: 0
+      swap: 0
+      original_name: 8vcpu_64GB
+      extra_specs: {}
+    has_config_drive: ''
+    host_id: 13ccb691f94d7675bbd593bcb5f7498d4828668a75c5a6bcc822b402
+    host_status: null
+    hostname: null
+    hypervisor_hostname: null
+    image_id: null
+    image:
+      checksum: null
+      container_format: null
+      created_at: null
+      disk_format: null
+      is_hidden: null
+      is_protected: null
+      hash_algo: null
+      hash_value: null
+      min_disk: null
+      min_ram: null
+      name: null
+      owner: null
+      owner_id: null
+      properties:
+        links:
+          - rel: bookmark
+            href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/images/804deb43-a185-4139-9605-9099f53e510e
+      size: null
+      store: null
+      status: null
+      updated_at: null
+      virtual_size: null
+      visibility: null
+      file: null
+      locations: null
+      direct_url: null
+      url: null
+      metadata: null
+      architecture: null
+      hypervisor_type: null
+      instance_type_rxtx_factor: null
+      instance_uuid: null
+      needs_config_drive: null
+      kernel_id: null
+      os_distro: null
+      os_version: null
+      needs_secure_boot: null
+      os_shutdown_timeout: null
+      ramdisk_id: null
+      vm_mode: null
+      hw_cpu_sockets: null
+      hw_cpu_cores: null
+      hw_cpu_threads: null
+      hw_disk_bus: null
+      hw_cpu_policy: null
+      hw_cpu_thread_policy: null
+      hw_rng_model: null
+      hw_machine_type: null
+      hw_scsi_model: null
+      hw_serial_port_count: null
+      hw_video_model: null
+      hw_video_ram: null
+      hw_watchdog_action: null
+      os_command_line: null
+      hw_vif_model: null
+      is_hw_vif_multiqueue_enabled: null
+      is_hw_boot_menu_enabled: null
+      vmware_adaptertype: null
+      vmware_ostype: null
+      has_auto_disk_config: null
+      os_type: null
+      os_admin_user: null
+      hw_qemu_guest_agent: null
+      os_require_quiesce: null
+      schema: null
+      id: 804deb43-a185-4139-9605-9099f53e510e
+      location: null
+      tags: *id001
+    instance_name: null
+    is_locked: false
+    kernel_id: null
+    key_name: ci-team-keypair
+    launch_index: null
+    launched_at: '2020-03-15T22:07:14.000000'
+    metadata: {}
+    networks: null
+    personality: null
+    power_state: 1
+    progress: 0
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    ramdisk_id: null
+    reservation_id: null
+    root_device_name: null
+    scheduler_hints: null
+    security_groups:
+      - name: sec_group_ssh_access_external
+      - name: sec_group_http_access_external
+      - name: default
+    server_groups: null
+    status: ACTIVE
+    task_state: null
+    terminated_at: null
+    trusted_image_certificates: null
+    updated_at: '2021-02-11T20:16:41Z'
+    user_data: null
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    vm_state: active
+    id: dce3d36b-b97b-4ff2-b201-62585152c3e2
+    name: rrcockpit
+    tags: []
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/servers/f7b2f96a-8c45-4a1b-81d6-90a1d0b2609e
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/servers/f7b2f96a-8c45-4a1b-81d6-90a1d0b2609e
+    access_ipv4: ''
+    access_ipv6: ''
+    addresses:
+      private:
+        - version: 4
+          addr: 192.168.100.241
+          OS-EXT-IPS:type: fixed
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:a5:f6:8d
+        - version: 4
+          addr: 38.102.83.131
+          OS-EXT-IPS:type: floating
+          OS-EXT-IPS-MAC:mac_addr: fa:16:3e:a5:f6:8d
+    admin_password: null
+    attached_volumes: []
+    availability_zone: nova
+    block_device_mapping: null
+    config_drive: ''
+    compute_host: null
+    created_at: '2020-03-12T14:28:39Z'
+    description: toolbox
+    disk_config: MANUAL
+    flavor_id: null
+    flavor:
+      vcpus: 2
+      ram: 4096
+      disk: 40
+      ephemeral: 0
+      swap: 0
+      original_name: ci.m1.medium
+      extra_specs: {}
+    has_config_drive: ''
+    host_id: 971c5a82c2e15b734a5cb2f3dfb84433528a202798cb6a998fd9ad51
+    host_status: null
+    hostname: null
+    hypervisor_hostname: null
+    image_id: null
+    image:
+      checksum: null
+      container_format: null
+      created_at: null
+      disk_format: null
+      is_hidden: null
+      is_protected: null
+      hash_algo: null
+      hash_value: null
+      min_disk: null
+      min_ram: null
+      name: null
+      owner: null
+      owner_id: null
+      properties:
+        links:
+          - rel: bookmark
+            href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/images/10b38db1-5638-42fc-bcae-e2ba39b6968f
+      size: null
+      store: null
+      status: null
+      updated_at: null
+      virtual_size: null
+      visibility: null
+      file: null
+      locations: null
+      direct_url: null
+      url: null
+      metadata: null
+      architecture: null
+      hypervisor_type: null
+      instance_type_rxtx_factor: null
+      instance_uuid: null
+      needs_config_drive: null
+      kernel_id: null
+      os_distro: null
+      os_version: null
+      needs_secure_boot: null
+      os_shutdown_timeout: null
+      ramdisk_id: null
+      vm_mode: null
+      hw_cpu_sockets: null
+      hw_cpu_cores: null
+      hw_cpu_threads: null
+      hw_disk_bus: null
+      hw_cpu_policy: null
+      hw_cpu_thread_policy: null
+      hw_rng_model: null
+      hw_machine_type: null
+      hw_scsi_model: null
+      hw_serial_port_count: null
+      hw_video_model: null
+      hw_video_ram: null
+      hw_watchdog_action: null
+      os_command_line: null
+      hw_vif_model: null
+      is_hw_vif_multiqueue_enabled: null
+      is_hw_boot_menu_enabled: null
+      vmware_adaptertype: null
+      vmware_ostype: null
+      has_auto_disk_config: null
+      os_type: null
+      os_admin_user: null
+      hw_qemu_guest_agent: null
+      os_require_quiesce: null
+      schema: null
+      id: 10b38db1-5638-42fc-bcae-e2ba39b6968f
+      location: null
+      tags: *id001
+    instance_name: null
+    is_locked: false
+    kernel_id: null
+    key_name: ci-team-keypair
+    launch_index: null
+    launched_at: '2020-03-12T14:29:00.000000'
+    metadata: {}
+    networks: null
+    personality: null
+    power_state: 1
+    progress: 0
+    project_id: 13a8c4940aac4c708117ea9eb7c2a018
+    ramdisk_id: null
+    reservation_id: null
+    root_device_name: null
+    scheduler_hints: null
+    security_groups:
+      - name: sec_group_ssh_access_external
+      - name: sec_group_http_access_external
+      - name: default
+    server_groups: null
+    status: ACTIVE
+    task_state: null
+    terminated_at: null
+    trusted_image_certificates: null
+    updated_at: '2021-02-11T20:16:04Z'
+    user_data: null
+    user_id: 685ff15e710041e2aca7ac41cccb76f8
+    vm_state: active
+    id: f7b2f96a-8c45-4a1b-81d6-90a1d0b2609e
+    name: toolbox
+    tags: []
+flavors:
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/1480253f-78d1-4e9e-9bc2-73190c08e907
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/1480253f-78d1-4e9e-9bc2-73190c08e907
+    name: nodepool-infra
+    description: null
+    disk: 40
+    is_public: false
+    ram: 8192
+    vcpus: 8
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 1480253f-78d1-4e9e-9bc2-73190c08e907
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/279e1823-4ebc-4303-b07c-aec741793a3c
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/279e1823-4ebc-4303-b07c-aec741793a3c
+    name: 8vcpu_16GB
+    description: null
+    disk: 400
+    is_public: false
+    ram: 16384
+    vcpus: 8
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 279e1823-4ebc-4303-b07c-aec741793a3c
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/3441d784-9736-4cbb-ac1d-bf245b9fcff5
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/3441d784-9736-4cbb-ac1d-bf245b9fcff5
+    name: 6vcpus_12gb
+    description: null
+    disk: 120
+    is_public: false
+    ram: 12288
+    vcpus: 6
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 3441d784-9736-4cbb-ac1d-bf245b9fcff5
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/4c6fc970-6c46-4fe1-ba7d-437925f1b047
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/4c6fc970-6c46-4fe1-ba7d-437925f1b047
+    name: 1vcpu_1gb
+    description: null
+    disk: 40
+    is_public: false
+    ram: 1024
+    vcpus: 1
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 4c6fc970-6c46-4fe1-ba7d-437925f1b047
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/5693d51f-3cc4-42aa-8ccb-3a86ec4d90c3
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/5693d51f-3cc4-42aa-8ccb-3a86ec4d90c3
+    name: v1-standard-2
+    description: null
+    disk: 100
+    is_public: false
+    ram: 8192
+    vcpus: 2
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 5693d51f-3cc4-42aa-8ccb-3a86ec4d90c3
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/61619d57-febb-4655-8f52-4ca093206287
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/61619d57-febb-4655-8f52-4ca093206287
+    name: 8vcpu_64GB
+    description: null
+    disk: 120
+    is_public: false
+    ram: 65536
+    vcpus: 8
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 61619d57-febb-4655-8f52-4ca093206287
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/6682b8f3-bb48-4563-9965-c8b9b09f1ee7
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/6682b8f3-bb48-4563-9965-c8b9b09f1ee7
+    name: v1-standard-8
+    description: null
+    disk: 400
+    is_public: false
+    ram: 32768
+    vcpus: 8
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 6682b8f3-bb48-4563-9965-c8b9b09f1ee7
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/6a23f4ef-c643-4cad-8d7e-14268e313c7f
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/6a23f4ef-c643-4cad-8d7e-14268e313c7f
+    name: v1-standard-4
+    description: null
+    disk: 200
+    is_public: false
+    ram: 16384
+    vcpus: 4
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 6a23f4ef-c643-4cad-8d7e-14268e313c7f
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/7d195b15-271f-40e7-9ceb-15b4b47c75d8
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/7d195b15-271f-40e7-9ceb-15b4b47c75d8
+    name: 1vcpu_2gb
+    description: null
+    disk: 20
+    is_public: false
+    ram: 2048
+    vcpus: 1
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: 7d195b15-271f-40e7-9ceb-15b4b47c75d8
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/e21b78ed-2380-4505-ac6f-e94e729ed0b3
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/e21b78ed-2380-4505-ac6f-e94e729ed0b3
+    name: v1-standard-1
+    description: null
+    disk: 50
+    is_public: false
+    ram: 4096
+    vcpus: 1
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: e21b78ed-2380-4505-ac6f-e94e729ed0b3
+  - links:
+      - rel: self
+        href: https://compute.rdo.mtl2.vexxhost.net/v2.1/13a8c4940aac4c708117ea9eb7c2a018/flavors/f155ac64-fa2e-49ea-9113-331b9ef2fa17
+      - rel: bookmark
+        href: https://compute.rdo.mtl2.vexxhost.net/13a8c4940aac4c708117ea9eb7c2a018/flavors/f155ac64-fa2e-49ea-9113-331b9ef2fa17
+    name: 4vcpus_8gb
+    description: null
+    disk: 80
+    is_public: false
+    ram: 8192
+    vcpus: 4
+    swap: ''
+    ephemeral: 0
+    is_disabled: false
+    rxtx_factor: 1.0
+    extra_specs: {}
+    id: f155ac64-fa2e-49ea-9113-331b9ef2fa17
+users:
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/8d32310af2c54e65b5f5a53b966ac5b0
+    name: admin
+    password: null
+    password_expires_at: null
+    id: 8d32310af2c54e65b5f5a53b966ac5b0
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: demo@example.com
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/56b8183d83724ee7a113519b6767f2ea
+    name: demo
+    password: null
+    password_expires_at: null
+    id: 56b8183d83724ee7a113519b6767f2ea
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: alt_demo@example.com
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/bd517b51f22241f3a0bb9900a966b27b
+    name: alt_demo
+    password: null
+    password_expires_at: null
+    id: bd517b51f22241f3a0bb9900a966b27b
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/f767ec5d1cac4eb7a836ed0a53947a16
+    name: nova
+    password: null
+    password_expires_at: null
+    id: f767ec5d1cac4eb7a836ed0a53947a16
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/444fd6f2312c446e82782db3d4b66e90
+    name: glance
+    password: null
+    password_expires_at: null
+    id: 444fd6f2312c446e82782db3d4b66e90
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/f8fdc4c88d62454fa4266fe6ce9c5981
+    name: glance-swift
+    password: null
+    password_expires_at: null
+    id: f8fdc4c88d62454fa4266fe6ce9c5981
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/eb8dd43647ce40e59c7d85af0fc8edfb
+    name: cinder
+    password: null
+    password_expires_at: null
+    id: eb8dd43647ce40e59c7d85af0fc8edfb
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/673ed6b4fdb245b2bfa2de79cdb72c97
+    name: neutron
+    password: null
+    password_expires_at: null
+    id: 673ed6b4fdb245b2bfa2de79cdb72c97
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/b58511bd018749bba827cabedfe8686d
+    name: swift
+    password: null
+    password_expires_at: null
+    id: b58511bd018749bba827cabedfe8686d
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: test@example.com
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/72e83335bece414ab27ae6b6c6f03caf
+    name: swiftusertest1
+    password: null
+    password_expires_at: null
+    id: 72e83335bece414ab27ae6b6c6f03caf
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: test3@example.com
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/ff4904a92b0d41f48957bf04f97766fe
+    name: swiftusertest3
+    password: null
+    password_expires_at: null
+    id: ff4904a92b0d41f48957bf04f97766fe
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: test2@example.com
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/e60c50324c324a26a730c43fcf78536d
+    name: swiftusertest2
+    password: null
+    password_expires_at: null
+    id: e60c50324c324a26a730c43fcf78536d
+  - default_project_id: null
+    description: null
+    domain_id: 52d267c960ce496bbd547dfffdfd3488
+    email: test4@example.com
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/9c1f0277a20a4df4b5289711a4131688
+    name: swiftusertest4
+    password: null
+    password_expires_at: null
+    id: 9c1f0277a20a4df4b5289711a4131688
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/14eea7e2eeb149bd81c36882843a5755
+    name: placement
+    password: null
+    password_expires_at: null
+    id: 14eea7e2eeb149bd81c36882843a5755
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/513dc0d88a1c4ff8af1882580eb8bb20
+    name: heat
+    password: null
+    password_expires_at: null
+    id: 513dc0d88a1c4ff8af1882580eb8bb20
+  - default_project_id: null
+    description: null
+    domain_id: c9bf577286ed499eb8a9192fbbd50a21
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/3b77ef63cc7d4f14bef25c069b8c4acb
+    name: heat_domain_admin
+    password: null
+    password_expires_at: null
+    id: 3b77ef63cc7d4f14bef25c069b8c4acb
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/137fcbefadf740b5ae69c6418a778de6
+    name: designate
+    password: null
+    password_expires_at: null
+    id: 137fcbefadf740b5ae69c6418a778de6
+  - default_project_id: null
+    description: null
+    domain_id: default
+    email: null
+    is_enabled: true
+    links:
+      self: https://192.168.2.139/identity/v3/users/2099f529efce4072b2d8de419d9a107a
+    name: octavia
+    password: null
+    password_expires_at: null
+    id: 2099f529efce4072b2d8de419d9a107a
+projects:
+  - description: demodescription
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: demoproject
+    parent_id: default
+    id: 0971347c3c3f40fc8f3fd7d76195b3fe
+    tags: []
+  - description: ''
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: demo
+    parent_id: default
+    id: 13a8c4940aac4c708117ea9eb7c2a018
+    tags: []
+  - description: ''
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: alt_demo
+    parent_id: default
+    id: 19c01f59d48448e98f22d31346b46ea9
+    tags: []
+  - description: ''
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: invisible_to_admin
+    parent_id: default
+    id: 1d061f90a571471c9e9dcb1a0214e38f
+    tags: []
+  - description: null
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: testproject
+    parent_id: default
+    id: 25f87e506b04484696e202106503a6bd
+    tags: []
+  - description: ''
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: swiftprojecttest1
+    parent_id: default
+    id: 38b075e3312d4e8f9806c37b04385838
+    tags: []
+  - description: ''
+    domain_id: 52d267c960ce496bbd547dfffdfd3488
+    is_domain: false
+    is_enabled: true
+    name: swiftprojecttest4
+    parent_id: 52d267c960ce496bbd547dfffdfd3488
+    id: dfec6f755e5942bfa2b4c44f6b7dbe82
+    tags: []
+  - description: ''
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: service
+    parent_id: default
+    id: e660ffa32ae64acc97ed63c16e83597a
+    tags: []
+  - description: ''
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: swiftprojecttest2
+    parent_id: default
+    id: ed7e05a7715b4328bf020656b5c0692e
+    tags: []
+  - description: Bootstrap project for initializing the cloud.
+    domain_id: default
+    is_domain: false
+    is_enabled: true
+    name: admin
+    parent_id: default
+    id: fdcb6e61f6b6470eb12601169878cf61
+    tags: []
+domains:
+  - description: Used for swift functional testing
+    is_enabled: true
+    name: swift_test
+    links:
+      self: https://192.168.2.139/identity/v3/domains/52d267c960ce496bbd547dfffdfd3488
+    id: 52d267c960ce496bbd547dfffdfd3488
+  - description: Owns users and projects created by heat
+    is_enabled: true
+    name: heat
+    links:
+      self: https://192.168.2.139/identity/v3/domains/c9bf577286ed499eb8a9192fbbd50a21
+    id: c9bf577286ed499eb8a9192fbbd50a21
+  - description: Demo Domain
+    is_enabled: true
+    name: demo1
+    links:
+      self: https://192.168.2.139/identity/v3/domains/ce4d68966c5449d7af9a81a04589eac6
+    id: ce4d68966c5449d7af9a81a04589eac6
+  - description: The default domain
+    is_enabled: true
+    name: Default
+    links:
+      self: https://192.168.2.139/identity/v3/domains/default
+    id: default
