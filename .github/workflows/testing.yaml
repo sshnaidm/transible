@@ -1,0 +1,110 @@
+name: CI for Transible
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  pep8-tests:
+    name: PEP-8
+    runs-on: ${{ matrix.runner-os }}
+    strategy:
+      matrix:
+        runner-os:
+          - ubuntu-latest  # 20.04
+        runner-python-version:
+          - 3.9
+    steps:
+
+      - name: Check out ${{ github.repository }} on disk
+        uses: actions/checkout@master
+
+      - name: Set up Python ${{ matrix.runner-python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.runner-python-version }}
+
+      - name: Set up pip cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('tests/sanity/requirements.txt') }}-${{ hashFiles('tests/unit/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - name: Install test requirements
+        run: python -m pip install -U -r test-requirements.txt
+
+      - name: Run PEP8 tests
+        run: tox -epep8
+
+  pylint-tests:
+    name: Pylint
+    runs-on: ${{ matrix.runner-os }}
+    strategy:
+      matrix:
+        runner-os:
+          - ubuntu-latest
+        runner-python-version:
+          - 3.9
+    steps:
+
+      - name: Check out ${{ github.repository }} on disk
+        uses: actions/checkout@master
+
+      - name: Set up Python ${{ matrix.runner-python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.runner-python-version }}
+
+      - name: Set up pip cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('tests/sanity/requirements.txt') }}-${{ hashFiles('tests/unit/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - name: Install test requirements
+        run: python -m pip install -U -r test-requirements.txt
+
+      - name: Run pylint tests
+        run: tox -epylint
+
+  unit-tests:
+    name: Unittests
+    runs-on: ${{ matrix.runner-os }}
+    strategy:
+      matrix:
+        runner-os:
+          - ubuntu-latest
+        runner-python-version:
+          - 3.9
+    steps:
+
+      - name: Check out ${{ github.repository }} on disk
+        uses: actions/checkout@master
+
+      - name: Set up Python ${{ matrix.runner-python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.runner-python-version }}
+
+      - name: Set up pip cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('tests/sanity/requirements.txt') }}-${{ hashFiles('tests/unit/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - name: Install test requirements
+        run: python -m pip install -U -r test-requirements.txt
+
+      - name: Run unit tests
+        run: tox

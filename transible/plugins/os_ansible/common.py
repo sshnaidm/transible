@@ -6,7 +6,7 @@ from transible.plugins.os_ansible.config import VARS_PATH
 class ExtraDumper(yaml.Dumper):
 
     def increase_indent(self, flow=False, indentless=False):
-        return super(ExtraDumper, self).increase_indent(flow, False)
+        return super().increase_indent(flow, False)
 
 
 def yaml_dump(content):
@@ -36,9 +36,9 @@ def read_yaml(path):
 def write_yaml(content, path):
     for item in content:
         if 'vars' in item:
-            vars = item.pop('vars')
-            var_name = list(vars.keys())[0]
-            add_vars(vars, VARS_PATH, header="# %s section\n" % var_name)
+            item_vars = item.pop('vars')
+            var_name = list(item_vars.keys())[0]
+            add_vars(item_vars, VARS_PATH, header="# %s section\n" % var_name)
     with open(path, "w") as f:
         f.write("---\n")
         f.write(yaml_dump(content))
@@ -70,9 +70,9 @@ def optimize(data, use_vars=True, var_name=None):
     templ.update({'loop': [list(i.values())[0] for i in data]})
     for k in all_keys:
         k_values = [i.get(k) for i in templ['loop']]
-        if any([isinstance(y, dict) for y in k_values]):
+        if any((isinstance(y, dict) for y in k_values)):
             continue
-        if any([isinstance(y, list) for y in k_values]):
+        if any((isinstance(y, list) for y in k_values)):
             continue
         allv = list(set(k_values))
         if len(allv) == 1:

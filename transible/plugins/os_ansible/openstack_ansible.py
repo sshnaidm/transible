@@ -76,7 +76,7 @@ class OpenstackAnsible:
         for file_name, (path, func) in cloud_funcs.items():
             if path == data_type:
                 path = os.path.join(self.path[path], file_name)
-                dumped_data = func()
+                dumped_data = func()  # pylint: disable=not-callable
                 write_yaml(dumped_data, path)
 
     def write_playbook(self):
@@ -127,7 +127,7 @@ class OpenstackInfo:
         }
         for data_type, (dump, func, file_name) in info_matrix.items():
             if dump:
-                self.data[data_type] = list([i.to_dict() for i in func()])
+                self.data[data_type] = list((i.to_dict() for i in func()))
                 # Remove Munch objects from the dict
                 for i in self.data[data_type]:
                     i.pop('location')
@@ -535,8 +535,8 @@ class OpenstackCalculation:
             s['name'] = ser['name']
             s['cloud'] = self.data['cloud']
             if value(ser, 'server', 'security_groups'):
-                s['security_groups'] = list(set(
-                    [i['name'] for i in ser['security_groups']]))
+                s['security_groups'] = list(
+                    {i['name'] for i in ser['security_groups']})
             if 'original_name' in ser['flavor']:
                 s['flavor'] = ser['flavor']['original_name']
             elif ser['flavor_id']:
