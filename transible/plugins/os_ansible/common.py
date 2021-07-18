@@ -4,6 +4,8 @@ from transible.plugins.os_ansible.config import VARS_PATH
 
 
 class ExtraDumper(yaml.Dumper):
+    """Custom dumper for YAML
+    """
 
     def increase_indent(self, flow=False, indentless=False):
         return super().increase_indent(flow, False)

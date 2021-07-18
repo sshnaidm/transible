@@ -10,6 +10,13 @@ from transible.plugins.os_ansible.common import value, optimize, write_yaml, rea
 
 
 class OpenstackAnsible:
+    """Main class to generate Ansible playbooks from OpenStack
+
+    Args:
+        cloud_name (string): cloud name from clouds.yaml config file
+        debug (bool, optional): debug option. Defaults to False.
+        from_file (str, optional): Optional file with all data. Defaults to ''.
+    """
     def __init__(self, cloud_name, debug=False, from_file=''):
         self.path = {}
         self.initialize_directories()
@@ -95,6 +102,12 @@ class OpenstackAnsible:
 
 
 class OpenstackInfo:
+    """Retrieve information about Openstack cloud
+
+    Args:
+        cloud_name (str): cloud name from clouds.yaml config file
+        debug (bool, optional): debug option. Defaults to False.
+    """
     def __init__(self, cloud_name, debug=False):
         self.debug = debug
         self.data = {}
@@ -145,6 +158,12 @@ class OpenstackInfo:
 
 
 class OpenstackCalculation:
+    """Class to generate all Ansible playbooks.
+
+    Args:
+            data (dict): Openstack info data to be used to generate the playbooks.
+            debug (bool, optional): debug option. Defaults to False.
+    """
     def __init__(self, data, debug=False):
         self.debug = debug
         self.data = data
