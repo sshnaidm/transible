@@ -2,13 +2,14 @@
 import argparse
 import sys
 from transible.plugins.os_ansible.openstack_ansible import OpenstackAnsible
+from transible.plugins.aws_ansible.amazon_ansible import AmazonAnsible
 
 
 def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('-f', '--from', dest="from_cloud",
                         default="openstack",
-                        choices=["openstack"],
+                        choices=["openstack", "aws"],
                         help='Cloud type to read configuration from')
     parser.add_argument('-t', '--to', dest="to",
                         default="ansible",
@@ -26,6 +27,8 @@ def main():
             print("Please provide the cloud name for Openstack")
             sys.exit(1)
         OpenstackAnsible(args.cloud_name, from_file=args.from_file).run()
+    elif args.from_cloud == "aws" and args.to == "ansible":
+        AmazonAnsible(from_file=args.from_file).run()
     else:
         print("Configuration is not supported yet")
 
