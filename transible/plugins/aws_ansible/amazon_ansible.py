@@ -76,7 +76,7 @@ class AmazonAnsible:
             # const.FILE_VOLUMES: ('storage', self.aws_calc.create_volumes),
             # const.FILE_FLAVORS: ('compute', self.aws_calc.create_flavors),
             # const.FILE_KEYPAIRS: ('compute', self.aws_calc.create_keypairs),
-            # const.FILE_SERVERS: ('compute', self.aws_calc.create_servers),
+            const.FILE_SERVERS: ('compute', self.aws_calc.create_servers),
             # const.FILE_PROJECTS: ('identity', self.aws_calc.create_projects),
             # const.FILE_DOMAINS: ('identity', self.aws_calc.create_domains),
             # const.FILE_USERS: ('identity', self.aws_calc.create_users),
@@ -323,11 +323,11 @@ class AmazonAnsibleCalculation:
                 route_tbs.append(optimized)
         return route_tbs
 
-    # def create_servers(self, force_optimize=conf.VARS_OPT_SERVERS,
-    #                    vars_file=True):
+    def create_servers(self, force_optimize=conf.VARS_OPT_SERVERS,
+                       vars_file=True):
 
-    #     servers = []
-    #     pre_optimized = []
+        servers = []
+        pre_optimized = []
     #     if conf.DUMP_STORAGE:
     #         volumes_dict = {i['id']: i for i in self.data['volumes']}
     #         images_dict = {i['id']: i['name'] for i in self.data['images']}
@@ -335,8 +335,31 @@ class AmazonAnsibleCalculation:
     #         volumes_dict = {}
     #         images_dict = {}
     #     flavors_names = {i['id']: i['name'] for i in self.data['flavors']}
-    #     for ser in self.data['servers']:
-    #         s = {'state': 'present'}
+        for ser in self.data['servers']:
+            inst = ser['Instances'][0]
+            s = {'state': inst['State']['Name']}
+            s['instance_type'] = inst['InstanceType']
+            s['tags'] = {t['Key']: t['Value'] for t in inst['Tags']}
+            s['image_id'] = inst['ImageId']
+            s['security_groups'] = [sg['GroupName'] for sg in inst['SecurityGroups']]
+            s['vpc_subnet_id'] = inst['SubnetId']
+            s['key_name'] = inst['KeyName']
+            s['availability_zone'] = inst['Placement']['AvailabilityZone']
+            s['tenancy'] = inst['Placement']['Tenancy']
+            s['cpu_options'] = {
+                'threads_per_core': inst['CpuOptions']['ThreadsPerCore'],
+                'core_count': inst['CpuOptions']['CoreCount']
+            }
+            s['detailed_monitoring'] = inst['Monitoring']['State'].lower() == 'enabled'
+            s['ebs_optimized'] = inst['EbsOptimized']
+            s['placement_group'] = inst['Placement']['GroupName']
+            s['metadata_options'] = {
+                'http_endpoint': inst['MetadataOptions']['HttpEndpoint'],
+                'http_tokens': inst['MetadataOptions']['HttpTokens'],
+                'http_put_response_hop_limit': inst['MetadataOptions']['HttpPutResponseHopLimit'],
+                'instance_metadata_tags': inst['MetadataOptions']['State'],
+            }
+
     #         s['name'] = ser['name']
     #         s['cloud'] = self.data['cloud']
     #         if value(ser, 'server', 'security_groups'):
@@ -410,18 +433,18 @@ class AmazonAnsibleCalculation:
     #                 fips = [j['addr'] for i in list(ser['addresses'].values())
     #                         for j in i if j['OS-EXT-IPS:type'] == 'floating']
     #                 s['floating_ips'] = fips
-    #         if force_optimize:
-    #             pre_optimized.append({'openstack.cloud.server': s})
-    #         else:
-    #             servers.append({'openstack.cloud.server': s})
-    #     if force_optimize:
-    #         optimized = optimize(
-    #             pre_optimized,
-    #             use_vars=vars_file,
-    #             var_name="servers")
-    #         if optimized:
-    #             servers.append(optimized)
-    #     return servers
+            if force_optimize:
+                pre_optimized.append({'amazon.aws.ec2_instance': s})
+            else:
+                servers.append({'amazon.aws.ec2_instance': s})
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                use_vars=vars_file,
+                var_name="servers")
+            if optimized:
+                servers.append(optimized)
+        return servers
 
 
 class AmazonInfo:
