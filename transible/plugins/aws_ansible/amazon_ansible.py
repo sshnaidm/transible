@@ -335,8 +335,12 @@ class AmazonAnsibleCalculation:
     #         volumes_dict = {}
     #         images_dict = {}
     #     flavors_names = {i['id']: i['name'] for i in self.data['flavors']}
+
         for ser in self.data['servers']:
+
             inst = ser['Instances'][0]
+            if inst['State']['Name'] == 'terminated':
+                continue
             s = {'state': inst['State']['Name']}
             s['instance_type'] = inst['InstanceType']
             s['tags'] = {t['Key']: t['Value'] for t in inst['Tags']}
