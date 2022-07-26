@@ -126,7 +126,8 @@ class OpenstackInfo:
         info_matrix = {
             'networks': (conf.DUMP_NETWORKS, conn.network.networks, const.FILE_NETWORKS),
             'subnets': (conf.DUMP_NETWORKS, conn.network.subnets, const.FILE_SUBNETS),
-            'secgroups': (conf.DUMP_NETWORKS, conn.network.security_groups, const.FILE_SECURITY_GROUPS),
+            'secgroups': (conf.DUMP_NETWORKS, conn.network.security_groups,
+                          const.FILE_SECURITY_GROUPS),
             'routers': (conf.DUMP_NETWORKS, conn.network.routers, const.FILE_ROUTERS),
             'ports': (conf.DUMP_NETWORKS, conn.network.ports, const.FILE_PORTS),
             'images': (conf.DUMP_STORAGE, conn.image.images, const.FILE_IMAGES),

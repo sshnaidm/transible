@@ -1,6 +1,4 @@
 [MESSAGES CONTROL]
 disable=too-many-ancestors,invalid-name,missing-function-docstring,too-many-statements,
         too-many-branches,too-many-locals,too-many-nested-blocks,missing-module-docstring,
-        no-self-use,too-few-public-methods
-[FORMAT]
-max-line-length=119
+        too-few-public-methods,unspecified-encoding,consider-using-f-string,duplicate-code
