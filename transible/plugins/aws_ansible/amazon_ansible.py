@@ -16,14 +16,14 @@ class AmazonAnsible:
         debug (bool, optional): debug option. Defaults to False.
         from_file (str, optional): Optional file with all data. Defaults to ''.
     """
-    def __init__(self, creds=None, debug=False, from_file=''):
+    def __init__(self, debug=False, from_file=''):
         self.path = {}
         self.initialize_directories()
         self.data = {}
         if from_file:
             self.data = read_yaml(os.path.join(conf.DATA_DIR_TRANSIENT, from_file))
         else:
-            ai = AmazonInfo(creds=creds, debug=debug)
+            ai = AmazonInfo(debug=debug)
             ai.run()
             self.data = ai.data
         self.debug = debug
@@ -457,7 +457,7 @@ class AmazonInfo:
     Args:
         debug (bool, optional): debug option. Defaults to False.
     """
-    def __init__(self, creds, debug=False):
+    def __init__(self, debug=False):
         self.debug = debug
         self.data = {}
         self.ec2 = None
@@ -476,9 +476,11 @@ class AmazonInfo:
             'subnets': (conf.DUMP_NETWORKS,
                         self.ec2.describe_subnets, 'Subnets', const.FILE_SUBNETS),
             'secgroups': (conf.DUMP_NETWORKS,
-                          self.ec2.describe_security_groups, 'SecurityGroups', const.FILE_SECURITY_GROUPS),
+                          self.ec2.describe_security_groups, 'SecurityGroups',
+                          const.FILE_SECURITY_GROUPS),
             'routers': (conf.DUMP_NETWORKS,
-                        self.ec2.describe_internet_gateways, 'InternetGateways', const.FILE_ROUTERS),
+                        self.ec2.describe_internet_gateways, 'InternetGateways',
+                        const.FILE_ROUTERS),
             'route_tables': (conf.DUMP_NETWORKS,
                              self.ec2.describe_route_tables, 'RouteTables', const.FILE_ROUTE_TBS),
             'nat_gateways': (conf.DUMP_NETWORKS,

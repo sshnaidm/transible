@@ -1,0 +1,1602 @@
+---
+networks:
+  - CidrBlock: 10.0.0.0/16
+    DhcpOptionsId: dopt-77f08f0f
+    State: available
+    VpcId: vpc-0cbccbfb66c06b98e
+    OwnerId: '238681791102'
+    InstanceTenancy: default
+    CidrBlockAssociationSet:
+      - AssociationId: vpc-cidr-assoc-0125538c44e401f16
+        CidrBlock: 10.0.0.0/16
+        CidrBlockState:
+          State: associated
+    IsDefault: false
+    EnableDnsSupport: true
+    EnableDnsHostnames: false
+  - CidrBlock: 10.0.0.0/16
+    DhcpOptionsId: dopt-77f08f0f
+    State: available
+    VpcId: vpc-03cc46bfb758fbc25
+    OwnerId: '238681791102'
+    InstanceTenancy: default
+    CidrBlockAssociationSet:
+      - AssociationId: vpc-cidr-assoc-06b8b738afa18e2c9
+        CidrBlock: 10.0.0.0/16
+        CidrBlockState:
+          State: associated
+    IsDefault: false
+    EnableDnsSupport: true
+    EnableDnsHostnames: false
+  - CidrBlock: 172.31.0.0/16
+    DhcpOptionsId: dopt-77f08f0f
+    State: available
+    VpcId: vpc-46eaac3e
+    OwnerId: '238681791102'
+    InstanceTenancy: default
+    CidrBlockAssociationSet:
+      - AssociationId: vpc-cidr-assoc-1639257c
+        CidrBlock: 172.31.0.0/16
+        CidrBlockState:
+          State: associated
+    IsDefault: true
+    EnableDnsSupport: true
+    EnableDnsHostnames: true
+subnets:
+  - AvailabilityZone: us-west-2a
+    AvailabilityZoneId: usw2-az2
+    AvailableIpAddressCount: 4091
+    CidrBlock: 172.31.32.0/20
+    DefaultForAz: true
+    MapPublicIpOnLaunch: true
+    MapCustomerOwnedIpOnLaunch: false
+    State: available
+    SubnetId: subnet-62c13d28
+    VpcId: vpc-46eaac3e
+    OwnerId: '238681791102'
+    AssignIpv6AddressOnCreation: false
+    Ipv6CidrBlockAssociationSet: []
+    SubnetArn: arn:aws:ec2:us-west-2:238681791102:subnet/subnet-62c13d28
+    EnableDns64: false
+    Ipv6Native: false
+    PrivateDnsNameOptionsOnLaunch:
+      HostnameType: ip-name
+      EnableResourceNameDnsARecord: false
+      EnableResourceNameDnsAAAARecord: false
+  - AvailabilityZone: us-west-2b
+    AvailabilityZoneId: usw2-az1
+    AvailableIpAddressCount: 4091
+    CidrBlock: 172.31.16.0/20
+    DefaultForAz: true
+    MapPublicIpOnLaunch: true
+    MapCustomerOwnedIpOnLaunch: false
+    State: available
+    SubnetId: subnet-1a37e462
+    VpcId: vpc-46eaac3e
+    OwnerId: '238681791102'
+    AssignIpv6AddressOnCreation: false
+    Ipv6CidrBlockAssociationSet: []
+    SubnetArn: arn:aws:ec2:us-west-2:238681791102:subnet/subnet-1a37e462
+    EnableDns64: false
+    Ipv6Native: false
+    PrivateDnsNameOptionsOnLaunch:
+      HostnameType: ip-name
+      EnableResourceNameDnsARecord: false
+      EnableResourceNameDnsAAAARecord: false
+  - AvailabilityZone: us-west-2a
+    AvailabilityZoneId: usw2-az2
+    AvailableIpAddressCount: 251
+    CidrBlock: 10.0.0.0/24
+    DefaultForAz: false
+    MapPublicIpOnLaunch: false
+    MapCustomerOwnedIpOnLaunch: false
+    State: available
+    SubnetId: subnet-02d4b3a680b6c22e7
+    VpcId: vpc-0cbccbfb66c06b98e
+    OwnerId: '238681791102'
+    AssignIpv6AddressOnCreation: false
+    Ipv6CidrBlockAssociationSet: []
+    SubnetArn: arn:aws:ec2:us-west-2:238681791102:subnet/subnet-02d4b3a680b6c22e7
+    EnableDns64: false
+    Ipv6Native: false
+    PrivateDnsNameOptionsOnLaunch:
+      HostnameType: ip-name
+      EnableResourceNameDnsARecord: false
+      EnableResourceNameDnsAAAARecord: false
+  - AvailabilityZone: us-west-2a
+    AvailabilityZoneId: usw2-az2
+    AvailableIpAddressCount: 250
+    CidrBlock: 10.0.2.0/24
+    DefaultForAz: false
+    MapPublicIpOnLaunch: false
+    MapCustomerOwnedIpOnLaunch: false
+    State: available
+    SubnetId: subnet-0ee452773dd4e4528
+    VpcId: vpc-03cc46bfb758fbc25
+    OwnerId: '238681791102'
+    AssignIpv6AddressOnCreation: false
+    Ipv6CidrBlockAssociationSet: []
+    SubnetArn: arn:aws:ec2:us-west-2:238681791102:subnet/subnet-0ee452773dd4e4528
+    EnableDns64: false
+    Ipv6Native: false
+    PrivateDnsNameOptionsOnLaunch:
+      HostnameType: ip-name
+      EnableResourceNameDnsARecord: false
+      EnableResourceNameDnsAAAARecord: false
+  - AvailabilityZone: us-west-2a
+    AvailabilityZoneId: usw2-az2
+    AvailableIpAddressCount: 251
+    CidrBlock: 10.0.2.0/24
+    DefaultForAz: false
+    MapPublicIpOnLaunch: false
+    MapCustomerOwnedIpOnLaunch: false
+    State: available
+    SubnetId: subnet-0fa24946bbf60c510
+    VpcId: vpc-0cbccbfb66c06b98e
+    OwnerId: '238681791102'
+    AssignIpv6AddressOnCreation: false
+    Ipv6CidrBlockAssociationSet: []
+    SubnetArn: arn:aws:ec2:us-west-2:238681791102:subnet/subnet-0fa24946bbf60c510
+    EnableDns64: false
+    Ipv6Native: false
+    PrivateDnsNameOptionsOnLaunch:
+      HostnameType: ip-name
+      EnableResourceNameDnsARecord: false
+      EnableResourceNameDnsAAAARecord: false
+  - AvailabilityZone: us-west-2d
+    AvailabilityZoneId: usw2-az4
+    AvailableIpAddressCount: 4091
+    CidrBlock: 172.31.48.0/20
+    DefaultForAz: true
+    MapPublicIpOnLaunch: true
+    MapCustomerOwnedIpOnLaunch: false
+    State: available
+    SubnetId: subnet-6f2e0b44
+    VpcId: vpc-46eaac3e
+    OwnerId: '238681791102'
+    AssignIpv6AddressOnCreation: false
+    Ipv6CidrBlockAssociationSet: []
+    SubnetArn: arn:aws:ec2:us-west-2:238681791102:subnet/subnet-6f2e0b44
+    EnableDns64: false
+    Ipv6Native: false
+    PrivateDnsNameOptionsOnLaunch:
+      HostnameType: ip-name
+      EnableResourceNameDnsARecord: false
+      EnableResourceNameDnsAAAARecord: false
+  - AvailabilityZone: us-west-2a
+    AvailabilityZoneId: usw2-az2
+    AvailableIpAddressCount: 246
+    CidrBlock: 10.0.0.0/24
+    DefaultForAz: false
+    MapPublicIpOnLaunch: false
+    MapCustomerOwnedIpOnLaunch: false
+    State: available
+    SubnetId: subnet-0de32518246e024d7
+    VpcId: vpc-03cc46bfb758fbc25
+    OwnerId: '238681791102'
+    AssignIpv6AddressOnCreation: false
+    Ipv6CidrBlockAssociationSet: []
+    SubnetArn: arn:aws:ec2:us-west-2:238681791102:subnet/subnet-0de32518246e024d7
+    EnableDns64: false
+    Ipv6Native: false
+    PrivateDnsNameOptionsOnLaunch:
+      HostnameType: ip-name
+      EnableResourceNameDnsARecord: false
+      EnableResourceNameDnsAAAARecord: false
+  - AvailabilityZone: us-west-2c
+    AvailabilityZoneId: usw2-az3
+    AvailableIpAddressCount: 4091
+    CidrBlock: 172.31.0.0/20
+    DefaultForAz: true
+    MapPublicIpOnLaunch: true
+    MapCustomerOwnedIpOnLaunch: false
+    State: available
+    SubnetId: subnet-40e24f1d
+    VpcId: vpc-46eaac3e
+    OwnerId: '238681791102'
+    AssignIpv6AddressOnCreation: false
+    Ipv6CidrBlockAssociationSet: []
+    SubnetArn: arn:aws:ec2:us-west-2:238681791102:subnet/subnet-40e24f1d
+    EnableDns64: false
+    Ipv6Native: false
+    PrivateDnsNameOptionsOnLaunch:
+      HostnameType: ip-name
+      EnableResourceNameDnsARecord: false
+      EnableResourceNameDnsAAAARecord: false
+secgroups:
+  - Description: Used in the terraform
+    GroupName: bastion-sg
+    IpPermissions:
+      - FromPort: 22
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 22
+        UserIdGroupPairs: []
+    OwnerId: '238681791102'
+    GroupId: sg-006dfe1d2d2c7a8a4
+    IpPermissionsEgress:
+      - IpProtocol: '-1'
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Description: default VPC security group
+    GroupName: default
+    IpPermissions:
+      - IpProtocol: '-1'
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs:
+          - GroupId: sg-0111f7ee1a845d2e0
+            UserId: '238681791102'
+    OwnerId: '238681791102'
+    GroupId: sg-0111f7ee1a845d2e0
+    IpPermissionsEgress:
+      - IpProtocol: '-1'
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Description: default VPC security group
+    GroupName: default
+    IpPermissions:
+      - IpProtocol: '-1'
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs:
+          - GroupId: sg-03f1513f62395c507
+            UserId: '238681791102'
+    OwnerId: '238681791102'
+    GroupId: sg-03f1513f62395c507
+    IpPermissionsEgress:
+      - IpProtocol: '-1'
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs: []
+    VpcId: vpc-0cbccbfb66c06b98e
+  - Description: Used in the terraform
+    GroupName: web_server-sg
+    IpPermissions:
+      - FromPort: 80
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 80
+        UserIdGroupPairs: []
+      - FromPort: 22
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 25
+        UserIdGroupPairs: []
+      - FromPort: 443
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 443
+        UserIdGroupPairs: []
+    OwnerId: '238681791102'
+    GroupId: sg-05808711a101d4950
+    IpPermissionsEgress:
+      - IpProtocol: '-1'
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs: []
+    VpcId: vpc-0cbccbfb66c06b98e
+  - Description: Used in the terraform
+    GroupName: web_server-sg
+    IpPermissions:
+      - FromPort: 80
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 80
+        UserIdGroupPairs: []
+      - FromPort: 22
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 25
+        UserIdGroupPairs: []
+      - FromPort: 443
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 443
+        UserIdGroupPairs: []
+    OwnerId: '238681791102'
+    GroupId: sg-068450e4da052f265
+    IpPermissionsEgress:
+      - IpProtocol: '-1'
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Description: Used in the terraform
+    GroupName: bastion-sg
+    IpPermissions:
+      - FromPort: 22
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 22
+        UserIdGroupPairs: []
+    OwnerId: '238681791102'
+    GroupId: sg-07b7faccd0ff41af7
+    IpPermissionsEgress:
+      - IpProtocol: '-1'
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs: []
+    VpcId: vpc-0cbccbfb66c06b98e
+  - Description: Used in the terraform
+    GroupName: database-sg
+    IpPermissions:
+      - FromPort: 22
+        IpProtocol: tcp
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 22
+        UserIdGroupPairs:
+          - GroupId: sg-07b7faccd0ff41af7
+            UserId: '238681791102'
+      - FromPort: 5431
+        IpProtocol: tcp
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 5432
+        UserIdGroupPairs:
+          - GroupId: sg-05808711a101d4950
+            UserId: '238681791102'
+      - FromPort: 3306
+        IpProtocol: tcp
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 3306
+        UserIdGroupPairs:
+          - GroupId: sg-05808711a101d4950
+            UserId: '238681791102'
+    OwnerId: '238681791102'
+    GroupId: sg-08c665747483a4d04
+    IpPermissionsEgress:
+      - FromPort: 80
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 80
+        UserIdGroupPairs: []
+      - FromPort: 53
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 53
+        UserIdGroupPairs: []
+      - FromPort: 443
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 443
+        UserIdGroupPairs: []
+    VpcId: vpc-0cbccbfb66c06b98e
+  - Description: Used in the terraform
+    GroupName: database-sg
+    IpPermissions:
+      - FromPort: 22
+        IpProtocol: tcp
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 22
+        UserIdGroupPairs:
+          - GroupId: sg-006dfe1d2d2c7a8a4
+            UserId: '238681791102'
+      - FromPort: 5431
+        IpProtocol: tcp
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 5432
+        UserIdGroupPairs:
+          - GroupId: sg-068450e4da052f265
+            UserId: '238681791102'
+      - FromPort: 3306
+        IpProtocol: tcp
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 3306
+        UserIdGroupPairs:
+          - GroupId: sg-068450e4da052f265
+            UserId: '238681791102'
+    OwnerId: '238681791102'
+    GroupId: sg-0b4b4b75bbe66ccd8
+    IpPermissionsEgress:
+      - FromPort: 80
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 80
+        UserIdGroupPairs: []
+      - FromPort: 53
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 53
+        UserIdGroupPairs: []
+      - FromPort: 443
+        IpProtocol: tcp
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        ToPort: 443
+        UserIdGroupPairs: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Description: default VPC security group
+    GroupName: default
+    IpPermissions:
+      - IpProtocol: '-1'
+        IpRanges: []
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs:
+          - GroupId: sg-8b76dca1
+            UserId: '238681791102'
+    OwnerId: '238681791102'
+    GroupId: sg-8b76dca1
+    IpPermissionsEgress:
+      - IpProtocol: '-1'
+        IpRanges:
+          - CidrIp: 0.0.0.0/0
+        Ipv6Ranges: []
+        PrefixListIds: []
+        UserIdGroupPairs: []
+    VpcId: vpc-46eaac3e
+routers:
+  - Attachments:
+      - State: available
+        VpcId: vpc-03cc46bfb758fbc25
+    InternetGatewayId: igw-00c7c645e13caf97f
+    OwnerId: '238681791102'
+    Tags: []
+  - Attachments:
+      - State: available
+        VpcId: vpc-0cbccbfb66c06b98e
+    InternetGatewayId: igw-0a3cdb8e9a8168601
+    OwnerId: '238681791102'
+    Tags: []
+  - Attachments:
+      - State: available
+        VpcId: vpc-46eaac3e
+    InternetGatewayId: igw-0b6bc072
+    OwnerId: '238681791102'
+    Tags: []
+route_tables:
+  - Associations:
+      - Main: true
+        RouteTableAssociationId: rtbassoc-3016164d
+        RouteTableId: rtb-c4edcebf
+        AssociationState:
+          State: associated
+    PropagatingVgws: []
+    RouteTableId: rtb-c4edcebf
+    Routes:
+      - DestinationCidrBlock: 172.31.0.0/16
+        GatewayId: local
+        Origin: CreateRouteTable
+        State: active
+      - DestinationCidrBlock: 0.0.0.0/0
+        GatewayId: igw-0b6bc072
+        Origin: CreateRoute
+        State: active
+    Tags: []
+    VpcId: vpc-46eaac3e
+    OwnerId: '238681791102'
+  - Associations:
+      - Main: false
+        RouteTableAssociationId: rtbassoc-0f614c3c8e2b240f1
+        RouteTableId: rtb-074b62202092e0c43
+        SubnetId: subnet-0ee452773dd4e4528
+        AssociationState:
+          State: associated
+    PropagatingVgws: []
+    RouteTableId: rtb-074b62202092e0c43
+    Routes:
+      - DestinationCidrBlock: 10.0.0.0/16
+        GatewayId: local
+        Origin: CreateRouteTable
+        State: active
+      - DestinationCidrBlock: 0.0.0.0/0
+        NatGatewayId: nat-04ae4b5e05ce3fcc8
+        Origin: CreateRoute
+        State: active
+    Tags:
+      - Key: Name
+        Value: Route Table for NAT-ed private subnet
+    VpcId: vpc-03cc46bfb758fbc25
+    OwnerId: '238681791102'
+  - Associations:
+      - Main: true
+        RouteTableAssociationId: rtbassoc-00e76138a8734b080
+        RouteTableId: rtb-01100dce32087fef9
+        AssociationState:
+          State: associated
+    PropagatingVgws: []
+    RouteTableId: rtb-01100dce32087fef9
+    Routes:
+      - DestinationCidrBlock: 10.0.0.0/16
+        GatewayId: local
+        Origin: CreateRouteTable
+        State: active
+    Tags: []
+    VpcId: vpc-03cc46bfb758fbc25
+    OwnerId: '238681791102'
+  - Associations:
+      - Main: true
+        RouteTableAssociationId: rtbassoc-0b41cbe35f5aa0609
+        RouteTableId: rtb-080ec780d2c166d5b
+        AssociationState:
+          State: associated
+    PropagatingVgws: []
+    RouteTableId: rtb-080ec780d2c166d5b
+    Routes:
+      - DestinationCidrBlock: 10.0.0.0/16
+        GatewayId: local
+        Origin: CreateRouteTable
+        State: active
+    Tags: []
+    VpcId: vpc-0cbccbfb66c06b98e
+    OwnerId: '238681791102'
+  - Associations:
+      - Main: false
+        RouteTableAssociationId: rtbassoc-07fe20a78b53f35c1
+        RouteTableId: rtb-056a06a3592e66469
+        SubnetId: subnet-0fa24946bbf60c510
+        AssociationState:
+          State: associated
+    PropagatingVgws: []
+    RouteTableId: rtb-056a06a3592e66469
+    Routes:
+      - DestinationCidrBlock: 10.0.0.0/16
+        GatewayId: local
+        Origin: CreateRouteTable
+        State: active
+      - DestinationCidrBlock: 0.0.0.0/0
+        NatGatewayId: nat-08c2d4eac6525fd88
+        Origin: CreateRoute
+        State: blackhole
+    Tags:
+      - Key: Name
+        Value: Route Table for NAT-ed private subnet
+    VpcId: vpc-0cbccbfb66c06b98e
+    OwnerId: '238681791102'
+  - Associations:
+      - Main: false
+        RouteTableAssociationId: rtbassoc-013da7d69f6db3c42
+        RouteTableId: rtb-0e167fbef16bfd190
+        SubnetId: subnet-0de32518246e024d7
+        AssociationState:
+          State: associated
+    PropagatingVgws: []
+    RouteTableId: rtb-0e167fbef16bfd190
+    Routes:
+      - DestinationCidrBlock: 10.0.0.0/16
+        GatewayId: local
+        Origin: CreateRouteTable
+        State: active
+      - DestinationCidrBlock: 0.0.0.0/0
+        GatewayId: igw-00c7c645e13caf97f
+        Origin: CreateRoute
+        State: active
+    Tags: []
+    VpcId: vpc-03cc46bfb758fbc25
+    OwnerId: '238681791102'
+  - Associations:
+      - Main: false
+        RouteTableAssociationId: rtbassoc-05eb02a69d7f45dcf
+        RouteTableId: rtb-00f9f057f3ebb34ab
+        SubnetId: subnet-02d4b3a680b6c22e7
+        AssociationState:
+          State: associated
+    PropagatingVgws: []
+    RouteTableId: rtb-00f9f057f3ebb34ab
+    Routes:
+      - DestinationCidrBlock: 10.0.0.0/16
+        GatewayId: local
+        Origin: CreateRouteTable
+        State: active
+      - DestinationCidrBlock: 0.0.0.0/0
+        GatewayId: igw-0a3cdb8e9a8168601
+        Origin: CreateRoute
+        State: active
+    Tags: []
+    VpcId: vpc-0cbccbfb66c06b98e
+    OwnerId: '238681791102'
+nat_gateways:
+  - CreateTime: 2022-06-17 00:11:50+00:00
+    NatGatewayAddresses:
+      - AllocationId: eipalloc-05df9447db93a2622
+        NetworkInterfaceId: eni-0b7b7116eefb867de
+        PrivateIp: 10.0.0.112
+        PublicIp: 44.238.240.119
+    NatGatewayId: nat-04ae4b5e05ce3fcc8
+    State: available
+    SubnetId: subnet-0de32518246e024d7
+    VpcId: vpc-03cc46bfb758fbc25
+    Tags: []
+    ConnectivityType: public
+eips:
+  - Association:
+      AllocationId: eipalloc-05df9447db93a2622
+      AssociationId: eipassoc-0d19f97d162df326b
+      IpOwnerId: '238681791102'
+      PublicDnsName: ''
+      PublicIp: 44.238.240.119
+    Attachment:
+      AttachmentId: ela-attach-0ef76b93a319caebf
+      DeleteOnTermination: false
+      DeviceIndex: 1
+      InstanceOwnerId: amazon-aws
+      Status: attached
+    AvailabilityZone: us-west-2a
+    Description: Interface for NAT Gateway nat-04ae4b5e05ce3fcc8
+    Groups: []
+    InterfaceType: nat_gateway
+    Ipv6Addresses: []
+    MacAddress: 06:39:d4:20:bf:3b
+    NetworkInterfaceId: eni-0b7b7116eefb867de
+    OwnerId: '238681791102'
+    PrivateIpAddress: 10.0.0.112
+    PrivateIpAddresses:
+      - Association:
+          AllocationId: eipalloc-05df9447db93a2622
+          AssociationId: eipassoc-0d19f97d162df326b
+          IpOwnerId: '238681791102'
+          PublicDnsName: ''
+          PublicIp: 44.238.240.119
+        Primary: true
+        PrivateIpAddress: 10.0.0.112
+    RequesterId: '159007097412'
+    RequesterManaged: true
+    SourceDestCheck: false
+    Status: in-use
+    SubnetId: subnet-0de32518246e024d7
+    TagSet: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Association:
+      AllocationId: eipalloc-0086d00f1c39ebb11
+      AssociationId: eipassoc-0962013619e8ed852
+      IpOwnerId: '238681791102'
+      PublicDnsName: ''
+      PublicIp: 44.226.104.196
+    Attachment:
+      AttachTime: 2022-06-17 00:14:27+00:00
+      AttachmentId: eni-attach-0eeb1af989c94e348
+      DeleteOnTermination: true
+      DeviceIndex: 0
+      NetworkCardIndex: 0
+      InstanceId: i-024b7fce39cb92513
+      InstanceOwnerId: '238681791102'
+      Status: attached
+    AvailabilityZone: us-west-2a
+    Description: ''
+    Groups:
+      - GroupName: bastion-sg
+        GroupId: sg-006dfe1d2d2c7a8a4
+    InterfaceType: interface
+    Ipv6Addresses: []
+    MacAddress: 06:60:e8:33:8e:45
+    NetworkInterfaceId: eni-0f6c705faab046331
+    OwnerId: '238681791102'
+    PrivateIpAddress: 10.0.0.99
+    PrivateIpAddresses:
+      - Association:
+          AllocationId: eipalloc-0086d00f1c39ebb11
+          AssociationId: eipassoc-0962013619e8ed852
+          IpOwnerId: '238681791102'
+          PublicDnsName: ''
+          PublicIp: 44.226.104.196
+        Primary: true
+        PrivateIpAddress: 10.0.0.99
+    RequesterManaged: false
+    SourceDestCheck: false
+    Status: in-use
+    SubnetId: subnet-0de32518246e024d7
+    TagSet: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Association:
+      AllocationId: eipalloc-0e6c3f983ba41115a
+      AssociationId: eipassoc-0cb9f3cebc559da03
+      IpOwnerId: '238681791102'
+      PublicDnsName: ''
+      PublicIp: 44.229.2.88
+    Attachment:
+      AttachTime: 2022-06-17 00:14:27+00:00
+      AttachmentId: eni-attach-04e775f94443da50f
+      DeleteOnTermination: true
+      DeviceIndex: 0
+      NetworkCardIndex: 0
+      InstanceId: i-0d4668fdda6c02cf2
+      InstanceOwnerId: '238681791102'
+      Status: attached
+    AvailabilityZone: us-west-2a
+    Description: ''
+    Groups:
+      - GroupName: web_server-sg
+        GroupId: sg-068450e4da052f265
+    InterfaceType: interface
+    Ipv6Addresses: []
+    MacAddress: 06:ed:6a:92:f0:67
+    NetworkInterfaceId: eni-012dded71cccd44f0
+    OwnerId: '238681791102'
+    PrivateIpAddress: 10.0.0.45
+    PrivateIpAddresses:
+      - Association:
+          AllocationId: eipalloc-0e6c3f983ba41115a
+          AssociationId: eipassoc-0cb9f3cebc559da03
+          IpOwnerId: '238681791102'
+          PublicDnsName: ''
+          PublicIp: 44.229.2.88
+        Primary: true
+        PrivateIpAddress: 10.0.0.45
+    RequesterManaged: false
+    SourceDestCheck: false
+    Status: in-use
+    SubnetId: subnet-0de32518246e024d7
+    TagSet: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Association:
+      IpOwnerId: amazon
+      PublicDnsName: ''
+      PublicIp: 35.90.46.101
+    Attachment:
+      AttachTime: 2022-06-17 00:14:27+00:00
+      AttachmentId: eni-attach-020fe2720735747bf
+      DeleteOnTermination: true
+      DeviceIndex: 0
+      NetworkCardIndex: 0
+      InstanceId: i-044af76f9cf8439c0
+      InstanceOwnerId: '238681791102'
+      Status: attached
+    AvailabilityZone: us-west-2a
+    Description: ''
+    Groups:
+      - GroupName: database-sg
+        GroupId: sg-0b4b4b75bbe66ccd8
+    InterfaceType: interface
+    Ipv6Addresses: []
+    MacAddress: 06:51:3b:9d:b8:c9
+    NetworkInterfaceId: eni-02525e50227538b43
+    OwnerId: '238681791102'
+    PrivateIpAddress: 10.0.2.239
+    PrivateIpAddresses:
+      - Association:
+          IpOwnerId: amazon
+          PublicDnsName: ''
+          PublicIp: 35.90.46.101
+        Primary: true
+        PrivateIpAddress: 10.0.2.239
+    RequesterManaged: false
+    SourceDestCheck: false
+    Status: in-use
+    SubnetId: subnet-0ee452773dd4e4528
+    TagSet: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Association:
+      AllocationId: eipalloc-010d6e08701603543
+      AssociationId: eipassoc-0a93b1344d236de42
+      IpOwnerId: '238681791102'
+      PublicDnsName: ''
+      PublicIp: 34.215.253.165
+    Attachment:
+      AttachTime: 2022-06-17 00:14:26+00:00
+      AttachmentId: eni-attach-0c7895cab4ce66c3e
+      DeleteOnTermination: true
+      DeviceIndex: 0
+      NetworkCardIndex: 0
+      InstanceId: i-09ac21ef77adb8ab7
+      InstanceOwnerId: '238681791102'
+      Status: attached
+    AvailabilityZone: us-west-2a
+    Description: ''
+    Groups:
+      - GroupName: web_server-sg
+        GroupId: sg-068450e4da052f265
+    InterfaceType: interface
+    Ipv6Addresses: []
+    MacAddress: 06:5a:69:a6:22:a9
+    NetworkInterfaceId: eni-0f68c8dfa82b37eed
+    OwnerId: '238681791102'
+    PrivateIpAddress: 10.0.0.39
+    PrivateIpAddresses:
+      - Association:
+          AllocationId: eipalloc-010d6e08701603543
+          AssociationId: eipassoc-0a93b1344d236de42
+          IpOwnerId: '238681791102'
+          PublicDnsName: ''
+          PublicIp: 34.215.253.165
+        Primary: true
+        PrivateIpAddress: 10.0.0.39
+    RequesterManaged: false
+    SourceDestCheck: false
+    Status: in-use
+    SubnetId: subnet-0de32518246e024d7
+    TagSet: []
+    VpcId: vpc-03cc46bfb758fbc25
+  - Association:
+      AllocationId: eipalloc-04bdc2e2838c7df3f
+      AssociationId: eipassoc-022874d7bb93ae347
+      IpOwnerId: '238681791102'
+      PublicDnsName: ''
+      PublicIp: 35.82.212.189
+    Attachment:
+      AttachTime: 2022-06-17 00:14:27+00:00
+      AttachmentId: eni-attach-03ac8a5c089a327ef
+      DeleteOnTermination: true
+      DeviceIndex: 0
+      NetworkCardIndex: 0
+      InstanceId: i-088d95dfa256ffede
+      InstanceOwnerId: '238681791102'
+      Status: attached
+    AvailabilityZone: us-west-2a
+    Description: ''
+    Groups:
+      - GroupName: web_server-sg
+        GroupId: sg-068450e4da052f265
+    InterfaceType: interface
+    Ipv6Addresses: []
+    MacAddress: 06:f1:ca:83:6b:63
+    NetworkInterfaceId: eni-0b680ae46b53f67eb
+    OwnerId: '238681791102'
+    PrivateIpAddress: 10.0.0.83
+    PrivateIpAddresses:
+      - Association:
+          AllocationId: eipalloc-04bdc2e2838c7df3f
+          AssociationId: eipassoc-022874d7bb93ae347
+          IpOwnerId: '238681791102'
+          PublicDnsName: ''
+          PublicIp: 35.82.212.189
+        Primary: true
+        PrivateIpAddress: 10.0.0.83
+    RequesterManaged: false
+    SourceDestCheck: false
+    Status: in-use
+    SubnetId: subnet-0de32518246e024d7
+    TagSet: []
+    VpcId: vpc-03cc46bfb758fbc25
+servers:
+  - Groups: []
+    Instances:
+      - AmiLaunchIndex: 0
+        ImageId: ami-0ca5c3bd5a268e7db
+        InstanceId: i-039aa408b53eb7898
+        InstanceType: t2.micro
+        KeyName: mykey
+        LaunchTime: 2021-03-08 12:31:25+00:00
+        Monitoring:
+          State: disabled
+        Placement:
+          AvailabilityZone: us-west-2a
+          GroupName: ''
+          Tenancy: default
+        PrivateDnsName: ''
+        ProductCodes: []
+        PublicDnsName: ''
+        State:
+          Code: 48
+          Name: terminated
+        StateTransitionReason: User initiated (2022-04-12 09:51:48 GMT)
+        Architecture: x86_64
+        BlockDeviceMappings: []
+        ClientToken: D2EFD5DB-ACD5-4C8F-83C9-A40403F62A98
+        EbsOptimized: false
+        EnaSupport: true
+        Hypervisor: xen
+        NetworkInterfaces: []
+        RootDeviceName: /dev/sda1
+        RootDeviceType: ebs
+        SecurityGroups: []
+        StateReason:
+          Code: Client.UserInitiatedShutdown
+          Message: 'Client.UserInitiatedShutdown: User initiated shutdown'
+        Tags:
+          - Key: Name
+            Value: database-0
+          - Key: ManagedBy
+            Value: Infracode
+        VirtualizationType: hvm
+        CpuOptions:
+          CoreCount: 1
+          ThreadsPerCore: 1
+        CapacityReservationSpecification:
+          CapacityReservationPreference: open
+        HibernationOptions:
+          Configured: false
+        MetadataOptions:
+          State: pending
+          HttpTokens: optional
+          HttpPutResponseHopLimit: 1
+          HttpEndpoint: enabled
+          HttpProtocolIpv6: disabled
+          InstanceMetadataTags: disabled
+        EnclaveOptions:
+          Enabled: false
+        PlatformDetails: Linux/UNIX
+        UsageOperation: RunInstances
+        UsageOperationUpdateTime: 2021-03-08 12:31:25+00:00
+        MaintenanceOptions:
+          AutoRecovery: default
+    OwnerId: '238681791102'
+    ReservationId: r-0185edac273a306bb
+  - Groups: []
+    Instances:
+      - AmiLaunchIndex: 0
+        ImageId: ami-0ca5c3bd5a268e7db
+        InstanceId: i-0bf217af6f5baad32
+        InstanceType: t2.micro
+        KeyName: mykey
+        LaunchTime: 2021-03-08 12:30:43+00:00
+        Monitoring:
+          State: disabled
+        Placement:
+          AvailabilityZone: us-west-2a
+          GroupName: ''
+          Tenancy: default
+        PrivateDnsName: ''
+        ProductCodes: []
+        PublicDnsName: ''
+        State:
+          Code: 48
+          Name: terminated
+        StateTransitionReason: User initiated (2022-04-12 09:51:48 GMT)
+        Architecture: x86_64
+        BlockDeviceMappings: []
+        ClientToken: A87FCEC1-66A6-4369-8FB4-E73B6AB30340
+        EbsOptimized: false
+        EnaSupport: true
+        Hypervisor: xen
+        NetworkInterfaces: []
+        RootDeviceName: /dev/sda1
+        RootDeviceType: ebs
+        SecurityGroups: []
+        StateReason:
+          Code: Client.UserInitiatedShutdown
+          Message: 'Client.UserInitiatedShutdown: User initiated shutdown'
+        Tags:
+          - Key: Server Role
+            Value: Bastion-server
+          - Key: ManagedBy
+            Value: Infracode
+          - Key: OS
+            Value: Ubuntu-20
+          - Key: Name
+            Value: bastion-0
+        VirtualizationType: hvm
+        CpuOptions:
+          CoreCount: 1
+          ThreadsPerCore: 1
+        CapacityReservationSpecification:
+          CapacityReservationPreference: open
+        HibernationOptions:
+          Configured: false
+        MetadataOptions:
+          State: pending
+          HttpTokens: optional
+          HttpPutResponseHopLimit: 1
+          HttpEndpoint: enabled
+          HttpProtocolIpv6: disabled
+          InstanceMetadataTags: disabled
+        EnclaveOptions:
+          Enabled: false
+        PlatformDetails: Linux/UNIX
+        UsageOperation: RunInstances
+        UsageOperationUpdateTime: 2021-03-08 12:30:43+00:00
+        MaintenanceOptions:
+          AutoRecovery: default
+    OwnerId: '238681791102'
+    ReservationId: r-08986b517467cf9ea
+  - Groups: []
+    Instances:
+      - AmiLaunchIndex: 0
+        ImageId: ami-00d27ac4138d503ce
+        InstanceId: i-044af76f9cf8439c0
+        InstanceType: t2.micro
+        KeyName: mykey2
+        LaunchTime: 2022-06-17 00:14:27+00:00
+        Monitoring:
+          State: disabled
+        Placement:
+          AvailabilityZone: us-west-2a
+          GroupName: ''
+          Tenancy: default
+        PrivateDnsName: ip-10-0-2-239.us-west-2.compute.internal
+        PrivateIpAddress: 10.0.2.239
+        ProductCodes: []
+        PublicDnsName: ''
+        PublicIpAddress: 35.90.46.101
+        State:
+          Code: 16
+          Name: running
+        StateTransitionReason: ''
+        SubnetId: subnet-0ee452773dd4e4528
+        VpcId: vpc-03cc46bfb758fbc25
+        Architecture: x86_64
+        BlockDeviceMappings:
+          - DeviceName: /dev/sda1
+            Ebs:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              DeleteOnTermination: true
+              Status: attached
+              VolumeId: vol-0003febd2b1c70592
+        ClientToken: D4EF4F48-C0F6-450B-864F-AFF0AB0492B0
+        EbsOptimized: false
+        EnaSupport: true
+        Hypervisor: xen
+        NetworkInterfaces:
+          - Association:
+              IpOwnerId: amazon
+              PublicDnsName: ''
+              PublicIp: 35.90.46.101
+            Attachment:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              AttachmentId: eni-attach-020fe2720735747bf
+              DeleteOnTermination: true
+              DeviceIndex: 0
+              Status: attached
+              NetworkCardIndex: 0
+            Description: ''
+            Groups:
+              - GroupName: database-sg
+                GroupId: sg-0b4b4b75bbe66ccd8
+            Ipv6Addresses: []
+            MacAddress: 06:51:3b:9d:b8:c9
+            NetworkInterfaceId: eni-02525e50227538b43
+            OwnerId: '238681791102'
+            PrivateIpAddress: 10.0.2.239
+            PrivateIpAddresses:
+              - Association:
+                  IpOwnerId: amazon
+                  PublicDnsName: ''
+                  PublicIp: 35.90.46.101
+                Primary: true
+                PrivateIpAddress: 10.0.2.239
+            SourceDestCheck: false
+            Status: in-use
+            SubnetId: subnet-0ee452773dd4e4528
+            VpcId: vpc-03cc46bfb758fbc25
+            InterfaceType: interface
+        RootDeviceName: /dev/sda1
+        RootDeviceType: ebs
+        SecurityGroups:
+          - GroupName: database-sg
+            GroupId: sg-0b4b4b75bbe66ccd8
+        SourceDestCheck: false
+        Tags:
+          - Key: Name
+            Value: database-0
+          - Key: ManagedBy
+            Value: Infracode
+        VirtualizationType: hvm
+        CpuOptions:
+          CoreCount: 1
+          ThreadsPerCore: 1
+        CapacityReservationSpecification:
+          CapacityReservationPreference: open
+        HibernationOptions:
+          Configured: false
+        MetadataOptions:
+          State: applied
+          HttpTokens: optional
+          HttpPutResponseHopLimit: 1
+          HttpEndpoint: enabled
+          HttpProtocolIpv6: disabled
+          InstanceMetadataTags: disabled
+        EnclaveOptions:
+          Enabled: false
+        PlatformDetails: Linux/UNIX
+        UsageOperation: RunInstances
+        UsageOperationUpdateTime: 2022-06-17 00:14:27+00:00
+        PrivateDnsNameOptions:
+          HostnameType: ip-name
+          EnableResourceNameDnsARecord: false
+          EnableResourceNameDnsAAAARecord: false
+        MaintenanceOptions:
+          AutoRecovery: default
+    OwnerId: '238681791102'
+    ReservationId: r-01022fe09b217568a
+  - Groups: []
+    Instances:
+      - AmiLaunchIndex: 0
+        ImageId: ami-00d27ac4138d503ce
+        InstanceId: i-024b7fce39cb92513
+        InstanceType: t2.micro
+        KeyName: mykey2
+        LaunchTime: 2022-06-17 00:14:27+00:00
+        Monitoring:
+          State: disabled
+        Placement:
+          AvailabilityZone: us-west-2a
+          GroupName: ''
+          Tenancy: default
+        PrivateDnsName: ip-10-0-0-99.us-west-2.compute.internal
+        PrivateIpAddress: 10.0.0.99
+        ProductCodes: []
+        PublicDnsName: ''
+        PublicIpAddress: 44.226.104.196
+        State:
+          Code: 16
+          Name: running
+        StateTransitionReason: ''
+        SubnetId: subnet-0de32518246e024d7
+        VpcId: vpc-03cc46bfb758fbc25
+        Architecture: x86_64
+        BlockDeviceMappings:
+          - DeviceName: /dev/sda1
+            Ebs:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              DeleteOnTermination: true
+              Status: attached
+              VolumeId: vol-0393b1beb3e102705
+        ClientToken: 508486DF-41E8-42BC-9DA9-A5CC0AE018C2
+        EbsOptimized: false
+        EnaSupport: true
+        Hypervisor: xen
+        NetworkInterfaces:
+          - Association:
+              IpOwnerId: '238681791102'
+              PublicDnsName: ''
+              PublicIp: 44.226.104.196
+            Attachment:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              AttachmentId: eni-attach-0eeb1af989c94e348
+              DeleteOnTermination: true
+              DeviceIndex: 0
+              Status: attached
+              NetworkCardIndex: 0
+            Description: ''
+            Groups:
+              - GroupName: bastion-sg
+                GroupId: sg-006dfe1d2d2c7a8a4
+            Ipv6Addresses: []
+            MacAddress: 06:60:e8:33:8e:45
+            NetworkInterfaceId: eni-0f6c705faab046331
+            OwnerId: '238681791102'
+            PrivateIpAddress: 10.0.0.99
+            PrivateIpAddresses:
+              - Association:
+                  IpOwnerId: '238681791102'
+                  PublicDnsName: ''
+                  PublicIp: 44.226.104.196
+                Primary: true
+                PrivateIpAddress: 10.0.0.99
+            SourceDestCheck: false
+            Status: in-use
+            SubnetId: subnet-0de32518246e024d7
+            VpcId: vpc-03cc46bfb758fbc25
+            InterfaceType: interface
+        RootDeviceName: /dev/sda1
+        RootDeviceType: ebs
+        SecurityGroups:
+          - GroupName: bastion-sg
+            GroupId: sg-006dfe1d2d2c7a8a4
+        SourceDestCheck: false
+        Tags:
+          - Key: Server Role
+            Value: Bastion-server
+          - Key: ManagedBy
+            Value: Infracode
+          - Key: Name
+            Value: bastion-0
+          - Key: OS
+            Value: Ubuntu-20
+        VirtualizationType: hvm
+        CpuOptions:
+          CoreCount: 1
+          ThreadsPerCore: 1
+        CapacityReservationSpecification:
+          CapacityReservationPreference: open
+        HibernationOptions:
+          Configured: false
+        MetadataOptions:
+          State: applied
+          HttpTokens: optional
+          HttpPutResponseHopLimit: 1
+          HttpEndpoint: enabled
+          HttpProtocolIpv6: disabled
+          InstanceMetadataTags: disabled
+        EnclaveOptions:
+          Enabled: false
+        PlatformDetails: Linux/UNIX
+        UsageOperation: RunInstances
+        UsageOperationUpdateTime: 2022-06-17 00:14:27+00:00
+        PrivateDnsNameOptions:
+          HostnameType: ip-name
+          EnableResourceNameDnsARecord: false
+          EnableResourceNameDnsAAAARecord: false
+        MaintenanceOptions:
+          AutoRecovery: default
+    OwnerId: '238681791102'
+    ReservationId: r-031dc03d1c84204cb
+  - Groups: []
+    Instances:
+      - AmiLaunchIndex: 0
+        ImageId: ami-00d27ac4138d503ce
+        InstanceId: i-0d4668fdda6c02cf2
+        InstanceType: t2.micro
+        KeyName: mykey2
+        LaunchTime: 2022-06-17 00:14:27+00:00
+        Monitoring:
+          State: disabled
+        Placement:
+          AvailabilityZone: us-west-2a
+          GroupName: ''
+          Tenancy: default
+        PrivateDnsName: ip-10-0-0-45.us-west-2.compute.internal
+        PrivateIpAddress: 10.0.0.45
+        ProductCodes: []
+        PublicDnsName: ''
+        PublicIpAddress: 44.229.2.88
+        State:
+          Code: 16
+          Name: running
+        StateTransitionReason: ''
+        SubnetId: subnet-0de32518246e024d7
+        VpcId: vpc-03cc46bfb758fbc25
+        Architecture: x86_64
+        BlockDeviceMappings:
+          - DeviceName: /dev/sda1
+            Ebs:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              DeleteOnTermination: true
+              Status: attached
+              VolumeId: vol-084f1f82ceeed8902
+        ClientToken: 8105682A-6FFA-4565-A56D-95356EBAF8B6
+        EbsOptimized: false
+        EnaSupport: true
+        Hypervisor: xen
+        NetworkInterfaces:
+          - Association:
+              IpOwnerId: '238681791102'
+              PublicDnsName: ''
+              PublicIp: 44.229.2.88
+            Attachment:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              AttachmentId: eni-attach-04e775f94443da50f
+              DeleteOnTermination: true
+              DeviceIndex: 0
+              Status: attached
+              NetworkCardIndex: 0
+            Description: ''
+            Groups:
+              - GroupName: web_server-sg
+                GroupId: sg-068450e4da052f265
+            Ipv6Addresses: []
+            MacAddress: 06:ed:6a:92:f0:67
+            NetworkInterfaceId: eni-012dded71cccd44f0
+            OwnerId: '238681791102'
+            PrivateIpAddress: 10.0.0.45
+            PrivateIpAddresses:
+              - Association:
+                  IpOwnerId: '238681791102'
+                  PublicDnsName: ''
+                  PublicIp: 44.229.2.88
+                Primary: true
+                PrivateIpAddress: 10.0.0.45
+            SourceDestCheck: false
+            Status: in-use
+            SubnetId: subnet-0de32518246e024d7
+            VpcId: vpc-03cc46bfb758fbc25
+            InterfaceType: interface
+        RootDeviceName: /dev/sda1
+        RootDeviceType: ebs
+        SecurityGroups:
+          - GroupName: web_server-sg
+            GroupId: sg-068450e4da052f265
+        SourceDestCheck: false
+        Tags:
+          - Key: Name
+            Value: web_server-1
+          - Key: Server Role
+            Value: Web-server
+          - Key: ManagedBy
+            Value: Infracode
+          - Key: OS
+            Value: Ubuntu-20
+        VirtualizationType: hvm
+        CpuOptions:
+          CoreCount: 1
+          ThreadsPerCore: 1
+        CapacityReservationSpecification:
+          CapacityReservationPreference: open
+        HibernationOptions:
+          Configured: false
+        MetadataOptions:
+          State: applied
+          HttpTokens: optional
+          HttpPutResponseHopLimit: 1
+          HttpEndpoint: enabled
+          HttpProtocolIpv6: disabled
+          InstanceMetadataTags: disabled
+        EnclaveOptions:
+          Enabled: false
+        PlatformDetails: Linux/UNIX
+        UsageOperation: RunInstances
+        UsageOperationUpdateTime: 2022-06-17 00:14:27+00:00
+        PrivateDnsNameOptions:
+          HostnameType: ip-name
+          EnableResourceNameDnsARecord: false
+          EnableResourceNameDnsAAAARecord: false
+        MaintenanceOptions:
+          AutoRecovery: default
+    OwnerId: '238681791102'
+    ReservationId: r-0c8e1fde7588a04bf
+  - Groups: []
+    Instances:
+      - AmiLaunchIndex: 0
+        ImageId: ami-00d27ac4138d503ce
+        InstanceId: i-088d95dfa256ffede
+        InstanceType: t2.micro
+        KeyName: mykey2
+        LaunchTime: 2022-06-17 00:14:27+00:00
+        Monitoring:
+          State: disabled
+        Placement:
+          AvailabilityZone: us-west-2a
+          GroupName: ''
+          Tenancy: default
+        PrivateDnsName: ip-10-0-0-83.us-west-2.compute.internal
+        PrivateIpAddress: 10.0.0.83
+        ProductCodes: []
+        PublicDnsName: ''
+        PublicIpAddress: 35.82.212.189
+        State:
+          Code: 16
+          Name: running
+        StateTransitionReason: ''
+        SubnetId: subnet-0de32518246e024d7
+        VpcId: vpc-03cc46bfb758fbc25
+        Architecture: x86_64
+        BlockDeviceMappings:
+          - DeviceName: /dev/sda1
+            Ebs:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              DeleteOnTermination: true
+              Status: attached
+              VolumeId: vol-03ef8418b6bcda536
+        ClientToken: ECA1B768-06DE-4EB5-A0F1-F60CA453384B
+        EbsOptimized: false
+        EnaSupport: true
+        Hypervisor: xen
+        NetworkInterfaces:
+          - Association:
+              IpOwnerId: '238681791102'
+              PublicDnsName: ''
+              PublicIp: 35.82.212.189
+            Attachment:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              AttachmentId: eni-attach-03ac8a5c089a327ef
+              DeleteOnTermination: true
+              DeviceIndex: 0
+              Status: attached
+              NetworkCardIndex: 0
+            Description: ''
+            Groups:
+              - GroupName: web_server-sg
+                GroupId: sg-068450e4da052f265
+            Ipv6Addresses: []
+            MacAddress: 06:f1:ca:83:6b:63
+            NetworkInterfaceId: eni-0b680ae46b53f67eb
+            OwnerId: '238681791102'
+            PrivateIpAddress: 10.0.0.83
+            PrivateIpAddresses:
+              - Association:
+                  IpOwnerId: '238681791102'
+                  PublicDnsName: ''
+                  PublicIp: 35.82.212.189
+                Primary: true
+                PrivateIpAddress: 10.0.0.83
+            SourceDestCheck: false
+            Status: in-use
+            SubnetId: subnet-0de32518246e024d7
+            VpcId: vpc-03cc46bfb758fbc25
+            InterfaceType: interface
+        RootDeviceName: /dev/sda1
+        RootDeviceType: ebs
+        SecurityGroups:
+          - GroupName: web_server-sg
+            GroupId: sg-068450e4da052f265
+        SourceDestCheck: false
+        Tags:
+          - Key: Server Role
+            Value: Web-server
+          - Key: Name
+            Value: web_server-2
+          - Key: ManagedBy
+            Value: Infracode
+          - Key: OS
+            Value: Ubuntu-20
+        VirtualizationType: hvm
+        CpuOptions:
+          CoreCount: 1
+          ThreadsPerCore: 1
+        CapacityReservationSpecification:
+          CapacityReservationPreference: open
+        HibernationOptions:
+          Configured: false
+        MetadataOptions:
+          State: applied
+          HttpTokens: optional
+          HttpPutResponseHopLimit: 1
+          HttpEndpoint: enabled
+          HttpProtocolIpv6: disabled
+          InstanceMetadataTags: disabled
+        EnclaveOptions:
+          Enabled: false
+        PlatformDetails: Linux/UNIX
+        UsageOperation: RunInstances
+        UsageOperationUpdateTime: 2022-06-17 00:14:27+00:00
+        PrivateDnsNameOptions:
+          HostnameType: ip-name
+          EnableResourceNameDnsARecord: false
+          EnableResourceNameDnsAAAARecord: false
+        MaintenanceOptions:
+          AutoRecovery: default
+    OwnerId: '238681791102'
+    ReservationId: r-0eff2e5d28ad360e2
+  - Groups: []
+    Instances:
+      - AmiLaunchIndex: 0
+        ImageId: ami-00d27ac4138d503ce
+        InstanceId: i-09ac21ef77adb8ab7
+        InstanceType: t2.micro
+        KeyName: mykey2
+        LaunchTime: 2022-06-17 00:14:26+00:00
+        Monitoring:
+          State: disabled
+        Placement:
+          AvailabilityZone: us-west-2a
+          GroupName: ''
+          Tenancy: default
+        PrivateDnsName: ip-10-0-0-39.us-west-2.compute.internal
+        PrivateIpAddress: 10.0.0.39
+        ProductCodes: []
+        PublicDnsName: ''
+        PublicIpAddress: 34.215.253.165
+        State:
+          Code: 16
+          Name: running
+        StateTransitionReason: ''
+        SubnetId: subnet-0de32518246e024d7
+        VpcId: vpc-03cc46bfb758fbc25
+        Architecture: x86_64
+        BlockDeviceMappings:
+          - DeviceName: /dev/sda1
+            Ebs:
+              AttachTime: 2022-06-17 00:14:27+00:00
+              DeleteOnTermination: true
+              Status: attached
+              VolumeId: vol-098e414dd1e35799b
+        ClientToken: 79F80208-2905-4AAF-B3C2-0BE3E43B87F5
+        EbsOptimized: false
+        EnaSupport: true
+        Hypervisor: xen
+        NetworkInterfaces:
+          - Association:
+              IpOwnerId: '238681791102'
+              PublicDnsName: ''
+              PublicIp: 34.215.253.165
+            Attachment:
+              AttachTime: 2022-06-17 00:14:26+00:00
+              AttachmentId: eni-attach-0c7895cab4ce66c3e
+              DeleteOnTermination: true
+              DeviceIndex: 0
+              Status: attached
+              NetworkCardIndex: 0
+            Description: ''
+            Groups:
+              - GroupName: web_server-sg
+                GroupId: sg-068450e4da052f265
+            Ipv6Addresses: []
+            MacAddress: 06:5a:69:a6:22:a9
+            NetworkInterfaceId: eni-0f68c8dfa82b37eed
+            OwnerId: '238681791102'
+            PrivateIpAddress: 10.0.0.39
+            PrivateIpAddresses:
+              - Association:
+                  IpOwnerId: '238681791102'
+                  PublicDnsName: ''
+                  PublicIp: 34.215.253.165
+                Primary: true
+                PrivateIpAddress: 10.0.0.39
+            SourceDestCheck: false
+            Status: in-use
+            SubnetId: subnet-0de32518246e024d7
+            VpcId: vpc-03cc46bfb758fbc25
+            InterfaceType: interface
+        RootDeviceName: /dev/sda1
+        RootDeviceType: ebs
+        SecurityGroups:
+          - GroupName: web_server-sg
+            GroupId: sg-068450e4da052f265
+        SourceDestCheck: false
+        Tags:
+          - Key: Name
+            Value: web_server-0
+          - Key: Server Role
+            Value: Web-server
+          - Key: ManagedBy
+            Value: Infracode
+          - Key: OS
+            Value: Ubuntu-20
+        VirtualizationType: hvm
+        CpuOptions:
+          CoreCount: 1
+          ThreadsPerCore: 1
+        CapacityReservationSpecification:
+          CapacityReservationPreference: open
+        HibernationOptions:
+          Configured: false
+        MetadataOptions:
+          State: applied
+          HttpTokens: optional
+          HttpPutResponseHopLimit: 1
+          HttpEndpoint: enabled
+          HttpProtocolIpv6: disabled
+          InstanceMetadataTags: disabled
+        EnclaveOptions:
+          Enabled: false
+        PlatformDetails: Linux/UNIX
+        UsageOperation: RunInstances
+        UsageOperationUpdateTime: 2022-06-17 00:14:26+00:00
+        PrivateDnsNameOptions:
+          HostnameType: ip-name
+          EnableResourceNameDnsARecord: false
+          EnableResourceNameDnsAAAARecord: false
+        MaintenanceOptions:
+          AutoRecovery: default
+    OwnerId: '238681791102'
+    ReservationId: r-0f7ee6f08187a6c86

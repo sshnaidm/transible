@@ -7,7 +7,7 @@ class TestOSAnsible:
 
     @pytest.fixture(autouse=True)
     def setup_class(self):
-        with open("test_data/all_data.yml") as f:
+        with open("test_data/os_data.yml") as f:
             self.data = yaml.safe_load(f)
         self.data['cloud'] = "test-cloud"
         self.o = OpenstackCalculation(self.data)
