@@ -6,7 +6,9 @@ import openstack
 
 from transible.plugins.os_ansible import config as conf
 from transible.plugins.os_ansible import const
-from transible.plugins.os_ansible.common import value, optimize, write_yaml, read_yaml
+from transible.plugins.os_ansible.common import value, write_yaml
+from transible.utils import optimize
+from transible.utils import read_yaml
 
 
 class OpenstackAnsible:
@@ -386,7 +388,7 @@ class OpenstackCalculation:
             s['cloud'] = self.data['cloud']
             s['name'] = secgr['name']
             project = ''
-            if self.data['projects']:
+            if self.data.get('projects'):
                 project_ids = {i['id']: i for i in self.data['projects']}
                 if secgr.get('project_id'):
                     project = project_ids[secgr['project_id']]['name']

@@ -18,6 +18,5 @@ class TestAWSAnsible:
         [(True, True), (True, False), (False, False)],
         ids=["optimize_and_vars_file", "optimize_no_vars_file", "no_optimize"]
     )
-    def test_passed(self, force_optimize, vars_file):
-        force_optimize, vars_file
-        pass
+    def test_create_servers(self, force_optimize, vars_file):
+        self.a.create_servers(force_optimize=force_optimize, vars_file=vars_file)
