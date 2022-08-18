@@ -74,8 +74,7 @@ class AmazonAnsible:
 
             # const.FILE_IMAGES: ('storage', self.aws_calc.create_images),
             # const.FILE_VOLUMES: ('storage', self.aws_calc.create_volumes),
-            # const.FILE_FLAVORS: ('compute', self.aws_calc.create_flavors),
-            # const.FILE_KEYPAIRS: ('compute', self.aws_calc.create_keypairs),
+            const.FILE_KEYPAIRS: ('compute', self.aws_calc.create_keypairs),
             const.FILE_SERVERS: ('compute', self.aws_calc.create_servers),
             # const.FILE_PROJECTS: ('identity', self.aws_calc.create_projects),
             # const.FILE_DOMAINS: ('identity', self.aws_calc.create_domains),
@@ -113,6 +112,30 @@ class AmazonAnsibleCalculation:
         self.debug = debug
         self.data = data
 
+    def create_dhcpopts(self, force_optimize=conf.VARS_OPT_DHCPOPTS,
+                        vars_file=True):
+        dopts = []
+        pre_optimized = []
+        for dhcp in self.data['dhcpopts']:
+            d = {'state': 'present'}
+            d['dhcp_options_id'] = dhcp['DhcpOptionsId']
+            if dhcp.get('Tags'):
+                d['tags'] = {t['Key']: t['Value'] for t in dhcp['Tags']
+                             if not t['Key'].startswith('aws:')}
+            key_pair = {'amazon.aws.ec2_vpc_dhcp_option': d}
+            if force_optimize:
+                pre_optimized.append(key_pair)
+            else:
+                dopts.append(key_pair)
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                use_vars=vars_file,
+                var_name="dhcpopts")
+            if optimized:
+                dopts.append(optimized)
+        return dopts
+
     def create_vpcs(self, force_optimize=conf.VARS_OPT_NETWORKS,
                     vars_file=True):
         vpcs = []
@@ -125,7 +148,8 @@ class AmazonAnsibleCalculation:
             if vpc['IsDefault']:
                 n['name'] = vpc['VpcId']
             if 'Tags' in vpc:
-                n['tags'] = {t['Key']: t['Value'] for t in vpc['Tags']}
+                n['tags'] = {t['Key']: t['Value'] for t in vpc['Tags']
+                             if not t['Key'].startswith('aws:')}
                 n['name'] = n['tags']['Name']
             if 'InstanceTenancy' in vpc:
                 n['tenancy'] = vpc['InstanceTenancy']
@@ -166,7 +190,8 @@ class AmazonAnsibleCalculation:
             if sub['MapPublicIpOnLaunch']:
                 s['map_public'] = sub['MapPublicIpOnLaunch']
             if 'Tags' in sub:
-                s['tags'] = {t['Key']: t['Value'] for t in sub['Tags']}
+                s['tags'] = {t['Key']: t['Value'] for t in sub['Tags']
+                             if not t['Key'].startswith('aws:')}
             sub_net = {'amazon.aws.ec2_vpc_subnet': s}
             if force_optimize:
                 pre_optimized.append(sub_net)
@@ -191,7 +216,8 @@ class AmazonAnsibleCalculation:
             sg['description'] = secgr['Description']
             sg['vpc_id'] = secgr['VpcId']
             if 'Tags' in secgr:
-                sg['tags'] = {t['Key']: t['Value'] for t in secgr['Tags']}
+                sg['tags'] = {t['Key']: t['Value'] for t in secgr['Tags']
+                              if not t['Key'].startswith('aws:')}
             rules = []
             for rule in secgr['IpPermissions']:
                 r = {}
@@ -243,7 +269,8 @@ class AmazonAnsibleCalculation:
             else:  # amazon collection requires vpc_id for router
                 continue
             if 'Tags' in rt:
-                r['tags'] = {t['Key']: t['Value'] for t in rt['Tags']}
+                r['tags'] = {t['Key']: t['Value'] for t in rt['Tags']
+                             if not t['Key'].startswith('aws:')}
             rt_net = {'amazon.aws.ec2_vpc_igw': r}
             if force_optimize:
                 pre_optimized.append(rt_net)
@@ -267,7 +294,8 @@ class AmazonAnsibleCalculation:
             n['subnet_id'] = ng['SubnetId']
             n['if_exist_do_not_create'] = True
             if 'Tags' in ng:
-                n['tags'] = {t['Key']: t['Value'] for t in ng['Tags']}
+                n['tags'] = {t['Key']: t['Value'] for t in ng['Tags']
+                             if not t['Key'].startswith('aws:')}
             n['allocation_id'] = ng['NatGatewayAddresses'][0]['AllocationId']
             ng_net = {'amazon.aws.ec2_vpc_nat_gateway': n}
             if force_optimize:
@@ -293,7 +321,8 @@ class AmazonAnsibleCalculation:
             r['lookup'] = 'id'
             r['vpc_id'] = ro['VpcId']
             if ro.get('Tags'):
-                r['tags'] = {t['Key']: t['Value'] for t in ro['Tags']}
+                r['tags'] = {t['Key']: t['Value'] for t in ro['Tags']
+                             if not t['Key'].startswith('aws:')}
             r['routes'] = []
             for route in ro['Routes']:
                 rt = {}
@@ -323,6 +352,30 @@ class AmazonAnsibleCalculation:
                 route_tbs.append(optimized)
         return route_tbs
 
+    def create_keypairs(self, force_optimize=conf.VARS_OPT_KEYPAIRS,
+                        vars_file=True):
+        keys = []
+        pre_optimized = []
+        for key in self.data['keypairs']:
+            k = {'state': 'present'}
+            k['name'] = key['KeyName']
+            if key.get('Tags'):
+                k['tags'] = {t['Key']: t['Value'] for t in key['Tags']
+                             if not t['Key'].startswith('aws:')}
+            key_pair = {'amazon.aws.ec2_key': k}
+            if force_optimize:
+                pre_optimized.append(key_pair)
+            else:
+                keys.append(key_pair)
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                use_vars=vars_file,
+                var_name="keypairs")
+            if optimized:
+                keys.append(optimized)
+        return keys
+
     def create_servers(self, force_optimize=conf.VARS_OPT_SERVERS,
                        vars_file=True):
 
@@ -334,7 +387,6 @@ class AmazonAnsibleCalculation:
     #     else:
     #         volumes_dict = {}
     #         images_dict = {}
-    #     flavors_names = {i['id']: i['name'] for i in self.data['flavors']}
 
         for ser in self.data['servers']:
 
@@ -343,7 +395,8 @@ class AmazonAnsibleCalculation:
                 continue
             s = {'state': inst['State']['Name']}
             s['instance_type'] = inst['InstanceType']
-            s['tags'] = {t['Key']: t['Value'] for t in inst['Tags']}
+            s['tags'] = {t['Key']: t['Value'] for t in inst['Tags']
+                         if not t['Key'].startswith('aws:')}
             s['image_id'] = inst['ImageId']
             s['security_groups'] = [sg['GroupName'] for sg in inst['SecurityGroups']]
             s['vpc_subnet_id'] = inst['SubnetId']
@@ -487,15 +540,17 @@ class AmazonInfo:
                              self.ec2.describe_nat_gateways, 'NatGateways', const.FILE_NAT_GWS),
             'eips': (conf.DUMP_NETWORKS,
                      self.ec2.describe_network_interfaces, 'NetworkInterfaces', const.FILE_EIPS),
+            'dhcpopts': (conf.DUMP_NETWORKS,
+                         self.ec2.describe_dhcp_options, 'DhcpOptions', const.FILE_DHCPS),
             # 'ports': (conf.DUMP_NETWORKS, conn.network.ports, const.FILE_PORTS),
             # 'images': (conf.DUMP_STORAGE, conn.image.images, const.FILE_IMAGES),
             # 'volumes': (conf.DUMP_STORAGE, conn.volume.volumes, const.FILE_VOLUMES),
             # # 'volumes': (conf.DUMP_STORAGE, conn.block_storage.volumes, const.FILE_VOLUMES),
             # # 'floating_ips': (conf.DUMP_NETWORKS, conn.network.floating_ips, const.FILE_FIPS),
-            # 'keypairs': (conf.DUMP_SERVERS, conn.compute.keypairs, const.FILE_KEYPAIRS),
+            'keypairs': (conf.DUMP_SERVERS,
+                         self.ec2.describe_key_pairs, 'KeyPairs', const.FILE_KEYPAIRS),
             'servers': (conf.DUMP_SERVERS,
                         self.ec2.describe_instances, 'Reservations', const.FILE_SERVERS),
-            # 'flavors': (conf.DUMP_SERVERS, conn.compute.flavors, const.FILE_FLAVORS),
             # 'users': (conf.DUMP_IDENTITY, conn.identity.users, const.FILE_FLAVORS),
             # 'projects': (conf.DUMP_IDENTITY, conn.identity.projects, const.FILE_PROJECTS),
             # 'domains': (conf.DUMP_IDENTITY, conn.identity.domains, const.FILE_DOMAINS),
