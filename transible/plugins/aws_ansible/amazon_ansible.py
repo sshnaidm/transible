@@ -71,14 +71,8 @@ class AmazonAnsible:
             const.FILE_ROUTERS: ('networks', self.aws_calc.create_routers),
             const.FILE_ROUTE_TBS: ('networks', self.aws_calc.create_route_tables),
             const.FILE_NAT_GWS: ('networks', self.aws_calc.create_nat_gateways),
-
-            # const.FILE_IMAGES: ('storage', self.aws_calc.create_images),
-            # const.FILE_VOLUMES: ('storage', self.aws_calc.create_volumes),
             const.FILE_KEYPAIRS: ('compute', self.aws_calc.create_keypairs),
             const.FILE_SERVERS: ('compute', self.aws_calc.create_servers),
-            # const.FILE_PROJECTS: ('identity', self.aws_calc.create_projects),
-            # const.FILE_DOMAINS: ('identity', self.aws_calc.create_domains),
-            # const.FILE_USERS: ('identity', self.aws_calc.create_users),
         }
         for file_name, (path, func) in cloud_funcs.items():
             if path == data_type:
@@ -381,12 +375,13 @@ class AmazonAnsibleCalculation:
 
         servers = []
         pre_optimized = []
-    #     if conf.DUMP_STORAGE:
-    #         volumes_dict = {i['id']: i for i in self.data['volumes']}
-    #         images_dict = {i['id']: i['name'] for i in self.data['images']}
-    #     else:
-    #         volumes_dict = {}
-    #         images_dict = {}
+        # Dumping storage is not implemented yet
+        #     if conf.DUMP_STORAGE:
+        #         volumes_dict = {i['id']: i for i in self.data['volumes']}
+        #         images_dict = {i['id']: i['name'] for i in self.data['images']}
+        #     else:
+        #         volumes_dict = {}
+        #         images_dict = {}
 
         for ser in self.data['servers']:
 
@@ -413,7 +408,7 @@ class AmazonAnsibleCalculation:
             s['metadata_options'] = {
                 'http_endpoint': inst['MetadataOptions']['HttpEndpoint'],
                 'http_tokens': inst['MetadataOptions']['HttpTokens'],
-                # Not supported yet
+                # Not supported yet in Ansible
                 # 'http_put_response_hop_limit': inst['MetadataOptions']['HttpPutResponseHopLimit'],
                 # 'instance_metadata_tags': inst['MetadataOptions']['State'],
             }
@@ -470,18 +465,10 @@ class AmazonInfo:
                      self.ec2.describe_network_interfaces, 'NetworkInterfaces', const.FILE_EIPS),
             'dhcpopts': (conf.DUMP_NETWORKS,
                          self.ec2.describe_dhcp_options, 'DhcpOptions', const.FILE_DHCPS),
-            # 'ports': (conf.DUMP_NETWORKS, conn.network.ports, const.FILE_PORTS),
-            # 'images': (conf.DUMP_STORAGE, conn.image.images, const.FILE_IMAGES),
-            # 'volumes': (conf.DUMP_STORAGE, conn.volume.volumes, const.FILE_VOLUMES),
-            # # 'volumes': (conf.DUMP_STORAGE, conn.block_storage.volumes, const.FILE_VOLUMES),
-            # # 'floating_ips': (conf.DUMP_NETWORKS, conn.network.floating_ips, const.FILE_FIPS),
             'keypairs': (conf.DUMP_SERVERS,
                          self.ec2.describe_key_pairs, 'KeyPairs', const.FILE_KEYPAIRS),
             'servers': (conf.DUMP_SERVERS,
                         self.ec2.describe_instances, 'Reservations', const.FILE_SERVERS),
-            # 'users': (conf.DUMP_IDENTITY, conn.identity.users, const.FILE_FLAVORS),
-            # 'projects': (conf.DUMP_IDENTITY, conn.identity.projects, const.FILE_PROJECTS),
-            # 'domains': (conf.DUMP_IDENTITY, conn.identity.domains, const.FILE_DOMAINS),
         }
         for data_type, (dump, func, key, file_name) in info_matrix.items():
             if dump:
