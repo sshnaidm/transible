@@ -66,5 +66,13 @@ class TestAWSAnsible:
         [(True, True), (True, False), (False, False)],
         ids=["optimize_and_vars_file", "optimize_no_vars_file", "no_optimize"]
     )
+    def test_create_keypairs(self, force_optimize, vars_file):
+        self.a.create_keypairs(force_optimize=force_optimize, vars_file=vars_file)
+
+    @pytest.mark.parametrize(
+        "force_optimize,vars_file",
+        [(True, True), (True, False), (False, False)],
+        ids=["optimize_and_vars_file", "optimize_no_vars_file", "no_optimize"]
+    )
     def test_create_servers(self, force_optimize, vars_file):
         self.a.create_servers(force_optimize=force_optimize, vars_file=vars_file)

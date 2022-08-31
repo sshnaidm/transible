@@ -908,6 +908,13 @@ eips:
     SubnetId: subnet-0de32518246e024d7
     TagSet: []
     VpcId: vpc-03cc46bfb758fbc25
+keypairs:
+  - KeyPairId: key-0ef4c410be48c32f1
+    KeyFingerprint: 25:4f:05:3a:5f:1c:5a:b8:8a:23:33:ed:92:c5:f2:55
+    KeyName: mykey
+    KeyType: rsa
+    Tags: []
+    CreateTime: 2022-05-16 08:44:53+00:00
 servers:
   - Groups: []
     Instances:
