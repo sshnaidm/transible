@@ -13,3 +13,7 @@ Run for Amazon AWS (make sure your credentials are in `~/.aws/config`):
 ```bash
 ./transible.py --from aws --to ansible
 ```
+
+## Demo
+
+[![asciicast](https://asciinema.org/a/Wsad95zocPJIMp4bJV0dnklaA.svg)](https://asciinema.org/a/Wsad95zocPJIMp4bJV0dnklaA)
