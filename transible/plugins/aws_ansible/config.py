@@ -4,13 +4,13 @@ from transible.utils import str2bool
 
 PREFIX = "TRANSIBLE_"
 INPUT_DATA_DIR = ""
-DATA_DIR_TRANSIENT = "./aws_cloud_data_test"
+DATA_DIR_TRANSIENT = "./aws_cloud_data"
 
 
 # # Paths config
 # Path to playbook
 PLAYS = os.environ.get(
-    PREFIX + "PLAYS", os.path.join(os.path.curdir, "aws_generated_playbooks_x"))
+    PREFIX + "PLAYS", os.path.join(os.path.curdir, "aws_generated_playbooks"))
 # Path to variables file
 VARS_PATH = os.environ.get(
     PREFIX + "VARS_PATH", os.path.join(PLAYS, "vars", "main.yml"))
