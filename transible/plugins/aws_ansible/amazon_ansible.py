@@ -143,7 +143,7 @@ class AmazonAnsibleCalculation:
         for vpc in self.data['networks']:
             n = {'state': 'present'}
             n['cidr_block'] = vpc['CidrBlock']
-            n['dhcp_opts_id'] = vpc['DhcpOptionsId']
+            # n['dhcp_opts_id'] = vpc['DhcpOptionsId']  # TODO(sshnaidm): add in the future
             n['multi_ok'] = False
             if vpc['IsDefault']:
                 n['name'] = vpc['VpcId']
@@ -399,7 +399,7 @@ class AmazonAnsibleCalculation:
                          if not t['Key'].startswith('aws:')}
             s['image_id'] = inst['ImageId']
             s['security_groups'] = [sg['GroupName'] for sg in inst['SecurityGroups']]
-            s['vpc_subnet_id'] = inst['SubnetId']
+            # s['vpc_subnet_id'] = inst['SubnetId']  # not compatible with AZ
             s['key_name'] = inst['KeyName']
             s['availability_zone'] = inst['Placement']['AvailabilityZone']
             s['tenancy'] = inst['Placement']['Tenancy']
@@ -413,83 +413,11 @@ class AmazonAnsibleCalculation:
             s['metadata_options'] = {
                 'http_endpoint': inst['MetadataOptions']['HttpEndpoint'],
                 'http_tokens': inst['MetadataOptions']['HttpTokens'],
-                'http_put_response_hop_limit': inst['MetadataOptions']['HttpPutResponseHopLimit'],
-                'instance_metadata_tags': inst['MetadataOptions']['State'],
+                # Not supported yet
+                # 'http_put_response_hop_limit': inst['MetadataOptions']['HttpPutResponseHopLimit'],
+                # 'instance_metadata_tags': inst['MetadataOptions']['State'],
             }
 
-    #         s['name'] = ser['name']
-    #         s['cloud'] = self.data['cloud']
-    #         if value(ser, 'server', 'security_groups'):
-    #             s['security_groups'] = list(
-    #                 {i['name'] for i in ser['security_groups']})
-    #         if 'original_name' in ser['flavor']:
-    #             s['flavor'] = ser['flavor']['original_name']
-    #         elif ser['flavor_id']:
-    #             s['flavor'] = flavors_names[ser['flavor_id']]
-    #         else:
-    #             raise Exception("Flavor for server %s not found! %s" % (
-    #                 ser['name'], str(ser['flavor'])))
-    #         if value(ser, 'server', 'key_name'):
-    #             s['key_name'] = ser['key_name']
-    #         if value(ser, 'server', 'scheduler_hints'):
-    #             s['scheduler_hints'] = ser['scheduler_hints']
-    #         if value(ser, 'server', 'metadata'):
-    #             s['meta'] = ser['metadata']
-    #         if value(ser, 'server', 'config_drive'):
-    #             s['config_drive'] = ser['config_drive'] == 'True'
-    #         if value(ser, 'server', 'user_data'):
-    #             s['userdata'] = ser['user_data']
-    #         # Images and volumes
-    #         if ser['image']['id']:
-    #             if ser['image']['id'] in images_dict:
-    #                 s['image'] = (
-    #                     ser['image']['id']
-    #                     if not conf.IMAGES_AS_NAMES
-    #                     else images_dict[ser['image']['id']])
-    #             else:
-    #                 print("Image with ID=%s of server %s is not in images list" %
-    #                       (ser['image']['id'], ser['name']))
-    #                 continue
-    #         else:
-    #             # Dancing with boot volumes
-    #             if conf.USE_EXISTING_BOOT_VOLUMES:
-    #                 s['boot_volume'] = get_boot_volume(
-    #                     ser['attached_volumes'])['id']
-    #                 # s['volumes'] = [i['id'] for i in ser['attached_volumes']]
-    #             elif conf.USE_SERVER_IMAGES:
-    #                 meta = get_boot_volume(ser['attached_volumes'])[
-    #                     'volume_image_metadata']
-    #                 s['image'] = (meta['image_name']
-    #                               if conf.IMAGES_AS_NAMES else meta['image_id'])
-    #                 if conf.CREATE_NEW_BOOT_VOLUMES:
-    #                     s['boot_from_volume'] = True
-    #                     s['volume_size'] = get_boot_volume(
-    #                         ser['attached_volumes'])['size']
-    #         if ser.get('attached_volumes'):
-    #             non_bootable_volumes = [i['id'] for i in ser['attached_volumes']
-    #                                     if not volumes_dict[i['id']]['is_bootable']]
-    #             if non_bootable_volumes:
-    #                 s['volumes'] = non_bootable_volumes
-    #         if ser.get('addresses'):
-    #             if conf.NETWORK_AUTO:
-    #                 # In case of DHCP just connect to networks
-    #                 nics = [{"net-name": i}
-    #                         for i in list(ser['addresses'].keys())]
-    #                 s['nics'] = nics
-    #             elif conf.STRICT_NETWORK_IPS:
-    #                 s['nics'] = []
-    #                 for net in list(ser['addresses'].keys()):
-    #                     for ip in ser['addresses'][net]:
-    #                         if ip['OS-EXT-IPS:type'] == 'fixed':
-    #                             s['nics'].append(
-    #                                 {'net-name': net, 'fixed_ip': ip['addr']})
-    #             if conf.FIP_AUTO:
-    #                 # If there are existing floating IPs only
-    #                 s['auto_ip'] = has_floating(ser['addresses'])
-    #             elif conf.STRICT_FIPS:
-    #                 fips = [j['addr'] for i in list(ser['addresses'].values())
-    #                         for j in i if j['OS-EXT-IPS:type'] == 'floating']
-    #                 s['floating_ips'] = fips
             if force_optimize:
                 pre_optimized.append({'amazon.aws.ec2_instance': s})
             else:
