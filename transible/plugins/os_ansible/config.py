@@ -13,7 +13,7 @@ def str2bool(x):
 
 PREFIX = "TRANSIBLE_"
 INPUT_DATA_DIR = ""
-DATA_DIR_TRANSIENT = "./cloud_data"
+DATA_DIR_TRANSIENT = "./os_cloud_data"
 
 # Plugin config
 DUMP_NETWORKS = str2bool(os.environ.get(PREFIX + "DUMP_NETWORKS", True))
@@ -24,7 +24,7 @@ DUMP_IDENTITY = str2bool(os.environ.get(PREFIX + "DUMP_IDENTITY", False))
 # # Paths config
 # Path to playbook
 PLAYS = os.environ.get(
-    PREFIX + "PLAYS", os.path.join(os.path.curdir, "generated_playbooks"))
+    PREFIX + "PLAYS", os.path.join(os.path.curdir, "os_generated_playbooks"))
 # Path to variables file
 VARS_PATH = os.environ.get(
     PREFIX + "VARS_PATH", os.path.join(PLAYS, "vars", "main.yml"))
