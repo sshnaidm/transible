@@ -19,4 +19,4 @@ Run for Amazon AWS (make sure your credentials are in `~/.aws/config`):
 
 ## Demo
 
-[![asciicast](https://asciinema.org/a/Wsad95zocPJIMp4bJV0dnklaA.svg)](https://asciinema.org/a/Wsad95zocPJIMp4bJV0dnklaA)
+![Trabsible Demo](https://github.com/sshnaidm/transible/raw/master/transible-demo.gif)
