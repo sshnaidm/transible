@@ -3,13 +3,14 @@ import argparse
 import sys
 from transible.plugins.os_ansible.openstack_ansible import OpenstackAnsible
 from transible.plugins.aws_ansible.amazon_ansible import AmazonAnsible
+from transible.plugins.az_ansible.azure_ansible import AzureAnsible
 
 
 def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('-f', '--from', dest="from_cloud",
                         default="openstack",
-                        choices=["openstack", "aws"],
+                        choices=["openstack", "aws", "azure"],
                         help='Cloud type to read configuration from')
     parser.add_argument('-t', '--to', dest="to",
                         default="ansible",
@@ -29,6 +30,8 @@ def main():
         OpenstackAnsible(args.cloud_name, from_file=args.from_file).run()
     elif args.from_cloud == "aws" and args.to == "ansible":
         AmazonAnsible(from_file=args.from_file).run()
+    elif args.from_cloud == "azure" and args.to == "ansible":
+        AzureAnsible(from_file=args.from_file).run()
     else:
         print("Configuration is not supported yet")
 
