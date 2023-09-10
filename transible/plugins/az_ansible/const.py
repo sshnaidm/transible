@@ -28,6 +28,7 @@ NET_PLAYBOOK = """
     - import_tasks: networks/subnets.yml
     - import_tasks: networks/security_groups.yml
     - import_tasks: networks/eips.yml
+    - import_tasks: networks/nat_gateways.yml
     - import_tasks: networks/load_balancers.yml
     - import_tasks: networks/application_security_groups.yml
     - import_tasks: networks/network_interfaces.yml
@@ -59,6 +60,7 @@ NET_PLAYBOOK_D = """
     - import_tasks: networks/network_interfaces.yml
     - import_tasks: networks/security_groups.yml
     - import_tasks: networks/application_security_groups.yml
+    - import_tasks: networks/nat_gateways.yml
     - import_tasks: networks/load_balancers.yml
     - import_tasks: networks/eips.yml
     - import_tasks: networks/subnets.yml

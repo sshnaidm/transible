@@ -12,7 +12,6 @@ from transible.plugins.az_ansible.common import write_yaml
 from transible.utils import read_yaml, optimize
 
 
-
 class AzureAnsible:
     """Main class to generate Ansible playbooks from Amazon
 
@@ -79,6 +78,7 @@ class AzureAnsible:
             const.FILE_LBS: ('networks', self.az_calc.create_load_balancers),
             const.FILE_SERVERS: ('compute', self.az_calc.create_servers),
             const.FILE_AVAIL_SETS: ('compute', self.az_calc.create_availability_sets),
+            const.FILE_NAT_GWS: ('networks', self.az_calc.create_nat_gateways),
 
         }
         for file_name, (path, func) in cloud_funcs.items():
@@ -357,6 +357,31 @@ class AzureAnsibleCalculation:
             if optimized:
                 netints.append(optimized)
         return netints
+
+    def create_nat_gateways(self, force_optimize=conf.VARS_OPT_NAT_GWS,
+                            vars_file=True):
+        ngws = []
+        pre_optimized = []
+        for ng in self.data['nat_gateways']:
+            n = {'state': '{{ state }}'}
+            n['resource_group'] = self.resource_group_name
+            n['name'] = ng['name']
+            n['public_ip_addresses'] = [i['id'].split("/publicIPAddresses/")[1] for i in ng['public_ip_addresses']]
+            n['idle_timeout_in_minutes'] = ng['idle_timeout_in_minutes']
+            n['sku'] = ng['sku']['name']
+            ngw = {'azure.azcollection.azure_rm_natgateway': n}
+            if force_optimize:
+                pre_optimized.append(ngw)
+            else:
+                ngws.append(ngw)
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                use_vars=vars_file,
+                var_name="nat_gateways")
+            if optimized:
+                ngws.append(optimized)
+        return ngws
 
     def create_app_secgroups(self, force_optimize=conf.VARS_OPT_APPSECGROUPS,
                              vars_file=True):
@@ -642,6 +667,8 @@ class AzureInfo:
                 self.resource_group_name), const.FILE_LBS),
             "subnets": (conf.DUMP_NETWORKS, self.network_client.virtual_networks.list(
                 self.resource_group_name), const.FILE_SUBNETS),
+            "nat_gateways": (conf.DUMP_NETWORKS, self.network_client.nat_gateways.list(
+                self.resource_group_name), const.FILE_NAT_GWS),
             "availability_sets": (conf.DUMP_SERVERS, self.compute_client.availability_sets.list(
                 self.resource_group_name), const.FILE_KEYPAIRS),
             "vms": (conf.DUMP_SERVERS, self.compute_client.virtual_machines.list(
