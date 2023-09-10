@@ -1,15 +1,16 @@
 import os
 import logging
 
+from azure.identity import DefaultAzureCredential
+from azure.mgmt.network import NetworkManagementClient
+from azure.mgmt.compute import ComputeManagementClient
+from azure.mgmt.resource import ResourceManagementClient
+
 from transible.plugins.az_ansible import config as conf
 from transible.plugins.az_ansible import const
 from transible.plugins.az_ansible.common import write_yaml
 from transible.utils import read_yaml, optimize
 
-from azure.identity import DefaultAzureCredential
-from azure.mgmt.network import NetworkManagementClient
-from azure.mgmt.compute import ComputeManagementClient
-from azure.mgmt.resource import ResourceManagementClient
 
 
 class AzureAnsible:
@@ -421,7 +422,8 @@ class AzureAnsibleCalculation:
                     np = {}
                     np['name'] = pool['name']
                     np['protocol'] = pool['protocol']
-                    np['frontend_ip_configuration_name'] = pool['frontend_ip_configuration']['id'].split("/frontendIPConfigurations/")[1]
+                    np['frontend_ip_configuration_name'] = pool['frontend_ip_configuration']['id'].split(
+                        "/frontendIPConfigurations/")[1]
                     np['frontend_port_range_start'] = pool['frontend_port_range_start']
                     np['frontend_port_range_end'] = pool['frontend_port_range_end']
                     np['backend_port'] = pool['backend_port']
@@ -436,7 +438,8 @@ class AzureAnsibleCalculation:
                     rcfg['backend_port'] = rule['backend_port']
                     rcfg['frontend_port'] = rule['frontend_port']
                     rcfg['enable_floating_ip'] = rule['enable_floating_ip']
-                    rcfg['frontend_ip_configuration'] = rule['frontend_ip_configuration']['id'].split("/frontendIPConfigurations/")[1]
+                    rcfg['frontend_ip_configuration'] = rule['frontend_ip_configuration']['id'].split(
+                        "/frontendIPConfigurations/")[1]
                     rcfg['idle_timeout'] = rule['idle_timeout_in_minutes']
                     rcfg['load_distribution'] = rule['load_distribution']
                     rcfg['protocol'] = rule['protocol']
