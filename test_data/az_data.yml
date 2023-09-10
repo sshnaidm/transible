@@ -1,0 +1,899 @@
+---
+resource_groups:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud
+    name: ManagedByParacloud
+    type: Microsoft.Resources/resourceGroups
+    properties:
+      provisioning_state: Succeeded
+    location: eastus
+    tags: {}
+networks:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main
+    name: main
+    type: Microsoft.Network/virtualNetworks
+    location: eastus
+    tags: {}
+    etag: W/"8d2d540f-169d-41fc-be28-700fe8e33759"
+    address_space:
+      address_prefixes:
+        - 10.0.0.0/16
+    dhcp_options:
+      dns_servers: []
+    subnets:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/public-subnet-0
+        name: public-subnet-0
+        etag: W/"8d2d540f-169d-41fc-be28-700fe8e33759"
+        type: Microsoft.Network/virtualNetworks/subnets
+        address_prefix: 10.0.0.0/24
+        service_endpoints: []
+        ip_configurations:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-0/ipConfigurations/WEB-INTERFACE-0
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-1/ipConfigurations/WEB-INTERFACE-1
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-2/ipConfigurations/WEB-INTERFACE-2
+        delegations: []
+        provisioning_state: Succeeded
+        private_endpoint_network_policies: Enabled
+        private_link_service_network_policies: Enabled
+    virtual_network_peerings: []
+    resource_guid: 0446121d-e969-4e8f-9c4e-bc428cc59468
+    provisioning_state: Succeeded
+    enable_ddos_protection: false
+security_groups:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg
+    name: web-loadBalancer-app-sg
+    type: Microsoft.Network/networkSecurityGroups
+    location: eastus
+    tags: {}
+    etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+    security_rules:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg/securityRules/allow_outbound_traffic
+        name: allow_outbound_traffic
+        etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+        type: Microsoft.Network/networkSecurityGroups/securityRules
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '0'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 1001
+        direction: Outbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg/securityRules/allow_inbound_traffic
+        name: allow_inbound_traffic
+        etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+        type: Microsoft.Network/networkSecurityGroups/securityRules
+        protocol: tcp
+        source_port_range: '*'
+        destination_port_range: '80'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 1001
+        direction: Inbound
+        provisioning_state: Succeeded
+    default_security_rules:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg/defaultSecurityRules/AllowVnetInBound
+        name: AllowVnetInBound
+        etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Allow inbound traffic from all VMs in VNET
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: VirtualNetwork
+        source_address_prefixes: []
+        destination_address_prefix: VirtualNetwork
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 65000
+        direction: Inbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg/defaultSecurityRules/AllowAzureLoadBalancerInBound
+        name: AllowAzureLoadBalancerInBound
+        etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Allow inbound traffic from azure load balancer
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: AzureLoadBalancer
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 65001
+        direction: Inbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg/defaultSecurityRules/DenyAllInBound
+        name: DenyAllInBound
+        etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Deny all inbound traffic
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Deny
+        priority: 65500
+        direction: Inbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg/defaultSecurityRules/AllowVnetOutBound
+        name: AllowVnetOutBound
+        etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Allow outbound traffic from all VMs to all VMs in VNET
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: VirtualNetwork
+        source_address_prefixes: []
+        destination_address_prefix: VirtualNetwork
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 65000
+        direction: Outbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg/defaultSecurityRules/AllowInternetOutBound
+        name: AllowInternetOutBound
+        etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Allow outbound traffic from all VMs to Internet
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: Internet
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 65001
+        direction: Outbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg/defaultSecurityRules/DenyAllOutBound
+        name: DenyAllOutBound
+        etag: W/"58a5a3c8-4777-4328-8976-391e2ce56b24"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Deny all outbound traffic
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Deny
+        priority: 65500
+        direction: Outbound
+        provisioning_state: Succeeded
+    resource_guid: 2c568336-7101-4829-a7f2-56d0570e4c40
+    provisioning_state: Succeeded
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg
+    name: web-sg
+    type: Microsoft.Network/networkSecurityGroups
+    location: eastus
+    tags: {}
+    etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+    security_rules:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/securityRules/web-security-rule-8000-in-1
+        name: web-security-rule-8000-in-1
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/securityRules
+        protocol: TCP
+        source_port_range: '*'
+        destination_port_range: '8000'
+        source_address_prefix: 172.172.224.4
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 101
+        direction: Inbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/securityRules/web-security-rule-8000-in-10
+        name: web-security-rule-8000-in-10
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/securityRules
+        protocol: TCP
+        source_port_range: '*'
+        destination_port_range: '22'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 112
+        direction: Inbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/securityRules/web-security-rule-0-out-3
+        name: web-security-rule-0-out-3
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/securityRules
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 130
+        direction: Outbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/securityRules/web-security-rule-443-in-2
+        name: web-security-rule-443-in-2
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/securityRules
+        protocol: TCP
+        source_port_range: '*'
+        destination_port_range: '443'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 120
+        direction: Inbound
+        provisioning_state: Succeeded
+    default_security_rules:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/defaultSecurityRules/AllowVnetInBound
+        name: AllowVnetInBound
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Allow inbound traffic from all VMs in VNET
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: VirtualNetwork
+        source_address_prefixes: []
+        destination_address_prefix: VirtualNetwork
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 65000
+        direction: Inbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/defaultSecurityRules/AllowAzureLoadBalancerInBound
+        name: AllowAzureLoadBalancerInBound
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Allow inbound traffic from azure load balancer
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: AzureLoadBalancer
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 65001
+        direction: Inbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/defaultSecurityRules/DenyAllInBound
+        name: DenyAllInBound
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Deny all inbound traffic
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Deny
+        priority: 65500
+        direction: Inbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/defaultSecurityRules/AllowVnetOutBound
+        name: AllowVnetOutBound
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Allow outbound traffic from all VMs to all VMs in VNET
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: VirtualNetwork
+        source_address_prefixes: []
+        destination_address_prefix: VirtualNetwork
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 65000
+        direction: Outbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/defaultSecurityRules/AllowInternetOutBound
+        name: AllowInternetOutBound
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Allow outbound traffic from all VMs to Internet
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: Internet
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Allow
+        priority: 65001
+        direction: Outbound
+        provisioning_state: Succeeded
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg/defaultSecurityRules/DenyAllOutBound
+        name: DenyAllOutBound
+        etag: W/"61e3a93b-dcb0-4ef2-896e-9b9889a32fad"
+        type: Microsoft.Network/networkSecurityGroups/defaultSecurityRules
+        description: Deny all outbound traffic
+        protocol: '*'
+        source_port_range: '*'
+        destination_port_range: '*'
+        source_address_prefix: '*'
+        source_address_prefixes: []
+        destination_address_prefix: '*'
+        destination_address_prefixes: []
+        source_port_ranges: []
+        destination_port_ranges: []
+        access: Deny
+        priority: 65500
+        direction: Outbound
+        provisioning_state: Succeeded
+    network_interfaces:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-1
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-2
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-0
+    resource_guid: 0277e5c0-e12b-48a2-934d-b24a8bea8fe1
+    provisioning_state: Succeeded
+public_ips:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/web-loadBalancer-public-ip
+    name: web-loadBalancer-public-ip
+    type: Microsoft.Network/publicIPAddresses
+    location: eastus
+    tags: {}
+    sku:
+      name: Basic
+      tier: Regional
+    etag: W/"3289c335-5ee4-4941-b258-831d988ce0b2"
+    public_ip_allocation_method: Static
+    public_ip_address_version: IPv4
+    ip_configuration:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/frontendIPConfigurations/PublicIPAddress
+    dns_settings:
+      domain_name_label: web-loadbalancer
+      fqdn: web-loadbalancer.eastus.cloudapp.azure.com
+    ip_tags: []
+    ip_address: 172.172.224.4
+    idle_timeout_in_minutes: 4
+    resource_guid: 086925d7-2682-41c7-8461-28d977080118
+    provisioning_state: Succeeded
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/web-public-ip-0
+    name: web-public-ip-0
+    type: Microsoft.Network/publicIPAddresses
+    location: eastus
+    tags: {}
+    sku:
+      name: Basic
+      tier: Regional
+    etag: W/"c18e0ff0-84eb-493e-957e-078badaa955c"
+    public_ip_allocation_method: Dynamic
+    public_ip_address_version: IPv4
+    ip_configuration:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-0/ipConfigurations/web-interface-0
+    ip_tags: []
+    ip_address: 52.142.60.89
+    idle_timeout_in_minutes: 4
+    resource_guid: 52762d3b-3b21-4bf8-b956-712355fa445a
+    provisioning_state: Succeeded
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/web-public-ip-1
+    name: web-public-ip-1
+    type: Microsoft.Network/publicIPAddresses
+    location: eastus
+    tags: {}
+    sku:
+      name: Basic
+      tier: Regional
+    etag: W/"ab69bd22-0c58-46dd-ac4a-e0c1313cf605"
+    public_ip_allocation_method: Dynamic
+    public_ip_address_version: IPv4
+    ip_configuration:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-1/ipConfigurations/web-interface-1
+    ip_tags: []
+    ip_address: 52.146.40.123
+    idle_timeout_in_minutes: 4
+    resource_guid: 7dc04991-b861-46a9-b004-9076412f5bba
+    provisioning_state: Succeeded
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/web-public-ip-2
+    name: web-public-ip-2
+    type: Microsoft.Network/publicIPAddresses
+    location: eastus
+    tags: {}
+    sku:
+      name: Basic
+      tier: Regional
+    etag: W/"8b416243-9893-4920-bcc6-3ef9a2ca64b6"
+    public_ip_allocation_method: Dynamic
+    public_ip_address_version: IPv4
+    ip_configuration:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-2/ipConfigurations/web-interface-2
+    ip_tags: []
+    ip_address: 52.142.58.65
+    idle_timeout_in_minutes: 4
+    resource_guid: 5e99f996-d8e9-4671-82d5-2fc32264f939
+    provisioning_state: Succeeded
+network_interfaces:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-0
+    name: web-network-int-0
+    type: Microsoft.Network/networkInterfaces
+    location: eastus
+    tags: {}
+    etag: W/"ef140570-e1dd-4ef2-b0b5-fcc998726cf5"
+    virtual_machine:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/virtualMachines/web-0
+    network_security_group:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg
+    ip_configurations:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-0/ipConfigurations/web-interface-0
+        name: web-interface-0
+        etag: W/"ef140570-e1dd-4ef2-b0b5-fcc998726cf5"
+        type: Microsoft.Network/networkInterfaces/ipConfigurations
+        load_balancer_backend_address_pools:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/backendAddressPools/BackEndAddressPool
+        private_ip_address: 10.0.0.6
+        private_ip_allocation_method: Dynamic
+        private_ip_address_version: IPv4
+        subnet:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/public-subnet-0
+        primary: true
+        public_ip_address:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/web-public-ip-0
+        application_security_groups:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/applicationSecurityGroups/web-asg
+        provisioning_state: Succeeded
+    tap_configurations: []
+    dns_settings:
+      dns_servers: []
+      applied_dns_servers: []
+      internal_domain_name_suffix: dujembdj3ghu3hcoxrbizrmuna.bx.internal.cloudapp.net
+    mac_address: 00-0D-3A-54-A7-15
+    primary: true
+    vnet_encryption_supported: false
+    enable_accelerated_networking: false
+    disable_tcp_state_tracking: false
+    enable_ip_forwarding: false
+    hosted_workloads: []
+    resource_guid: 90f07ce3-d16b-4000-ba4d-2e079fa6ed03
+    provisioning_state: Succeeded
+    nic_type: Standard
+    auxiliary_mode: None
+    auxiliary_sku: None
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-1
+    name: web-network-int-1
+    type: Microsoft.Network/networkInterfaces
+    location: eastus
+    tags: {}
+    etag: W/"dff85752-8a6e-49f4-aea3-8ec878df2400"
+    virtual_machine:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/virtualMachines/web-1
+    network_security_group:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg
+    ip_configurations:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-1/ipConfigurations/web-interface-1
+        name: web-interface-1
+        etag: W/"dff85752-8a6e-49f4-aea3-8ec878df2400"
+        type: Microsoft.Network/networkInterfaces/ipConfigurations
+        load_balancer_backend_address_pools:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/backendAddressPools/BackEndAddressPool
+        private_ip_address: 10.0.0.4
+        private_ip_allocation_method: Dynamic
+        private_ip_address_version: IPv4
+        subnet:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/public-subnet-0
+        primary: true
+        public_ip_address:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/web-public-ip-1
+        application_security_groups:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/applicationSecurityGroups/web-asg
+        provisioning_state: Succeeded
+    tap_configurations: []
+    dns_settings:
+      dns_servers: []
+      applied_dns_servers: []
+      internal_domain_name_suffix: dujembdj3ghu3hcoxrbizrmuna.bx.internal.cloudapp.net
+    mac_address: 00-0D-3A-57-3D-6D
+    primary: true
+    vnet_encryption_supported: false
+    enable_accelerated_networking: false
+    disable_tcp_state_tracking: false
+    enable_ip_forwarding: false
+    hosted_workloads: []
+    resource_guid: 1c93ae22-6425-4aa0-8246-1a26a5554d5e
+    provisioning_state: Succeeded
+    nic_type: Standard
+    auxiliary_mode: None
+    auxiliary_sku: None
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-2
+    name: web-network-int-2
+    type: Microsoft.Network/networkInterfaces
+    location: eastus
+    tags: {}
+    etag: W/"a57186cd-a930-4687-8dd7-5d547e481dff"
+    virtual_machine:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/virtualMachines/web-2
+    network_security_group:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-sg
+    ip_configurations:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-2/ipConfigurations/web-interface-2
+        name: web-interface-2
+        etag: W/"a57186cd-a930-4687-8dd7-5d547e481dff"
+        type: Microsoft.Network/networkInterfaces/ipConfigurations
+        load_balancer_backend_address_pools:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/backendAddressPools/BackEndAddressPool
+        private_ip_address: 10.0.0.5
+        private_ip_allocation_method: Dynamic
+        private_ip_address_version: IPv4
+        subnet:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/public-subnet-0
+        primary: true
+        public_ip_address:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/web-public-ip-2
+        application_security_groups:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/applicationSecurityGroups/web-asg
+        provisioning_state: Succeeded
+    tap_configurations: []
+    dns_settings:
+      dns_servers: []
+      applied_dns_servers: []
+      internal_domain_name_suffix: dujembdj3ghu3hcoxrbizrmuna.bx.internal.cloudapp.net
+    mac_address: 00-0D-3A-54-A0-E0
+    primary: true
+    vnet_encryption_supported: false
+    enable_accelerated_networking: false
+    disable_tcp_state_tracking: false
+    enable_ip_forwarding: false
+    hosted_workloads: []
+    resource_guid: f5a0b43a-dadf-457b-8063-06ab307924bf
+    provisioning_state: Succeeded
+    nic_type: Standard
+    auxiliary_mode: None
+    auxiliary_sku: None
+application_security_groups:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/applicationSecurityGroups/web-asg
+    name: web-asg
+    type: Microsoft.Network/applicationSecurityGroups
+    location: eastus
+    tags: {}
+    etag: W/"4c04b994-1bff-4217-8eab-f8e187e6ef2f"
+    provisioning_state: Succeeded
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/applicationSecurityGroups/web-lb-asg
+    name: web-lb-asg
+    type: Microsoft.Network/applicationSecurityGroups
+    location: eastus
+    tags: {}
+    etag: W/"20c0fa0c-f933-404b-be6e-7fb4defaa5ab"
+    provisioning_state: Succeeded
+load_balancers:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer
+    name: web-loadBalancer
+    type: Microsoft.Network/loadBalancers
+    location: eastus
+    tags: {}
+    sku:
+      name: Basic
+      tier: Regional
+    etag: W/"ad28a1c0-170e-4b5f-bfeb-6a763f47293f"
+    frontend_ip_configurations:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/frontendIPConfigurations/PublicIPAddress
+        name: PublicIPAddress
+        etag: W/"ad28a1c0-170e-4b5f-bfeb-6a763f47293f"
+        type: Microsoft.Network/loadBalancers/frontendIPConfigurations
+        load_balancing_rules:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/loadBalancingRules/LBRule
+        private_ip_allocation_method: Dynamic
+        public_ip_address:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/web-loadBalancer-public-ip
+        provisioning_state: Succeeded
+    backend_address_pools:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/backendAddressPools/BackEndAddressPool
+        name: BackEndAddressPool
+        etag: W/"ad28a1c0-170e-4b5f-bfeb-6a763f47293f"
+        type: Microsoft.Network/loadBalancers/backendAddressPools
+        backend_ip_configurations:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-1/ipConfigurations/web-interface-1
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-0/ipConfigurations/web-interface-0
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-2/ipConfigurations/web-interface-2
+        load_balancing_rules:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/loadBalancingRules/LBRule
+        provisioning_state: Succeeded
+    load_balancing_rules:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/loadBalancingRules/LBRule
+        name: LBRule
+        etag: W/"ad28a1c0-170e-4b5f-bfeb-6a763f47293f"
+        type: Microsoft.Network/loadBalancers/loadBalancingRules
+        frontend_ip_configuration:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/frontendIPConfigurations/PublicIPAddress
+        backend_address_pool:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/backendAddressPools/BackEndAddressPool
+        backend_address_pools:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/backendAddressPools/BackEndAddressPool
+        probe:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/probes/web-loadBalancer-probe
+        protocol: Tcp
+        load_distribution: Default
+        frontend_port: 80
+        backend_port: 8000
+        idle_timeout_in_minutes: 4
+        enable_floating_ip: false
+        enable_tcp_reset: false
+        provisioning_state: Succeeded
+    probes:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/probes/web-loadBalancer-probe
+        name: web-loadBalancer-probe
+        etag: W/"ad28a1c0-170e-4b5f-bfeb-6a763f47293f"
+        type: Microsoft.Network/loadBalancers/probes
+        load_balancing_rules:
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/loadBalancers/web-loadBalancer/loadBalancingRules/LBRule
+        protocol: Http
+        port: 8000
+        interval_in_seconds: 15
+        number_of_probes: 2
+        probe_threshold: 1
+        request_path: /index.html
+        provisioning_state: Succeeded
+    inbound_nat_rules: []
+    inbound_nat_pools: []
+    resource_guid: 672e7735-6d09-4c4c-bc6d-7a12f154b116
+    provisioning_state: Succeeded
+subnets:
+  main:
+    - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/public-subnet-0
+      name: public-subnet-0
+      etag: W/"8d2d540f-169d-41fc-be28-700fe8e33759"
+      type: Microsoft.Network/virtualNetworks/subnets
+      address_prefix: 10.0.0.0/24
+      service_endpoints: []
+      ip_configurations:
+        - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-0/ipConfigurations/WEB-INTERFACE-0
+        - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-1/ipConfigurations/WEB-INTERFACE-1
+        - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-2/ipConfigurations/WEB-INTERFACE-2
+      delegations: []
+      provisioning_state: Succeeded
+      private_endpoint_network_policies: Enabled
+      private_link_service_network_policies: Enabled
+availability_sets:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/availabilitySets/web-set-availabilityset
+    name: web-set-availabilityset
+    type: Microsoft.Compute/availabilitySets
+    location: eastus
+    tags: {}
+    sku:
+      name: Aligned
+    platform_update_domain_count: 2
+    platform_fault_domain_count: 2
+    virtual_machines:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Compute/virtualMachines/WEB-0
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Compute/virtualMachines/WEB-1
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Compute/virtualMachines/WEB-2
+vms:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/virtualMachines/web-0
+    name: web-0
+    type: Microsoft.Compute/virtualMachines
+    location: eastus
+    tags:
+      ManagedBy: Paracloud
+      Name: web-0
+    hardware_profile:
+      vm_size: Standard_B1s
+    storage_profile:
+      image_reference:
+        publisher: Canonical
+        offer: 0001-com-ubuntu-server-jammy
+        sku: 22_04-lts
+        version: latest
+        exact_version: 22.04.202308140
+      os_disk:
+        os_type: Linux
+        name: web-0_OsDisk_1_dd60a3e88f3449ed975098b683fc2b9b
+        caching: ReadWrite
+        write_accelerator_enabled: false
+        create_option: FromImage
+        disk_size_gb: 30
+        managed_disk:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/disks/web-0_OsDisk_1_dd60a3e88f3449ed975098b683fc2b9b
+          storage_account_type: Standard_LRS
+        delete_option: Detach
+      data_disks: []
+    os_profile:
+      computer_name: web-0
+      admin_username: ubuntu
+      linux_configuration:
+        disable_password_authentication: true
+        ssh:
+          public_keys:
+            - path: /home/ubuntu/.ssh/authorized_keys
+              key_data: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDhi/BqsZibuAPiUjJe7b3Dqe5nyI7BckOwfGwJYg436+bFQMoR/7RKmtPe+ISVQ04lwIriIPwKGaSHj5mbEe4LsCLZ5jAUHxvWfgHitqS5ln295zU7vp1z28o7e6LQNplgExyqQlxUPdOU48tmlz93F6szSYkNYvZnhzMn9syrajC74qPuKsmHTeYFLEcxesb7/u+BtxCk8WdjYTb//sk038NEtIsNhrGtAOV3WcDpXnA5mNMpUfeoQ4yiN9LqtreXr7Zeo587LV3T2QL+huAE0J7EuCzHAKk6TIzJqjLidg0SYwZZwfbxgviU66QLkeyzh9oiovwskelvOQCBFq3
+                sshnaidm@redhat.com
+
+                '
+        provision_vm_agent: true
+        patch_settings:
+          patch_mode: ImageDefault
+          assessment_mode: ImageDefault
+        enable_vm_agent_platform_updates: false
+      secrets: []
+      allow_extension_operations: true
+      require_guest_provision_signal: true
+    network_profile:
+      network_interfaces:
+        - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-0
+          primary: true
+    diagnostics_profile:
+      boot_diagnostics:
+        enabled: false
+    availability_set:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/availabilitySets/WEB-SET-AVAILABILITYSET
+    priority: Regular
+    provisioning_state: Succeeded
+    vm_id: ac8b32d5-c0d0-4869-ac77-6aeaa747f478
+    extensions_time_budget: PT1H30M
+    time_created: '2023-09-08T05:48:05.57629Z'
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/virtualMachines/web-1
+    name: web-1
+    type: Microsoft.Compute/virtualMachines
+    location: eastus
+    tags:
+      ManagedBy: Paracloud
+      Name: web-1
+    hardware_profile:
+      vm_size: Standard_B1s
+    storage_profile:
+      image_reference:
+        publisher: Canonical
+        offer: 0001-com-ubuntu-server-jammy
+        sku: 22_04-lts
+        version: latest
+        exact_version: 22.04.202308140
+      os_disk:
+        os_type: Linux
+        name: web-1_OsDisk_1_67b3b3f505fd45adb9d7e409bf9a0a5e
+        caching: ReadWrite
+        write_accelerator_enabled: false
+        create_option: FromImage
+        disk_size_gb: 30
+        managed_disk:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/disks/web-1_OsDisk_1_67b3b3f505fd45adb9d7e409bf9a0a5e
+          storage_account_type: Standard_LRS
+        delete_option: Detach
+      data_disks: []
+    os_profile:
+      computer_name: web-1
+      admin_username: ubuntu
+      linux_configuration:
+        disable_password_authentication: true
+        ssh:
+          public_keys:
+            - path: /home/ubuntu/.ssh/authorized_keys
+              key_data: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDhi/BqsZibuAPiUjJe7b3Dqe5nyI7BckOwfGwJYg436+bFQMoR/7RKmtPe+ISVQ04lwIriIPwKGaSHj5mbEe4LsCLZ5jAUHxvWfgHitqS5ln295zU7vp1z28o7e6LQNplgExyqQlxUPdOU48tmlz93F6szSYkNYvZnhzMn9syrajC74qPuKsmHTeYFLEcxesb7/u+BtxCk8WdjYTb//sk038NEtIsNhrGtAOV3WcDpXnA5mNMpUfeoQ4yiN9LqtreXr7Zeo587LV3T2QL+huAE0J7EuCzHAKk6TIzJqjLidg0SYwZZwfbxgviU66QLkeyzh9oiovwskelvOQCBFq3
+                sshnaidm@redhat.com
+
+                '
+        provision_vm_agent: true
+        patch_settings:
+          patch_mode: ImageDefault
+          assessment_mode: ImageDefault
+        enable_vm_agent_platform_updates: false
+      secrets: []
+      allow_extension_operations: true
+      require_guest_provision_signal: true
+    network_profile:
+      network_interfaces:
+        - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-1
+          primary: true
+    diagnostics_profile:
+      boot_diagnostics:
+        enabled: false
+    availability_set:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/availabilitySets/WEB-SET-AVAILABILITYSET
+    priority: Regular
+    provisioning_state: Succeeded
+    vm_id: 494521a9-37eb-46d8-baeb-0df16f1add3f
+    extensions_time_budget: PT1H30M
+    time_created: '2023-09-08T05:48:04.982527Z'
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/virtualMachines/web-2
+    name: web-2
+    type: Microsoft.Compute/virtualMachines
+    location: eastus
+    tags:
+      ManagedBy: Paracloud
+      Name: web-2
+    hardware_profile:
+      vm_size: Standard_B1s
+    storage_profile:
+      image_reference:
+        publisher: Canonical
+        offer: 0001-com-ubuntu-server-jammy
+        sku: 22_04-lts
+        version: latest
+        exact_version: 22.04.202308140
+      os_disk:
+        os_type: Linux
+        name: web-2_OsDisk_1_2bd8eca095e5472f8f597efe70d3f3f5
+        caching: ReadWrite
+        write_accelerator_enabled: false
+        create_option: FromImage
+        disk_size_gb: 30
+        managed_disk:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/disks/web-2_OsDisk_1_2bd8eca095e5472f8f597efe70d3f3f5
+          storage_account_type: Standard_LRS
+        delete_option: Detach
+      data_disks: []
+    os_profile:
+      computer_name: web-2
+      admin_username: ubuntu
+      linux_configuration:
+        disable_password_authentication: true
+        ssh:
+          public_keys:
+            - path: /home/ubuntu/.ssh/authorized_keys
+              key_data: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDhi/BqsZibuAPiUjJe7b3Dqe5nyI7BckOwfGwJYg436+bFQMoR/7RKmtPe+ISVQ04lwIriIPwKGaSHj5mbEe4LsCLZ5jAUHxvWfgHitqS5ln295zU7vp1z28o7e6LQNplgExyqQlxUPdOU48tmlz93F6szSYkNYvZnhzMn9syrajC74qPuKsmHTeYFLEcxesb7/u+BtxCk8WdjYTb//sk038NEtIsNhrGtAOV3WcDpXnA5mNMpUfeoQ4yiN9LqtreXr7Zeo587LV3T2QL+huAE0J7EuCzHAKk6TIzJqjLidg0SYwZZwfbxgviU66QLkeyzh9oiovwskelvOQCBFq3
+                sshnaidm@redhat.com
+
+                '
+        provision_vm_agent: true
+        patch_settings:
+          patch_mode: ImageDefault
+          assessment_mode: ImageDefault
+        enable_vm_agent_platform_updates: false
+      secrets: []
+      allow_extension_operations: true
+      require_guest_provision_signal: true
+    network_profile:
+      network_interfaces:
+        - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkInterfaces/web-network-int-2
+          primary: true
+    diagnostics_profile:
+      boot_diagnostics:
+        enabled: false
+    availability_set:
+      id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Compute/availabilitySets/WEB-SET-AVAILABILITYSET
+    priority: Regular
+    provisioning_state: Succeeded
+    vm_id: eb3229e8-26a9-4a46-94ac-f8261b11bc6b
+    extensions_time_budget: PT1H30M
+    time_created: '2023-09-08T05:48:05.560671Z'
