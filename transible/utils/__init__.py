@@ -8,6 +8,14 @@ class ExtraDumper(yaml.Dumper):
     def increase_indent(self, flow=False, indentless=False):
         return super().increase_indent(flow, False)
 
+    def represent_str(self, data):
+        if "{{" in data or "}}" in data:
+            return self.represent_scalar('tag:yaml.org,2002:str', data, style='"')
+        return self.represent_scalar('tag:yaml.org,2002:str', data)
+
+
+ExtraDumper.add_representer(str, ExtraDumper.represent_str)
+
 
 def str2bool(x):
     if isinstance(x, bool):

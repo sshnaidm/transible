@@ -1,8 +1,2 @@
 openstacksdk
 boto3
-azure-mgmt-core
-azure-mgmt-compute
-azure-mgmt-network
-azure-mgmt-resource
-azure-mgmt-storage
-azure-identity
