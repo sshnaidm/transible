@@ -686,7 +686,7 @@ class OpenstackCalculation:
             if value(img, 'image', 'min_ram'):
                 im['min_ram'] = img['min_ram']
             if value(img, 'image', 'visibility'):
-                im['is_public'] = (img['visibility'] == 'public')
+                im['is_public'] = img['visibility'] == 'public'
             # Supported in ansible > 2.8
             # if value(img, 'image', 'is_protected'):
             #     im['protected'] = img['is_protected']
