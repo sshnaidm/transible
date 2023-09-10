@@ -13,31 +13,41 @@ networks:
     type: Microsoft.Network/virtualNetworks
     location: eastus
     tags: {}
-    etag: W/"8d2d540f-169d-41fc-be28-700fe8e33759"
+    etag: W/"c3128d90-78a5-4b98-999b-e81ade02b215"
     address_space:
       address_prefixes:
         - 10.0.0.0/16
-    dhcp_options:
-      dns_servers: []
     subnets:
-      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/public-subnet-0
-        name: public-subnet-0
-        etag: W/"8d2d540f-169d-41fc-be28-700fe8e33759"
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/default
+        name: default
+        etag: W/"c3128d90-78a5-4b98-999b-e81ade02b215"
         type: Microsoft.Network/virtualNetworks/subnets
         address_prefix: 10.0.0.0/24
-        service_endpoints: []
         ip_configurations:
-          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-0/ipConfigurations/WEB-INTERFACE-0
-          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-1/ipConfigurations/WEB-INTERFACE-1
-          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/WEB-NETWORK-INT-2/ipConfigurations/WEB-INTERFACE-2
+          - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/MANAGEDBYPARACLOUD/providers/Microsoft.Network/networkInterfaces/MAC1825/ipConfigurations/IPCONFIG1
         delegations: []
         provisioning_state: Succeeded
-        private_endpoint_network_policies: Enabled
+        private_endpoint_network_policies: Disabled
+        private_link_service_network_policies: Enabled
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/priv
+        name: priv
+        etag: W/"c3128d90-78a5-4b98-999b-e81ade02b215"
+        type: Microsoft.Network/virtualNetworks/subnets
+        address_prefixes:
+          - 10.0.1.0/24
+        nat_gateway:
+          id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/natGateways/natgw2
+        delegations: []
+        provisioning_state: Succeeded
+        private_endpoint_network_policies: Disabled
         private_link_service_network_policies: Enabled
     virtual_network_peerings: []
-    resource_guid: 0446121d-e969-4e8f-9c4e-bc428cc59468
+    resource_guid: 6ec3d953-3de7-426d-bbde-67594d365c64
     provisioning_state: Succeeded
     enable_ddos_protection: false
+    encryption:
+      enabled: false
+      enforcement: AllowUnencrypted
 security_groups:
   - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/networkSecurityGroups/web-loadBalancer-app-sg
     name: web-loadBalancer-app-sg

@@ -188,7 +188,10 @@ class AzureAnsibleCalculation:
                 s['resource_group'] = self.resource_group_name
                 s['name'] = sub['name']
                 s['virtual_network_name'] = net_name
-                s['address_prefix_cidr'] = sub['address_prefix']
+                if sub.get('address_prefix'):
+                    s['address_prefix_cidr'] = sub['address_prefix']
+                if sub.get('address_prefixes'):
+                    s['address_prefixes_cidr'] = sub['address_prefixes']
                 sub_net = {'azure.azcollection.azure_rm_subnet': s}
                 if force_optimize:
                     pre_optimized.append(sub_net)
