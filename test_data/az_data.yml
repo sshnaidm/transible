@@ -907,3 +907,19 @@ vms:
     vm_id: eb3229e8-26a9-4a46-94ac-f8261b11bc6b
     extensions_time_budget: PT1H30M
     time_created: '2023-09-08T05:48:05.560671Z'
+nat_gateways:
+  - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/natGateways/natgw2
+    name: natgw2
+    type: Microsoft.Network/natGateways
+    location: eastus
+    tags: {}
+    sku:
+      name: Standard
+    etag: W/"062b3468-b080-4ec5-b7f0-b519f5bda734"
+    idle_timeout_in_minutes: 4
+    public_ip_addresses:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/publicIPAddresses/priv-publicIpAddress
+    subnets:
+      - id: /subscriptions/26b9eb0b-2d3b-49e8-b07f-ce08716a1fc6/resourceGroups/ManagedByParacloud/providers/Microsoft.Network/virtualNetworks/main/subnets/priv
+    resource_guid: 90953e6b-5cea-4af0-82f2-15611e2a617d
+    provisioning_state: Succeeded
