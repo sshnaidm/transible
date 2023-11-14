@@ -442,7 +442,9 @@ class AmazonInfo:
         self.get_info()
 
     def get_info(self):
-        self.ec2 = boto3.client('ec2')
+        profile = os.environ.get('AWS_PROFILE', 'default')
+        session = boto3.Session(profile_name=profile)
+        self.ec2 = session.client('ec2')
         # pylint: disable=maybe-no-member
         if self.debug:
             boto3.set_stream_logger('boto3.resources', logging.DEBUG)
