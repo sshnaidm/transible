@@ -17,6 +17,12 @@ Run for Amazon AWS (make sure your credentials are in `~/.aws/config`):
 ./transible.py --from aws --to ansible
 ```
 
+Or specify the AWS profile as environment variable:
+
+```bash
+AWS_PROFILE=readonly ./transible.py --from aws --to ansible
+```
+
 ## Demo
 
 ![Trabsible Demo](https://github.com/sshnaidm/transible/raw/master/transible-demo.gif)
