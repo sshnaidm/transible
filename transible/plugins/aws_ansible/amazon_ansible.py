@@ -69,6 +69,7 @@ class AmazonAnsible:
             const.FILE_SUBNETS: ('networks', self.aws_calc.create_subnets),
             const.FILE_SECURITY_GROUPS: ('networks', self.aws_calc.create_security_groups),
             const.FILE_ROUTERS: ('networks', self.aws_calc.create_routers),
+            const.FILE_LBS: ('networks', self.aws_calc.create_loadbalancers),
             const.FILE_ROUTE_TBS: ('networks', self.aws_calc.create_route_tables),
             const.FILE_NAT_GWS: ('networks', self.aws_calc.create_nat_gateways),
             const.FILE_KEYPAIRS: ('compute', self.aws_calc.create_keypairs),
@@ -93,6 +94,18 @@ class AmazonAnsible:
                 playbook += play
         with open(os.path.join(conf.PLAYS, "playbook.yml"), "w") as f:
             f.write(playbook)
+        del_playbook = const.PLAYBOOK_DELETE
+        play_matrix_del = {
+            const.IDENTITY_PLAYBOOK_D: conf.DUMP_IDENTITY,
+            const.COMPUTE_PLAYBOOK_D: conf.DUMP_SERVERS,
+            const.STORAGE_PLAYBOOK_D: conf.DUMP_STORAGE,
+            const.NET_PLAYBOOK_D: conf.DUMP_NETWORKS,
+        }
+        for play, dump in play_matrix_del.items():
+            if dump:
+                del_playbook += play
+        with open(os.path.join(conf.PLAYS, "delete-playbook.yml"), "w") as f:
+            f.write(del_playbook)
 
 
 class AmazonAnsibleCalculation:
@@ -111,7 +124,7 @@ class AmazonAnsibleCalculation:
         dopts = []
         pre_optimized = []
         for dhcp in self.data['dhcpopts']:
-            d = {'state': 'present'}
+            d = {'state': '{{ state }}'}
             d['dhcp_options_id'] = dhcp['DhcpOptionsId']
             if dhcp.get('Tags'):
                 d['tags'] = {t['Key']: t['Value'] for t in dhcp['Tags']
@@ -134,8 +147,23 @@ class AmazonAnsibleCalculation:
                     vars_file=True):
         vpcs = []
         pre_optimized = []
+        self.data['vpc_ids'] = {}
         for vpc in self.data['networks']:
-            n = {'state': 'present'}
+            vpc_net_id = vpc['VpcId']
+            vpc_register_name = vpc_net_id.replace('-', '_')
+            self.data['vpc_ids'][vpc_net_id] = "{{ %s.vpc.id | default('%s') }}" % (vpc_register_name, vpc_net_id)
+            if vpc['IsDefault']:
+                vpcs.append({
+                    'amazon.aws.ec2_vpc_net_info': {
+                        "filters": {
+                            "is-default": True
+                        },
+                    },
+                    'register': vpc_register_name
+                })
+                self.data['vpc_ids'][vpc_net_id] = "{{ %s.vpcs.0.id | default('%s') }}" % (vpc_register_name, vpc_net_id)
+                continue
+            n = {'state': '{{ state }}'}
             n['cidr_block'] = vpc['CidrBlock']
             # n['dhcp_opts_id'] = vpc['DhcpOptionsId']  # TODO(sshnaidm): add in the future
             n['multi_ok'] = False
@@ -145,13 +173,15 @@ class AmazonAnsibleCalculation:
                 n['tags'] = {t['Key']: t['Value'] for t in vpc['Tags']
                              if not t['Key'].startswith('aws:')}
                 n['name'] = n['tags']['Name']
+            if 'name' not in n:
+                n['name'] = 'ansible_generated_vpc'
             if 'InstanceTenancy' in vpc:
                 n['tenancy'] = vpc['InstanceTenancy']
             if 'Ipv6CidrBlockAssociationSet' in vpc:
                 n['ipv6_cidr'] = True
             n['dns_hostnames'] = vpc['EnableDnsHostnames']
             n['dns_support'] = vpc['EnableDnsSupport']
-            vpc_net = {'amazon.aws.ec2_vpc_net': n}
+            vpc_net = {'amazon.aws.ec2_vpc_net': n, 'register': vpc_register_name}
             if vpc['IsDefault']:
                 vpc_net.update({'check_mode': True, 'changed_when': False})
             if force_optimize and not vpc['IsDefault']:
@@ -171,10 +201,14 @@ class AmazonAnsibleCalculation:
                        vars_file=True):
         subs = []
         pre_optimized = []
+        self.data['subnet_ids'] = {}
         for sub in self.data['subnets']:
-            s = {'state': 'present'}
+            s = {'state': '{{ state }}'}
+            sub_id = sub['SubnetId']
+            sub_register_name = sub_id.replace('-', '_')
+            self.data['subnet_ids'][sub_id] = "{{ %s.subnet.id | default('%s') }}" % (sub_register_name, sub_id)
             s['cidr'] = sub['CidrBlock']
-            s['vpc_id'] = sub['VpcId']
+            s['vpc_id'] = self.data['vpc_ids'][sub['VpcId']]
             if sub['AssignIpv6AddressOnCreation']:
                 s['assign_instances_ipv6'] = True
             if sub['AvailabilityZone']:
@@ -186,7 +220,7 @@ class AmazonAnsibleCalculation:
             if 'Tags' in sub:
                 s['tags'] = {t['Key']: t['Value'] for t in sub['Tags']
                              if not t['Key'].startswith('aws:')}
-            sub_net = {'amazon.aws.ec2_vpc_subnet': s}
+            sub_net = {'amazon.aws.ec2_vpc_subnet': s, 'register': sub_register_name}
             if force_optimize:
                 pre_optimized.append(sub_net)
             else:
@@ -205,10 +239,10 @@ class AmazonAnsibleCalculation:
         sgs = []
         pre_optimized = []
         for secgr in self.data['secgroups']:
-            sg = {'state': 'present'}
+            sg = {'state': '{{ state }}'}
             sg['name'] = secgr['GroupName']
             sg['description'] = secgr['Description']
-            sg['vpc_id'] = secgr['VpcId']
+            sg['vpc_id'] = self.data['vpc_ids'][secgr['VpcId']]
             if 'Tags' in secgr:
                 sg['tags'] = {t['Key']: t['Value'] for t in secgr['Tags']
                               if not t['Key'].startswith('aws:')}
@@ -257,9 +291,9 @@ class AmazonAnsibleCalculation:
         routers = []
         pre_optimized = []
         for rt in self.data['routers']:
-            r = {'state': 'present'}
+            r = {'state': '{{ state }}'}
             if rt.get('Attachments', False):
-                r['vpc_id'] = rt['Attachments'][0]['VpcId']
+                r['vpc_id'] = self.data['vpc_ids'][rt['Attachments'][0]['VpcId']]
             else:  # amazon collection requires vpc_id for router
                 continue
             if 'Tags' in rt:
@@ -284,8 +318,8 @@ class AmazonAnsibleCalculation:
         ngws = []
         pre_optimized = []
         for ng in self.data['nat_gateways']:
-            n = {'state': 'present'}
-            n['subnet_id'] = ng['SubnetId']
+            n = {'state': '{{ state }}'}
+            n['subnet_id'] = self.data['subnet_ids'][ng['SubnetId']]
             n['if_exist_do_not_create'] = True
             if 'Tags' in ng:
                 n['tags'] = {t['Key']: t['Value'] for t in ng['Tags']
@@ -310,10 +344,10 @@ class AmazonAnsibleCalculation:
         route_tbs = []
         pre_optimized = []
         for ro in self.data['route_tables']:
-            r = {'state': 'present'}
+            r = {'state': '{{ state }}'}
             r['route_table_id'] = ro['RouteTableId']
             r['lookup'] = 'id'
-            r['vpc_id'] = ro['VpcId']
+            r['vpc_id'] = self.data['vpc_ids'][ro['VpcId']]
             if ro.get('Tags'):
                 r['tags'] = {t['Key']: t['Value'] for t in ro['Tags']
                              if not t['Key'].startswith('aws:')}
@@ -351,7 +385,7 @@ class AmazonAnsibleCalculation:
         keys = []
         pre_optimized = []
         for key in self.data['keypairs']:
-            k = {'state': 'present'}
+            k = {'state': '{{ state }}'}
             k['name'] = key['KeyName']
             if key.get('Tags'):
                 k['tags'] = {t['Key']: t['Value'] for t in key['Tags']
@@ -388,15 +422,17 @@ class AmazonAnsibleCalculation:
             inst = ser['Instances'][0]
             if inst['State']['Name'] == 'terminated':
                 continue
-            s = {'state': inst['State']['Name']}
+            # s = {'state': inst['State']['Name']}
+            s = {'state': '{{ state }}'}
+
             s['instance_type'] = inst['InstanceType']
             s['tags'] = {t['Key']: t['Value'] for t in inst['Tags']
                          if not t['Key'].startswith('aws:')}
             s['image_id'] = inst['ImageId']
             s['security_groups'] = [sg['GroupName'] for sg in inst['SecurityGroups']]
-            # s['vpc_subnet_id'] = inst['SubnetId']  # not compatible with AZ
+            s['vpc_subnet_id'] = self.data['subnet_ids'][inst['SubnetId']]  # not compatible with AZ
             s['key_name'] = inst['KeyName']
-            s['availability_zone'] = inst['Placement']['AvailabilityZone']
+            # s['availability_zone'] = inst['Placement']['AvailabilityZone']
             s['tenancy'] = inst['Placement']['Tenancy']
             s['cpu_options'] = {
                 'threads_per_core': inst['CpuOptions']['ThreadsPerCore'],
@@ -426,6 +462,80 @@ class AmazonAnsibleCalculation:
                 servers.append(optimized)
         return servers
 
+    def create_loadbalancers(self, force_optimize=conf.VARS_OPT_SERVERS,
+                             vars_file=True):
+
+        load_bs = []
+        pre_optimized = []
+
+        for lb in self.data['load_balancers']:
+            newlb = {'state': '{{ state }}'}
+            newlb['name'] = lb['LoadBalancerName']
+            if lb.get('Tags'):
+                newlb['tags'] = {t['Key']: t['Value'] for t in lb['Tags']
+                                 if not t['Key'].startswith('aws:')}
+            newlb['instance_ids'] = [i['InstanceId'] for i in lb['Instances']]
+            newlb['zones'] = lb['AvailabilityZones']
+            # newlb['subnets'] = lb['Subnets'] - mutually exclusive with zones
+            newlb['security_group_ids'] = lb['SecurityGroups']
+            # probably not needed with security_group_ids
+            # newlb['security_group_names'] = lb['SourceSecurityGroup']['GroupName']
+            newlb['scheme'] = lb['Scheme']
+            newlb['listeners'] = []
+            for listener in lb['ListenerDescriptions']:
+                new_listener = {
+                    'protocol': listener['Listener']['Protocol'],
+                    'load_balancer_port': listener['Listener']['LoadBalancerPort'],
+                    'instance_port': listener['Listener']['InstancePort'],
+                    'instance_protocol': listener['Listener']['InstanceProtocol'],
+                }
+                if 'SSLCertificateId' in listener['Listener']:
+                    new_listener['ssl_certificate_id'] = listener['Listener']['SSLCertificateId']
+                newlb['listeners'].append(new_listener)
+            newlb['health_check'] = {
+                'ping_protocol': lb['HealthCheck']['Target'].split(':')[0],
+                'ping_port': lb['HealthCheck']['Target'].split(':')[1].split('/')[0],
+                'ping_path': lb['HealthCheck']['Target'].split(':')[1].split('/')[1],
+                'interval': lb['HealthCheck']['Interval'],
+                'timeout': lb['HealthCheck']['Timeout'],
+                'healthy_threshold': lb['HealthCheck']['HealthyThreshold'],
+                'unhealthy_threshold': lb['HealthCheck']['UnhealthyThreshold'],
+            }
+            newlb['cross_az_load_balancing'] = lb['LoadBalancerAttributes']['CrossZoneLoadBalancing']['Enabled']
+            newlb['connection_draining_timeout'] = lb['LoadBalancerAttributes']['ConnectionDraining']['Timeout']
+
+            if lb['Policies']['AppCookieStickinessPolicies'] or lb['Policies']['LBCookieStickinessPolicies']:
+                newlb['stickiness'] = {}
+                if lb['Policies']['AppCookieStickinessPolicies']:
+                    newlb['stickiness']['type'] = 'application'
+                    newlb['stickiness']['cookie'] = lb['Policies']['AppCookieStickinessPolicies'][0]['CookieName']
+                else:
+                    newlb['stickiness']['type'] = 'loadbalancer'
+                    newlb['stickiness']['expiration'] = lb[
+                        'Policies']['LBCookieStickinessPolicies'][0]['CookieExpirationPeriod']
+            if lb['LoadBalancerAttributes']['AccessLog']['Enabled']:
+                newlb['access_logs'] = {
+                    'enabled': True,
+                    'bucket': lb['LoadBalancerAttributes']['AccessLog']['S3BucketName'],
+                    'prefix': lb['LoadBalancerAttributes']['AccessLog']['S3BucketPrefix'],
+                }
+            else:
+                newlb['access_logs'] = False
+
+            lb_def = {'amazon.aws.elb_classic_lb': newlb}
+            if force_optimize:
+                pre_optimized.append(lb_def)
+            else:
+                load_bs.append(lb_def)
+        if force_optimize:
+            optimized = optimize(
+                pre_optimized,
+                use_vars=vars_file,
+                var_name="load_balancers")
+            if optimized:
+                load_bs.append(optimized)
+        return load_bs
+
 
 class AmazonInfo:
     """Retrieve information about Amazon cloud
@@ -437,6 +547,7 @@ class AmazonInfo:
         self.debug = debug
         self.data = {}
         self.ec2 = None
+        self.elb = None
 
     def run(self):
         self.get_info()
@@ -445,6 +556,7 @@ class AmazonInfo:
         profile = os.environ.get('AWS_PROFILE', 'default')
         session = boto3.Session(profile_name=profile)
         self.ec2 = session.client('ec2')
+        self.elb = session.client('elb')
         # pylint: disable=maybe-no-member
         if self.debug:
             boto3.set_stream_logger('boto3.resources', logging.DEBUG)
@@ -465,6 +577,8 @@ class AmazonInfo:
                              self.ec2.describe_nat_gateways, 'NatGateways', const.FILE_NAT_GWS),
             'eips': (conf.DUMP_NETWORKS,
                      self.ec2.describe_network_interfaces, 'NetworkInterfaces', const.FILE_EIPS),
+            'load_balancers': (conf.DUMP_NETWORKS,
+                               self.elb.describe_load_balancers, 'LoadBalancerDescriptions', const.FILE_LBS),
             'dhcpopts': (conf.DUMP_NETWORKS,
                          self.ec2.describe_dhcp_options, 'DhcpOptions', const.FILE_DHCPS),
             'keypairs': (conf.DUMP_SERVERS,
@@ -477,6 +591,8 @@ class AmazonInfo:
                 self.data[data_type] = func()[key]  # pylint: disable=not-callable
                 if data_type == 'networks':
                     self.data[data_type] = self.complete_networks(self.data[data_type])
+                if data_type == 'load_balancers':
+                    self.data[data_type] = self.complete_lbs(self.data[data_type])
                 self.dump2file(file_name, data_type)
 
         if conf.DATA_DIR_TRANSIENT:
@@ -497,4 +613,10 @@ class AmazonInfo:
             vpc['EnableDnsHostnames'] = self.ec2.describe_vpc_attribute(
                 Attribute='enableDnsHostnames',
                 VpcId=vpc['VpcId'])['EnableDnsHostnames']['Value']
+        return data
+
+    def complete_lbs(self, data):
+        for lb in data:
+            lb['LoadBalancerAttributes'] = self.elb.describe_load_balancer_attributes(
+                LoadBalancerName=lb['LoadBalancerName'])['LoadBalancerAttributes']
         return data

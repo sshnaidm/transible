@@ -31,7 +31,8 @@ def yaml_dump(content):
     return yaml.dump(content,
                      Dumper=ExtraDumper,
                      default_flow_style=False,
-                     sort_keys=False)
+                     sort_keys=False,
+                     width=120)
 
 
 def add_vars(content, path, header=None, footer=None):
