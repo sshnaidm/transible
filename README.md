@@ -1,7 +1,11 @@
 # Transible
 
-Convert existing cloud configuration to ansible playbooks
-Currently Openstack and Amazon AWS are supported only and the product is under development
+## Convert existing cloud configuration to Ansible playbooks
+
+In many infrastructure projects, dealing with existing cloud resources is a common scenario. Whether you've set up resources manually in your cloud provider's console or CLI, or used infrastructure as code tools like Terraform or AWS CloudFormation, Transible is here to help you adopt and manage those resources seamlessly.
+
+### Supported Cloud Providers
+Transible currently supports OpenStack, Azure, and Amazon AWS. Please note that the product is still in development, with ongoing enhancements and additional cloud provider support planned.
 
 Run for Openstack:
 
@@ -21,6 +25,12 @@ Or specify the AWS profile as environment variable:
 
 ```bash
 AWS_PROFILE=readonly ./transible.py --from aws --to ansible
+```
+
+Run for Azure:
+
+```bash
+./transible.py --from azure --to ansible
 ```
 
 ## Demo
