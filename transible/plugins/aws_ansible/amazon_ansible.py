@@ -161,7 +161,8 @@ class AmazonAnsibleCalculation:
                     },
                     'register': vpc_register_name
                 })
-                self.data['vpc_ids'][vpc_net_id] = "{{ %s.vpcs.0.id | default('%s') }}" % (vpc_register_name, vpc_net_id)
+                self.data['vpc_ids'][vpc_net_id] = "{{ %s.vpcs.0.id | default('%s') }}" % (
+                    vpc_register_name, vpc_net_id)
                 continue
             n = {'state': '{{ state }}'}
             n['cidr_block'] = vpc['CidrBlock']
