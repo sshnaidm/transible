@@ -5,6 +5,7 @@
 In many infrastructure projects, dealing with existing cloud resources is a common scenario. Whether you've set up resources manually in your cloud provider's console or CLI, or used infrastructure as code tools like Terraform or AWS CloudFormation, Transible is here to help you adopt and manage those resources seamlessly.
 
 ### Supported Cloud Providers
+
 Transible currently supports OpenStack, Azure, and Amazon AWS. Please note that the product is still in development, with ongoing enhancements and additional cloud provider support planned.
 
 Run for Openstack:
@@ -30,6 +31,8 @@ AWS_PROFILE=readonly ./transible.py --from aws --to ansible
 Run for Azure:
 
 ```bash
+AZURE_SUBSCRIPTION_ID=<my subscription id>
+AZURE_RESOURCE_GROUP=<my resource group name>
 ./transible.py --from azure --to ansible
 ```
 

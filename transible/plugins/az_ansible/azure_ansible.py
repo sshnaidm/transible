@@ -13,7 +13,7 @@ from transible.utils import read_yaml, optimize
 
 
 class AzureAnsible:
-    """Main class to generate Ansible playbooks from Amazon
+    """Main class to generate Ansible playbooks from Azure
 
     Args:
         debug (bool, optional): debug option. Defaults to False.
@@ -118,7 +118,7 @@ class AzureAnsibleCalculation:
     """Class to generate all Ansible playbooks.
 
     Args:
-            data (dict): Amazon info data to be used to generate the playbooks.
+            data (dict): Azure info data to be used to generate the playbooks.
             debug (bool, optional): debug option. Defaults to False.
     """
     def __init__(self, data, debug=False):
@@ -621,7 +621,7 @@ class AzureAnsibleCalculation:
 
 
 class AzureInfo:
-    """Retrieve information about Amazon cloud
+    """Retrieve information about Azure cloud
 
     Args:
         debug (bool, optional): debug option. Defaults to False.
@@ -635,7 +635,7 @@ class AzureInfo:
             raise ValueError("AZURE_SUBSCRIPTION_ID environment variable not set.")
         self.resource_group_name = os.environ.get("AZURE_RESOURCE_GROUP")
         if self.resource_group_name is None:
-            raise ValueError("AZURE_RESOURCE_GROUP environment variable not set. It should match resource gruop name.")
+            raise ValueError("AZURE_RESOURCE_GROUP environment variable not set. It should match resource group name.")
         self.network_client = NetworkManagementClient(credential, subscription_id)
         self.resource_client = ResourceManagementClient(credential, subscription_id)
         self.compute_client = ComputeManagementClient(credential, subscription_id)
