@@ -319,6 +319,8 @@ class AmazonAnsibleCalculation:
         ngws = []
         pre_optimized = []
         for ng in self.data['nat_gateways']:
+            if ng['State'] == 'deleted':
+                continue
             n = {'state': '{{ state }}'}
             n['subnet_id'] = self.data['subnet_ids'][ng['SubnetId']]
             n['if_exist_do_not_create'] = True
