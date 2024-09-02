@@ -434,7 +434,8 @@ class AmazonAnsibleCalculation:
             s['image_id'] = inst['ImageId']
             s['security_groups'] = [sg['GroupName'] for sg in inst['SecurityGroups']]
             s['vpc_subnet_id'] = self.data['subnet_ids'][inst['SubnetId']]  # not compatible with AZ
-            s['key_name'] = inst['KeyName']
+            if 'KeyName' in inst:
+                s['key_name'] = inst['KeyName']
             # s['availability_zone'] = inst['Placement']['AvailabilityZone']
             s['tenancy'] = inst['Placement']['Tenancy']
             s['cpu_options'] = {
